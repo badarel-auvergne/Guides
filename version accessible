@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Livret accessible – Hameau de Badarel, Bansat</title>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --vert:#1a5c35; --vert-c:#e8f5e9;
+    --rouge:#b71c1c; --rouge-c:#ffebee;
+    --jaune:#e65100; --jaune-c:#fff3e0;
+    --fond:#ffffff; --texte:#111111;
+    --gris:#444444; --gris-c:#f2f2f2;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--fond);color:var(--texte);font-family:'Atkinson Hyperlegible',Arial,sans-serif;font-size:20px;line-height:1.85;}
+
+  .hero{position:relative;height:300px;overflow:hidden;display:flex;align-items:flex-end;}
+  .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 55%;}
+  .hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0) 10%,rgba(0,0,0,.78) 100%);}
+  .hero-text{position:relative;z-index:2;padding:26px 34px;color:white;}
+  .hero-badge{display:inline-block;background:#f5a623;color:#111;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 16px;border-radius:20px;margin-bottom:10px;}
+  .hero h1{font-size:clamp(1.8rem,5vw,2.8rem);font-weight:700;line-height:1.15;margin-bottom:6px;}
+  .hero h1 em{font-style:italic;color:#b8dfc6;}
+  .hero-sub{font-size:1rem;opacity:.88;}
+
+  .nav{background:var(--vert);display:flex;flex-wrap:wrap;position:sticky;top:0;z-index:100;}
+  .nav a{color:rgba(255,255,255,.9);text-decoration:none;font-size:14px;font-weight:700;padding:14px 16px;transition:background .2s;white-space:nowrap;}
+  .nav a:hover{background:rgba(255,255,255,.15);}
+
+  main{max-width:820px;margin:0 auto;padding:44px 24px 72px;}
+  section{margin-bottom:58px;scroll-margin-top:60px;}
+
+  .sec-head{display:flex;align-items:center;gap:16px;margin-bottom:22px;padding-bottom:14px;border-bottom:3px solid var(--vert);}
+  .sec-ico{width:52px;height:52px;background:var(--vert);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;}
+  .sec-title{font-size:1.75rem;font-weight:700;color:var(--vert);}
+  .sec-sub{font-size:.9rem;color:var(--gris);margin-top:2px;}
+
+  .welcome{background:var(--vert);color:white;border-radius:16px;padding:28px 32px;margin-bottom:28px;font-size:1.1rem;line-height:1.85;}
+  .welcome .sig{margin-top:16px;font-style:italic;font-size:1.15rem;color:#b8dfc6;}
+
+  .infos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;}
+  .info-card{background:var(--gris-c);border-radius:12px;padding:18px 20px;border-left:5px solid var(--vert);}
+  .info-label{font-size:.8rem;letter-spacing:2px;text-transform:uppercase;color:var(--gris);margin-bottom:5px;}
+  .info-val{font-size:1.15rem;font-weight:700;}
+  .info-note{font-size:.9rem;color:var(--gris);margin-top:3px;}
+
+  .items{display:grid;gap:14px;}
+  .item{background:var(--gris-c);border-radius:14px;padding:20px 22px;display:flex;gap:18px;align-items:flex-start;}
+  .item-ico{font-size:32px;flex-shrink:0;line-height:1;margin-top:2px;}
+  .item-title{font-size:1.1rem;font-weight:700;margin-bottom:6px;}
+  .item-desc{font-size:.95rem;color:var(--gris);line-height:1.75;}
+  .item.hl{border-left:6px solid var(--jaune);}
+  .item.eco{border-left:6px solid var(--vert);}
+
+  .alerte{background:var(--rouge-c);border:2px solid var(--rouge);border-radius:14px;padding:18px 22px;display:flex;gap:14px;align-items:flex-start;margin-top:14px;}
+  .alerte-ico{font-size:30px;flex-shrink:0;}
+  .alerte p{font-size:.95rem;color:#7a0000;line-height:1.7;}
+
+  .tip{background:var(--vert-c);border:2px solid var(--vert);border-radius:14px;padding:18px 22px;display:flex;gap:14px;align-items:flex-start;margin-top:14px;}
+  .tip p{font-size:.95rem;color:#1a3d25;line-height:1.7;}
+
+  .tarifs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;}
+  .tarif{background:var(--gris-c);border-radius:12px;padding:18px;text-align:center;}
+  .tarif-prix{font-size:2rem;font-weight:700;color:var(--vert);}
+  .tarif-label{font-size:.88rem;color:var(--gris);margin-top:4px;}
+
+  .poele-wrap{margin:16px 0;text-align:center;}
+  .poele-wrap img{width:100%;max-width:440px;border-radius:12px;border:2px solid #ccc;}
+  .poele-wrap p{font-size:.82rem;color:var(--gris);margin-top:6px;font-style:italic;}
+
+  .urgs{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-bottom:22px;}
+  .urg{background:var(--rouge-c);border:2px solid var(--rouge);border-radius:12px;text-align:center;padding:16px 10px;}
+  .urg-num{font-size:2rem;font-weight:700;color:var(--rouge);}
+  .urg-lab{font-size:.82rem;color:var(--gris);margin-top:3px;}
+
+  .act-box{background:var(--vert);border-radius:16px;padding:26px 28px;color:white;}
+  .act-box h3{font-size:1.3rem;margin-bottom:14px;}
+  .act-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .act-item{font-size:1rem;}
+  .act-link{display:inline-block;margin-top:16px;background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.5);color:white;text-decoration:none;font-size:.9rem;font-weight:700;padding:10px 22px;border-radius:10px;}
+
+  .access-note{background:var(--jaune-c);border:2px solid var(--jaune);border-radius:12px;padding:16px 20px;font-size:.88rem;color:#5d2a00;margin-top:16px;line-height:1.7;}
+
+  footer{background:#111;color:rgba(255,255,255,.65);text-align:center;padding:28px;font-size:.88rem;}
+  footer strong{color:white;}
+
+  @media(max-width:600px){
+    body{font-size:18px;}
+    .hero{height:240px;} .hero-text{padding:18px 18px;}
+    main{padding:26px 14px 50px;}
+    .act-grid,.tarifs{grid-template-columns:1fr;}
+    .urgs{grid-template-columns:repeat(2,1fr);}
+    .nav a{padding:10px 10px;font-size:13px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <img src="hero_terrasse.jpg" alt="Terrasse teck ensoleillée – Badarel, Bansat">
+  <div class="hero-text">
+    <div class="hero-badge">👁 Document accessible · Grande police</div>
+    <h1>Bienvenue dans<br>ma <em>maison</em> !</h1>
+    <div class="hero-sub">12 lieu-dit Badarel · 63570 Bansat · Auvergne</div>
+  </div>
+</div>
+
+<nav class="nav">
+  <a href="#bienvenue">💬 Accueil</a>
+  <a href="#access">♿ Accessibilité</a>
+  <a href="#arrivee">🔑 Arrivée</a>
+  <a href="#maison">🏠 Maison</a>
+  <a href="#equip">⚙️ Équipements</a>
+  <a href="#eco">🌿 Éco-gestes</a>
+  <a href="#depart">🧹 Départ</a>
+  <a href="#activites">🥾 Activités</a>
+  <a href="#contacts">📞 Contacts</a>
+</nav>
+
+<main>
+
+  <section id="bienvenue">
+    <div class="welcome">
+      <p>Bonjour et bienvenue dans ma maison ! 🎉<br><br>
+      J'espère que vous y passerez un séjour ressourçant et que vous profiterez de notre belle région. Cette maison est ma maison — j'y ai mis beaucoup de soin et d'amour dans sa rénovation éco-responsable. Traitez-la bien et elle vous le rendra !<br><br>
+      Je suis votre voisine directe et reste disponible pour vous conseiller ou vous dépanner. N'hésitez pas à m'appeler !</p>
+      <div class="sig">Avec plaisir, Sidonie 🌿<br><span style="font-size:.95rem;opacity:.8">06 64 51 32 45</span></div>
+    </div>
+    <div class="infos">
+      <div class="info-card"><div class="info-label">📍 Adresse</div><div class="info-val">12 lieu-dit Badarel</div><div class="info-note">63570 Bansat · Dernière maison du hameau, côté gauche (est)</div></div>
+      <div class="info-card"><div class="info-label">📶 Code WiFi</div><div class="info-val" style="letter-spacing:2px;font-size:1.05rem">325GAAMDBA4</div><div class="info-note">Réseau dans toute la maison</div></div>
+      <div class="info-card"><div class="info-label">📞 Votre hôte</div><div class="info-val">Sidonie</div><div class="info-note">06 64 51 32 45 · Voisine directe</div></div>
+      <div class="info-card"><div class="info-label">🕐 Horaires</div><div class="info-val">Arrivée dès 16h00</div><div class="info-note">Départ avant 11h00</div></div>
+    </div>
+  </section>
+
+  <section id="access">
+    <div class="sec-head"><div class="sec-ico">♿</div><div><div class="sec-title">Accessibilité</div><div class="sec-sub">Informations importantes avant votre arrivée</div></div></div>
+    <div class="alerte">
+      <span class="alerte-ico">⚠️</span>
+      <p><strong>Ce logement n'est pas adapté aux personnes à mobilité réduite (PMR).</strong><br>Chambres et salle de bain à l'étage, accessibles uniquement par un escalier.</p>
+    </div>
+    <div class="items" style="margin-top:16px">
+      <div class="item"><span class="item-ico">👁</span><div><div class="item-title">Troubles visuels</div><div class="item-desc">Ce document est en police haute lisibilité (Atkinson Hyperlegible), taille 20px min, fort contraste et pictogrammes. Conçu pour les personnes malvoyantes ou dyslexiques.</div></div></div>
+      <div class="item"><span class="item-ico">📞</span><div><div class="item-title">Besoin d'aide spécifique ?</div><div class="item-desc">Contactez Sidonie avant votre arrivée : <strong>06 64 51 32 45</strong>. Je ferai mon possible pour adapter votre accueil.</div></div></div>
+    </div>
+  </section>
+
+  <section id="arrivee">
+    <div class="sec-head"><div class="sec-ico">🔑</div><div><div class="sec-title">Arrivée &amp; Clés</div><div class="sec-sub">Tout pour trouver la maison et bien s'installer</div></div></div>
+    <div class="items">
+      <div class="item"><span class="item-ico">🗺️</span><div><div class="item-title">Comment trouver la maison</div><div class="item-desc">Badarel est un hameau à plusieurs kilomètres de Bansat. C'est la <strong>dernière maison du hameau, côté gauche (est), entourée d'une barrière en bois</strong>.</div></div></div>
+      <div class="item hl"><span class="item-ico">🔑</span><div><div class="item-title">Remise des clés</div><div class="item-desc">Je vous accueille en personne si possible, ou je vous communique l'emplacement des clés à l'avance. Je vous contacterai avant votre arrivée.</div></div></div>
+      <div class="item"><span class="item-ico">🚗</span><div><div class="item-title">Parking</div><div class="item-desc">Parking gratuit devant la maison. Utilisez les <strong>cales derrière vos roues</strong> si besoin et n'oubliez pas de <strong>laisser une vitesse</strong> !</div></div></div>
+    </div>
+  </section>
+
+  <section id="maison">
+    <div class="sec-head"><div class="sec-ico">🏠</div><div><div class="sec-title">La Maison</div><div class="sec-sub">Tout ce que vous trouverez sur place</div></div></div>
+    <div class="items">
+      <div class="item"><span class="item-ico">🛏️</span><div><div class="item-title">Les chambres</div><div class="item-desc"><strong>Chambre 1 :</strong> 2 lits 90×190 · couettes 140×200<br><strong>Chambre 2 :</strong> lit 140×190 · couette 240×220<br><strong>Chambre 3 :</strong> lit 140×190 · couette 240×220<br>2 oreillers 60×60 par personne.</div></div></div>
+      <div class="item hl"><span class="item-ico">🛁</span><div><div class="item-title">Linge de maison — en option</div><div class="item-desc">Draps et serviettes non inclus par défaut :</div></div></div>
+    </div>
+    <div class="tarifs">
+      <div class="tarif"><div class="tarif-prix">20€</div><div class="tarif-label">par chambre<br>Draps &amp; taies</div></div>
+      <div class="tarif"><div class="tarif-prix">5€</div><div class="tarif-label">par personne<br>Serviette (1 grande + 1 petite)</div></div>
+    </div>
+    <div class="tip"><span style="font-size:28px">💡</span><p>Si vous n'avez pas pris les bonnes tailles de draps, merci de ne pas utiliser la literie sans draps. Contactez-moi.</p></div>
+    <div class="items" style="margin-top:16px">
+      <div class="item"><span class="item-ico">🪴</span><div><div class="item-title">Fourni à votre arrivée</div><div class="item-desc">Torchons · Savon et shampoing · Liquide vaisselle, éponge, produits ménagers · Bois pour le poêle.</div></div></div>
+      <div class="item"><span class="item-ico">📚</span><div><div class="item-title">Pour vous divertir</div><div class="item-desc">Jeux de société, BD, livres, dépliants sur la région — sur le meuble du salon.</div></div></div>
+    </div>
+  </section>
+
+  <section id="equip">
+    <div class="sec-head"><div class="sec-ico">⚙️</div><div><div class="sec-title">Équipements</div><div class="sec-sub">Mode d'emploi des appareils</div></div></div>
+    <div class="items">
+      <div class="item hl"><span class="item-ico">🔥</span><div><div class="item-title">Poêle à bois</div><div class="item-desc">Le bois se trouve dans <strong>l'abri bois en face de la maison</strong>. Des allume-feux sont à disposition.<br><br><strong>Conseils :</strong> placez 3 bûches de taille moyenne et l'allume-feu au croisement des 3 bûches. Entrouvrez le cendrier pour améliorer le tirage le temps du démarrage.</div></div></div>
+      <div class="poele-wrap"><img src="poele_annote_gemini.jpg" alt="Poêle à bois – tirage et cendrier indiqués"><p>Tirage = poignée latérale · Cendrier = plaque ovale en bas</p></div>
+      <div class="alerte"><span class="alerte-ico">⚠️</span><p><strong>IMPORTANT :</strong> Ne laissez pas le cendrier ouvert sans surveillance.<br><strong>ATTENTION :</strong> Ne brûlez pas de déchets ou de bois traité.</p></div>
+      <div class="item" style="margin-top:8px"><span class="item-ico">❄️</span><div><div class="item-title">PAC réversible — chauffage &amp; climatisation</div><div class="item-desc">Télécommande sur le meuble du salon. Le poêle à bois est généralement suffisant au RDC. Radiateurs électriques à l'étage.<br><br>🌍 <em>Merci de faire un usage raisonné du chauffage et de la climatisation !</em></div></div></div>
+      <div class="item"><span class="item-ico">🍽️</span><div><div class="item-title">Lave-vaisselle</div><div class="item-desc">Appuyez sur <strong>ON</strong>, puis tournez la molette jusqu'au <strong>point blanc</strong>. Pastilles sous l'évier.</div></div></div>
+      <div class="item"><span class="item-ico">📺</span><div><div class="item-title">Télévision</div><div class="item-desc">TV connectée — pas d'antenne.<br>🎮 <strong>Grande télécommande :</strong> allumer/éteindre · 🕹️ <strong>Petite :</strong> naviguer<br>• <strong>TF1+</strong> · <strong>6play</strong> · <strong>Molotov TV</strong> · <strong>Netflix</strong> (profils Invité et Jeunesse)</div></div></div>
+      <div class="item"><span class="item-ico">🥩</span><div><div class="item-title">Plancha &amp; mini-crêpes</div><div class="item-desc">Dans le <strong>placard du salon</strong>. À votre disposition !</div></div></div>
+      <div class="item"><span class="item-ico">🧹</span><div><div class="item-title">Matériel ménager</div><div class="item-desc">Aspirateur, serpillière, produits, étendoir, fer à repasser… dans le <strong>placard du salon</strong>.</div></div></div>
+    </div>
+  </section>
+
+  <section id="eco">
+    <div class="sec-head"><div class="sec-ico">🌿</div><div><div class="sec-title">Vie à la maison &amp; Éco-gestes</div><div class="sec-sub">Une maison biosourcée qui mérite quelques attentions</div></div></div>
+    <div class="items">
+      <div class="item eco"><span class="item-ico">🏺</span><div><div class="item-title">Sol en tomettes — attention aux taches !</div><div class="item-desc"><strong>En cas de renversement (vin rouge, café, tomate…), nettoyez immédiatement</strong> — une tache laissée peut être définitive.</div></div></div>
+      <div class="item eco"><span class="item-ico">♻️</span><div><div class="item-title">Tri sélectif</div><div class="item-desc">À la sortie du hameau (gauche) — <strong>3 conteneurs</strong> :<br>• Tout-venant · • Recyclables · • Composteur<br><strong>Verre :</strong> Vernet-la-Varenne (plan d'eau), Sarpoil, La Malotière…</div></div></div>
+      <div class="item eco"><span class="item-ico">🌱</span><div><div class="item-title">Compost</div><div class="item-desc">Derrière la maison côté nord — sortez par la cuisine, tournez à droite.</div></div></div>
+      <div class="item eco"><span class="item-ico">💡</span><div><div class="item-title">Économies d'énergie</div><div class="item-desc">Éteignez les lumières en quittant une pièce. Pas de fenêtres ouvertes avec le chauffage. Éteignez la PAC en cas d'absence. Merci pour la planète ! 🌍</div></div></div>
+    </div>
+  </section>
+
+  <section id="depart">
+    <div class="sec-head"><div class="sec-ico">🧹</div><div><div class="sec-title">Départ</div><div class="sec-sub">Quelques petites choses avant de repartir — avant 11h00</div></div></div>
+    <div class="alerte"><span class="alerte-ico">🧹</span><p style="font-size:1.05rem">Pour que la maison soit toujours propre pour vous accueillir, un <strong style="font-size:1.15rem">forfait ménage de 70€ est obligatoire</strong>. Il couvre le nettoyage complet. Merci de laisser la maison dans un état correct !</p></div>
+    <div class="items" style="margin-top:16px">
+      <div class="item"><span class="item-ico">🍽️</span><div><div class="item-desc">Merci de laisser la vaisselle propre et rangée.</div></div></div>
+      <div class="item"><span class="item-ico">🗑️</span><div><div class="item-desc">Videz les poubelles (voir section éco-gestes ci-dessus).</div></div></div>
+      <div class="item"><span class="item-ico">🛏️</span><div><div class="item-desc">Laissez le linge à laver en tas sur la table du salon.</div></div></div>
+      <div class="item"><span class="item-ico">🏠</span><div><div class="item-desc">Fermez fenêtres, éteignez lumières et appareils, déposez les clés à l'endroit convenu.</div></div></div>
+    </div>
+    <div class="tip" style="margin-top:20px;border-width:2px;padding:20px 24px;"><span style="font-size:32px">🙏</span><p style="font-size:1.05rem;color:#1a3d25;"><strong>Un petit mot ou un avis sur votre expérience me ferait vraiment plaisir !</strong><br>Et si vous avez des remarques, je suis toujours ouverte aux retours. Merci pour votre confiance 🌿</p></div>
+  </section>
+
+  <section id="activites">
+    <div class="sec-head"><div class="sec-ico">🥾</div><div><div class="sec-title">À faire dans la région</div><div class="sec-sub">Un aperçu — guide complet disponible séparément</div></div></div>
+    <div class="act-box">
+      <h3>Les incontournables autour de Badarel</h3>
+      <div class="act-grid">
+        <div class="act-item">🏊 Plan d'eau du Vernet · 5 min</div>
+        <div class="act-item">💎 Musée de l'Améthyste · 5 min</div>
+        <div class="act-item">🦁 Parc Animalier Ardes · 30 min</div>
+        <div class="act-item">🏰 Sauxillanges médiéval · 8 km</div>
+        <div class="act-item">🌋 Puy de Dôme · 45 min</div>
+        <div class="act-item">🏔 Puy de Sancy · 50 min</div>
+        <div class="act-item">🛒 Marché Issoire (sam.) · 20 min</div>
+        <div class="act-item">🎶 Guinguette Sauxillanges · 8 km</div>
+        <div class="act-item">⛪ La Chaise-Dieu · 45 min</div>
+        <div class="act-item">🧀 Saint-Nectaire · 30 min</div>
+      </div>
+      <a class="act-link" href="guide_activites_badarel.html">→ Voir le guide complet des activités</a>
+    </div>
+  </section>
+
+  <section id="contacts">
+    <div class="sec-head"><div class="sec-ico">📞</div><div><div class="sec-title">Contacts Utiles</div><div class="sec-sub">En cas de besoin</div></div></div>
+    <p style="font-size:1rem;margin-bottom:16px">En cas d'urgence médicale grave : <strong>15 (SAMU)</strong> ou <strong>112</strong>.</p>
+    <div class="urgs">
+      <div class="urg"><div class="urg-num">15</div><div class="urg-lab">SAMU</div></div>
+      <div class="urg"><div class="urg-num">18</div><div class="urg-lab">Pompiers</div></div>
+      <div class="urg"><div class="urg-num">17</div><div class="urg-lab">Police</div></div>
+      <div class="urg"><div class="urg-num">112</div><div class="urg-lab">Urgences EU</div></div>
+      <div class="urg"><div class="urg-num">15</div><div class="urg-lab">Médecin garde</div></div>
+    </div>
+    <div class="access-note">♿ <strong>Note accessibilité :</strong> Police Atkinson Hyperlegible · 20px min · Contraste &gt; 7:1 · Pictogrammes sur chaque élément.<br>Pour toute adaptation : Sidonie · 06 64 51 32 45</div>
+  </section>
+
+</main>
+
+<footer>
+  <strong>Havre de paix écorénovée · 12 lieu-dit Badarel · 63570 Bansat · Auvergne</strong><br>
+  Sidonie · 06 64 51 32 45 · Votre voisine directe 🌿<br>
+  <span style="opacity:.5;display:block;margin-top:4px">Livret accessible · Police haute lisibilité · 2026</span>
+</footer>
+
+</body>
+</html>

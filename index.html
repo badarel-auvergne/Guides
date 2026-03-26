@@ -3,143 +3,316 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bienvenue à Badarel · Auvergne</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<title>Gîte de Badarel – Auvergne · Documents & Guides</title>
+<meta name="description" content="Découvrez le gîte écorénovée de Badarel (Bansat, 63) : présentation, livret d'accueil, guide des activités Auvergne. Location vacances 6 personnes, lac à 5 min, Pays d'Issoire.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://badarel-auvergne.github.io/Guides/">
+<meta property="og:title" content="Gîte de Badarel – Auvergne">
+<meta property="og:description" content="Gîte écorénovée 90 m², 3 chambres, 6 personnes · Lac à 5 min · Pays d'Issoire, Auvergne">
+<meta property="og:image" content="https://badarel-auvergne.github.io/Guides/exterieur_terrasse.jpg">
+<meta property="og:url" content="https://badarel-auvergne.github.io/Guides/">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:#f7f3ec; font-family:'Lato',sans-serif; font-weight:300; color:#2e2018; min-height:100vh; display:flex; flex-direction:column; }
+:root {
+  --vert: #2d5a3d;
+  --vert-cl: #4a8c60;
+  --vert-p: #e8f0ea;
+  --creme: #f5f0e8;
+  --creme2: #ede6d8;
+  --brun: #2a1e0e;
+  --gris: #6b6b6b;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--creme); color: var(--brun); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.7; min-height: 100vh; }
 
-  .hero {
-    position:relative; height:380px; overflow:hidden;
-    display:flex; align-items:center; justify-content:center;
-  }
-  .hero img {
-    position:absolute; inset:0; width:100%; height:100%;
-    object-fit:cover; object-position:center 55%;
-  }
-  .hero::after {
-    content:''; position:absolute; inset:0;
-    background:linear-gradient(to bottom, rgba(0,0,0,.15), rgba(0,0,0,.65));
-  }
-  .hero-text {
-    position:relative; z-index:2; text-align:center; color:white; padding:24px;
-  }
-  .hero-badge {
-    display:inline-block; background:rgba(255,255,255,.18);
-    border:1px solid rgba(255,255,255,.4); font-size:11px;
-    letter-spacing:3px; text-transform:uppercase; padding:5px 16px;
-    border-radius:20px; margin-bottom:14px;
-  }
-  .hero h1 {
-    font-family:'Playfair Display',serif;
-    font-size:clamp(2rem,5vw,3.2rem); font-weight:700; line-height:1.2;
-    margin-bottom:10px;
-  }
-  .hero h1 em { font-style:italic; color:#b8dfc6; }
-  .hero p { font-size:1rem; opacity:.88; }
+/* HERO */
+.hero {
+  position: relative;
+  height: 52vh;
+  min-height: 320px;
+  max-height: 480px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+.hero img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  transform: scale(1.04);
+  animation: zoomout 7s ease forwards;
+}
+@keyframes zoomout { to { transform: scale(1); } }
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 10%, rgba(20,12,4,.72) 100%);
+}
+.hero-text {
+  position: relative;
+  z-index: 2;
+  padding: 0 48px 40px;
+  color: white;
+  opacity: 0;
+  animation: fadeup .8s .3s ease forwards;
+}
+@keyframes fadeup { from { opacity:0; transform:translateY(16px) } to { opacity:1; transform:translateY(0) } }
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255,255,255,.15);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.3);
+  color: white;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 30px;
+  margin-bottom: 14px;
+}
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-weight: 300;
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+.hero h1 em { font-style: italic; color: #b8dfc6; }
+.hero-sub { font-size: .9rem; opacity: .8; }
 
-  main {
-    max-width:700px; margin:0 auto; padding:52px 22px 60px;
-    flex:1; width:100%;
-  }
+/* MAIN */
+main {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 56px 24px 80px;
+}
 
-  h2 {
-    font-family:'Playfair Display',serif; font-size:1.4rem;
-    color:#3a6b4d; text-align:center; margin-bottom:32px;
-    font-weight:400; font-style:italic;
-  }
+.section-label {
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--vert-cl);
+  font-weight: 500;
+  margin-bottom: 20px;
+  text-align: center;
+}
 
-  .cards { display:grid; gap:18px; }
+/* CARDS */
+.cards { display: grid; gap: 16px; }
 
-  .card {
-    background:white; border-radius:16px;
-    box-shadow:0 2px 16px rgba(0,0,0,.08);
-    text-decoration:none; color:inherit;
-    display:flex; align-items:center; gap:20px;
-    padding:22px 24px;
-    transition:transform .2s, box-shadow .2s;
-    border-left:5px solid #3a6b4d;
-  }
-  .card:hover {
-    transform:translateY(-3px);
-    box-shadow:0 8px 28px rgba(0,0,0,.13);
-  }
-  .card.orange { border-left-color:#bf6e3a; }
-  .card.blue   { border-left-color:#4a7fa5; }
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 28px 30px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  text-decoration: none;
+  color: var(--brun);
+  box-shadow: 0 2px 16px rgba(0,0,0,.06);
+  border: 2px solid transparent;
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(45,90,61,.04) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity .22s;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(0,0,0,.11);
+  border-color: var(--vert-cl);
+}
+.card:hover::before { opacity: 1; }
 
-  .card-ico {
-    font-size:2.4rem; flex-shrink:0; line-height:1;
-  }
-  .card-title {
-    font-family:'Playfair Display',serif;
-    font-size:1.15rem; font-weight:700; margin-bottom:4px;
-    color:#2e2018;
-  }
-  .card-desc { font-size:.87rem; color:#777; line-height:1.55; }
-  .card-arrow {
-    margin-left:auto; font-size:1.3rem; color:#3a6b4d;
-    flex-shrink:0; opacity:.6;
-  }
-  .card.orange .card-arrow { color:#bf6e3a; }
-  .card.blue   .card-arrow { color:#4a7fa5; }
+/* Carte principale (gîte) mise en avant */
+.card.featured {
+  background: var(--vert);
+  color: white;
+  border-color: transparent;
+  padding: 32px 30px;
+}
+.card.featured:hover {
+  background: #245030;
+  border-color: transparent;
+  box-shadow: 0 12px 40px rgba(45,90,61,.35);
+}
+.card.featured::before {
+  background: linear-gradient(135deg, rgba(255,255,255,.08) 0%, transparent 60%);
+}
+.card.featured:hover::before { opacity: 1; }
 
-  footer {
-    background:#2e2018; color:rgba(255,255,255,.55);
-    text-align:center; padding:24px; font-size:.82rem;
-  }
-  footer strong { color:white; }
+.card-ico {
+  font-size: 38px;
+  flex-shrink: 0;
+  line-height: 1;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--vert-p);
+  border-radius: 14px;
+}
+.card.featured .card-ico {
+  background: rgba(255,255,255,.15);
+}
 
-  @media(max-width:500px){
-    .hero { height:280px; }
-    .card { padding:18px; gap:14px; }
-    .card-ico { font-size:2rem; }
-  }
+.card-body { flex: 1; }
+.card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+  line-height: 1.2;
+}
+.card.featured .card-title { color: white; }
+.card-desc {
+  font-size: .84rem;
+  color: var(--gris);
+  line-height: 1.6;
+}
+.card.featured .card-desc { color: rgba(255,255,255,.8); }
+
+.card-arrow {
+  font-size: 1.2rem;
+  color: var(--vert-cl);
+  flex-shrink: 0;
+  transition: transform .2s;
+}
+.card.featured .card-arrow { color: rgba(255,255,255,.7); }
+.card:hover .card-arrow { transform: translateX(4px); }
+
+/* Badge "Nouveau" */
+.badge-new {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: #f0a500;
+  color: white;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+.card.featured .badge-new { background: rgba(255,255,255,.25); color: white; }
+
+/* Séparateur */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 28px 0;
+  color: var(--gris);
+  font-size: .75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--creme2);
+}
+
+/* FOOTER */
+footer {
+  background: var(--brun);
+  color: rgba(255,255,255,.5);
+  text-align: center;
+  padding: 28px 24px;
+  font-size: .8rem;
+  line-height: 1.8;
+}
+footer strong { color: white; }
+
+@media (max-width: 600px) {
+  .hero { height: 44vh; min-height: 260px; }
+  .hero-text { padding: 0 20px 30px; }
+  main { padding: 36px 16px 60px; }
+  .card { padding: 20px 18px; gap: 14px; }
+  .card.featured { padding: 24px 18px; }
+  .card-ico { width: 50px; height: 50px; font-size: 28px; border-radius: 12px; }
+}
 </style>
 </head>
 <body>
 
+<!-- HERO -->
 <div class="hero">
-  <img src="hero_terrasse.jpg" alt="Terrasse teck – Badarel, Bansat">
+  <img src="exterieur_terrasse.jpg" alt="Terrasse du gîte de Badarel – vue sur la nature auvergnate">
   <div class="hero-text">
-    <div class="hero-badge">🌿 Hameau de Badarel · Bansat</div>
+    <div class="hero-badge">🌿 Hameau de Badarel · Bansat · Auvergne</div>
     <h1>Bienvenue dans<br>ma <em>maison</em> !</h1>
-    <p>12 lieu-dit Badarel · 63570 Bansat · Auvergne</p>
+    <p class="hero-sub">12 lieu-dit Badarel · 63570 Bansat · Auvergne</p>
   </div>
 </div>
 
 <main>
-  <h2>Choisissez votre document</h2>
+
+  <div class="section-label">Choisissez votre document</div>
 
   <div class="cards">
 
-    <a class="card" href="livret_accueil_badarel.html">
-      <span class="card-ico">🏠</span>
-      <div>
-        <div class="card-title">Livret d'accueil</div>
-        <div class="card-desc">WiFi, équipements, poêle à bois, éco-gestes, départ… Tout ce qu'il faut savoir pour votre séjour à Badarel.</div>
+    <!-- CARTE PRINCIPALE : le gîte -->
+    <a class="card featured" href="https://badarel-auvergne.github.io/Guides/gite_badarel.html">
+      <div class="card-ico">🏠</div>
+      <div class="card-body">
+        <div class="card-title">Le Gîte de Badarel</div>
+        <div class="card-desc">Présentation complète · Photos · Équipements · Tarifs · Activités · Réservation directe</div>
       </div>
-      <span class="card-arrow">→</span>
+      <div class="card-arrow">→</div>
     </a>
 
-    <a class="card orange" href="guide_activites_badarel.html">
-      <span class="card-ico">🥾</span>
-      <div>
+    <!-- Livret d'accueil -->
+    <a class="card" href="https://badarel-auvergne.github.io/Guides/livret_accueil_badarel.html">
+      <div class="card-ico">📖</div>
+      <div class="card-body">
+        <div class="card-title">Livret d'accueil</div>
+        <div class="card-desc">WiFi, équipements, poêle à bois, éco-gestes, départ… Tout ce qu'il faut savoir pour votre séjour.</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <!-- Guide activités -->
+    <a class="card" href="https://badarel-auvergne.github.io/Guides/guide_activites_badarel.html">
+      <div class="card-ico">🥾</div>
+      <div class="card-body">
         <div class="card-title">Guide des activités</div>
         <div class="card-desc">Randonnées, plan d'eau, parc animalier, villages, marchés, bonnes tables, festivités… Le meilleur de la région.</div>
       </div>
-      <span class="card-arrow">→</span>
+      <div class="card-arrow">→</div>
     </a>
 
-    <a class="card blue" href="livret_accessible_badarel.html">
-      <span class="card-ico">👁</span>
-      <div>
+    <div class="divider">Pour les personnes malvoyantes</div>
+
+    <!-- Livret accessible -->
+    <a class="card" href="https://badarel-auvergne.github.io/Guides/livret_accessible_badarel.html">
+      <div class="card-ico">👁</div>
+      <div class="card-body">
         <div class="card-title">Livret accessible</div>
-        <div class="card-desc">Version grande police et fort contraste </div>
+        <div class="card-desc">Version grande police et fort contraste — même contenu que le livret d'accueil.</div>
       </div>
-      <span class="card-arrow">→</span>
+      <div class="card-arrow">→</div>
     </a>
 
   </div>
+
 </main>
 
 <footer>

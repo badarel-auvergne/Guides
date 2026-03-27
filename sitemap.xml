@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- Page principale – gîte -->
+  <!-- Page d'accueil du dossier Guides -->
   <url>
-    <loc>https://badarel-auvergne.github.io/</loc>
+    <loc>https://badarel-auvergne.github.io/Guides/</loc>
     <lastmod>2026-03-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://badarel-auvergne.github.io/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://badarel-auvergne.github.io/"/>
+  </url>
+
+  <!-- Page principale du gîte -->
+  <url>
+    <loc>https://badarel-auvergne.github.io/Guides/gite_badarel.html</loc>
+    <lastmod>2026-03-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
   </url>
 
   <!-- Guide des activités -->

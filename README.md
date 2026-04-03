@@ -11,7 +11,7 @@ Nichée dans le hameau paisible de **Badarel** (commune de Bansat, Puy-de-Dôme)
 - 🏠 **90 m²** habitables · 3 chambres · 1 salle de bain
 - 🔥 Poêle à bois (bois fourni) · PAC réversible
 - 🌿 Deux terrasses (Est & Ouest) · Soleil toute la journée
-- 📶 WiFi inclus · TV connectée (Netflix, Molotov…)
+- 📶 WiFi · TV 
 - 🍳 Cuisine entièrement équipée (induction, four, lave-vaisselle)
 - 🚗 Parking gratuit · 🚭 Non-fumeurs · 🚫 Animaux non acceptés
 

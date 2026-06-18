@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Le Triozon – T2 Cosy – Issoire Centre | Location vacances Auvergne</title>
+  <meta name="description" content="T2 cosy entièrement équipé au cœur d'Issoire, à 200m de l'Abbatiale Saint-Austremoine. 4 voyageurs · WiFi fibre · Parking gratuit · À 2 min de la gare. Classé ⭐⭐ meublé de tourisme.">
+  <meta name="keywords" content="location Issoire, T2 Issoire, appartement vacances Issoire, meublé tourisme Issoire, Auvergne location courte durée, gîte Puy-de-Dôme centre ville">
+  <meta name="author" content="Sidonie – Le Triozon">
+  <meta property="og:title" content="Le Triozon – T2 Cosy – Issoire Centre">
+  <meta property="og:description" content="4 voyageurs · WiFi fibre · À 2 min de la gare · Abbatiale à 200m · Parking gratuit">
+  <meta property="og:image" content="photos/salon_canape.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:    #F5F1EB;
+      --stone:    #E8E2D8;
+      --taupe:    #C4B49A;
+      --brown:    #7A6048;
+      --charcoal: #2E2A26;
+      --rust:     #B85C38;
+      --slate:    #5A6472;
+      --white:    #FEFCF9;
+      --shadow:   rgba(46,42,38,.10);
+
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans:  'Inter', system-ui, sans-serif;
+
+      --radius: 12px;
+      --max-w: 1120px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--cream);
+      color: var(--charcoal);
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    /* ========== NAV ========== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(254,252,249,.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--stone);
+    }
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 58px;
+    }
+    .nav-brand {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: var(--charcoal);
+      text-decoration: none;
+    }
+    .nav-brand span { color: var(--rust); }
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: .85rem;
+      font-weight: 500;
+      color: var(--slate);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 20px;
+      transition: background .2s, color .2s;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      background: var(--stone);
+      color: var(--charcoal);
+    }
+    .nav-cta {
+      background: var(--rust) !important;
+      color: var(--white) !important;
+    }
+    .nav-cta:hover { background: var(--brown) !important; }
+
+    /* hamburger */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--charcoal); border-radius: 2px; transition: .3s; }
+    .nav-mobile { display: none; flex-direction: column; padding: 12px 24px 16px; gap: 4px; border-top: 1px solid var(--stone); background: var(--white); }
+    .nav-mobile a { font-size: .9rem; font-weight: 500; color: var(--slate); text-decoration: none; padding: 8px 12px; border-radius: 8px; }
+    .nav-mobile a:hover { background: var(--stone); color: var(--charcoal); }
+    .nav-mobile.open { display: flex; }
+
+    /* ========== HERO ========== */
+    .hero {
+      position: relative;
+      height: min(90vh, 680px);
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(46,42,38,.72) 0%, rgba(46,42,38,.15) 60%, transparent 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 32px 52px;
+    }
+    .hero-eyebrow {
+      font-size: .8rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--taupe);
+      margin-bottom: 10px;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .hero-sub {
+      font-size: 1rem;
+      color: rgba(254,252,249,.85);
+      margin-bottom: 28px;
+      max-width: 520px;
+    }
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .badge {
+      background: rgba(254,252,249,.15);
+      border: 1px solid rgba(254,252,249,.30);
+      backdrop-filter: blur(6px);
+      color: var(--white);
+      font-size: .82rem;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 20px;
+    }
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 13px 24px;
+      border-radius: 8px;
+      font-size: .9rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .15s, box-shadow .15s;
+      border: none;
+    }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px var(--shadow); }
+    .btn-primary { background: var(--rust); color: var(--white); }
+    .btn-primary:hover { background: var(--brown); }
+    .btn-outline { background: rgba(254,252,249,.12); color: var(--white); border: 1.5px solid rgba(254,252,249,.45); backdrop-filter: blur(4px); }
+    .btn-outline:hover { background: rgba(254,252,249,.22); }
+
+    /* ========== SECTIONS ========== */
+    section { padding: 72px 24px; }
+    .container { max-width: var(--max-w); margin: 0 auto; }
+    .section-label {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      color: var(--charcoal);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .section-title em { font-style: italic; color: var(--rust); }
+    .section-lead {
+      color: var(--slate);
+      max-width: 600px;
+      margin-bottom: 48px;
+      font-size: 1.02rem;
+    }
+
+    /* ========== INTRO ========== */
+    #logement { background: var(--white); }
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .stats-row {
+      display: flex;
+      gap: 32px;
+      margin-top: 32px;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      color: var(--rust);
+      line-height: 1;
+      display: block;
+    }
+    .stat-label { font-size: .78rem; text-transform: uppercase; letter-spacing: .1em; color: var(--slate); margin-top: 4px; }
+    .intro-img {
+      border-radius: var(--radius);
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      box-shadow: 0 16px 48px var(--shadow);
+    }
+
+    /* ========== GALERIE ========== */
+    #galerie { background: var(--cream); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto;
+      gap: 12px;
+    }
+    .gallery-item {
+      overflow: hidden;
+      border-radius: var(--radius);
+      cursor: pointer;
+      position: relative;
+    }
+    .gallery-item:first-child {
+      grid-column: span 2;
+      grid-row: span 1;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .4s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.04); }
+    .gallery-item .caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(46,42,38,.6));
+      color: var(--white);
+      font-size: .8rem;
+      font-weight: 500;
+      padding: 24px 14px 10px;
+      opacity: 0;
+      transition: opacity .3s;
+    }
+    .gallery-item:hover .caption { opacity: 1; }
+
+    /* lightbox */
+    .lightbox { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,.88); align-items: center; justify-content: center; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 90vw; max-height: 90vh; border-radius: 8px; object-fit: contain; }
+    .lightbox-close { position: absolute; top: 20px; right: 24px; font-size: 2rem; color: white; cursor: pointer; background: none; border: none; line-height: 1; }
+    .lightbox-prev, .lightbox-next { position: absolute; top: 50%; transform: translateY(-50%); font-size: 2rem; color: white; cursor: pointer; background: none; border: none; padding: 12px; }
+    .lightbox-prev { left: 16px; }
+    .lightbox-next { right: 16px; }
+
+    /* ========== ÉQUIPEMENTS ========== */
+    #equipements { background: var(--white); }
+    .equip-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .equip-card {
+      background: var(--cream);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .equip-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 1px; }
+    .equip-name { font-weight: 600; font-size: .92rem; margin-bottom: 3px; }
+    .equip-detail { font-size: .8rem; color: var(--slate); }
+
+    /* conditions */
+    .conditions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 40px;
+    }
+    .cond-card {
+      background: var(--stone);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .cond-icon { font-size: 1.3rem; }
+    .cond-text { font-size: .88rem; }
+    .cond-price { font-weight: 700; font-size: 1rem; color: var(--rust); display: block; }
+
+    /* ========== EMPLACEMENT ========== */
+    #emplacement { background: var(--cream); }
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .poi-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .poi-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--white);
+      border-radius: 10px;
+      padding: 14px 18px;
+    }
+    .poi-icon { font-size: 1.25rem; flex-shrink: 0; }
+    .poi-dist { font-size: .75rem; font-weight: 700; color: var(--rust); text-transform: uppercase; letter-spacing: .06em; white-space: nowrap; margin-left: auto; padding-left: 12px; }
+    .poi-name { font-weight: 600; font-size: .9rem; }
+    .poi-sub { font-size: .78rem; color: var(--slate); }
+
+    .map-embed {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 8px 32px var(--shadow);
+      border: none;
+    }
+
+    /* ========== HÔTE ========== */
+    #hote { background: var(--white); }
+    .hote-inner {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 40px;
+      align-items: center;
+      max-width: 780px;
+    }
+    .hote-photo {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--stone);
+    }
+    .hote-stars { color: var(--rust); font-size: 1rem; margin-bottom: 6px; }
+    .hote-name { font-family: var(--serif); font-size: 1.6rem; margin-bottom: 6px; }
+    .hote-meta { font-size: .85rem; color: var(--slate); margin-bottom: 16px; }
+    .hote-quote {
+      font-style: italic;
+      color: var(--slate);
+      border-left: 3px solid var(--rust);
+      padding-left: 16px;
+      margin: 16px 0;
+    }
+    .hote-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
+    .btn-dark { background: var(--charcoal); color: var(--white); }
+    .btn-dark:hover { background: #1a1714; }
+    .btn-ghost { background: transparent; color: var(--charcoal); border: 1.5px solid var(--stone); }
+    .btn-ghost:hover { background: var(--stone); }
+
+    /* ========== CONTACT ========== */
+    #contact { background: var(--charcoal); }
+    #contact .section-label { color: var(--taupe); }
+    #contact .section-title { color: var(--white); }
+    #contact .section-lead { color: rgba(254,252,249,.65); }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: span 2; }
+    label { font-size: .82rem; font-weight: 600; color: rgba(254,252,249,.7); text-transform: uppercase; letter-spacing: .08em; }
+    input, select, textarea {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 8px;
+      color: var(--white);
+      font-family: var(--sans);
+      font-size: .95rem;
+      padding: 12px 14px;
+      outline: none;
+      transition: border .2s;
+      width: 100%;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--taupe); }
+    select option { background: var(--charcoal); }
+    textarea { resize: vertical; min-height: 110px; }
+    .form-submit { margin-top: 8px; }
+    .success-msg { display: none; background: rgba(100,180,100,.15); border: 1px solid rgba(100,180,100,.3); color: #9de09d; border-radius: 8px; padding: 14px 18px; margin-top: 16px; font-size: .9rem; }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: #1a1714;
+      color: rgba(254,252,249,.5);
+      text-align: center;
+      padding: 32px 24px;
+      font-size: .82rem;
+    }
+    footer a { color: var(--taupe); text-decoration: none; }
+    footer a:hover { color: var(--white); }
+    .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 12px; flex-wrap: wrap; }
+
+    /* ========== CTA BANNER ========== */
+    .cta-banner {
+      background: linear-gradient(135deg, var(--rust) 0%, var(--brown) 100%);
+      text-align: center;
+      padding: 64px 24px;
+    }
+    .cta-banner h2 { font-family: var(--serif); font-size: 2rem; color: var(--white); margin-bottom: 12px; }
+    .cta-banner p { color: rgba(254,252,249,.8); margin-bottom: 28px; font-size: 1rem; }
+    .cta-banner .btn { background: var(--white); color: var(--rust); }
+    .cta-banner .btn:hover { background: var(--cream); }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .intro-grid, .location-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-item:first-child { grid-column: span 2; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full { grid-column: span 1; }
+      .hote-inner { grid-template-columns: 1fr; text-align: center; }
+      .hote-photo { margin: 0 auto; }
+      .stats-row { justify-content: center; }
+    }
+
+    @media (max-width: 480px) {
+      section { padding: 48px 16px; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item:first-child { grid-column: span 1; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="#">🏛️ Le <span>Triozon</span> · Issoire</a>
+    <ul class="nav-links">
+      <li><a href="#logement">Le logement</a></li>
+      <li><a href="#galerie">Photos</a></li>
+      <li><a href="#equipements">Équipements</a></li>
+      <li><a href="#emplacement">Situation</a></li>
+      <li><a href="#hote">L'hôte</a></li>
+      <li><a href="livret_accueil_triozon.html" class="nav-links">📖 Livret d'accueil</a></li>
+      <li><a href="#contact" class="nav-cta">✉️ Contact</a></li>
+    </ul>
+    <button class="hamburger" id="ham" aria-label="Menu" onclick="document.getElementById('navMobile').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="#logement" onclick="this.closest('.nav-mobile').classList.remove('open')">Le logement</a>
+    <a href="#galerie" onclick="this.closest('.nav-mobile').classList.remove('open')">Photos</a>
+    <a href="#equipements" onclick="this.closest('.nav-mobile').classList.remove('open')">Équipements</a>
+    <a href="#emplacement" onclick="this.closest('.nav-mobile').classList.remove('open')">Situation</a>
+    <a href="#hote" onclick="this.closest('.nav-mobile').classList.remove('open')">L'hôte</a>
+    <a href="livret_accueil_triozon.html">📖 Livret d'accueil</a>
+    <a href="#contact" onclick="this.closest('.nav-mobile').classList.remove('open')">✉️ Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <img class="hero-img" src="photos/salon_canape.jpg" alt="Le Triozon – salon avec canapé convertible" id="heroImg">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">🏛️ Issoire · Centre historique · Auvergne</p>
+    <h1 class="hero-title">Le Triozon</h1>
+    <p class="hero-sub">T2 cosy entièrement équipé, au cœur d'Issoire — à 200 m de l'Abbatiale et 2 min de la gare.</p>
+    <div class="hero-badges">
+      <span class="badge">🏠 Logement entier</span>
+      <span class="badge">👤 4 voyageurs</span>
+      <span class="badge">🛏 1 chambre + canapé-lit</span>
+      <span class="badge">📶 Fibre WiFi</span>
+      <span class="badge">⭐⭐ Meublé tourisme</span>
+    </div>
+    <div class="hero-btns">
+      <a href="#contact" class="btn btn-primary">✉️ Nous contacter</a>
+      <a href="#galerie" class="btn btn-outline">Voir les photos ↓</a>
+    </div>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section id="logement">
+  <div class="container">
+    <div class="intro-grid">
+      <div>
+        <p class="section-label">Le logement</p>
+        <h2 class="section-title">Un <em>cocon issoirien</em><br>tout confort</h2>
+        <p>Bienvenue dans ce T2 traversant, idéalement placé pour explorer l'Auvergne ou pour un déplacement professionnel. D'un côté, le bouveard avec vue sur les platanes ; de l'autre, la cour de la mairie et le béal.</p>
+        <p style="margin-top:14px; color:var(--slate);">Arrivée autonome par boîte à clés, appartement entièrement équipé, tout à pied : aucune voiture nécessaire pour profiter des commerces, restaurants et trésors patrimoniaux d'Issoire.</p>
+        <div class="stats-row">
+          <div class="stat"><span class="stat-num">4</span><span class="stat-label">voyageurs</span></div>
+          <div class="stat"><span class="stat-num">2</span><span class="stat-label">lits</span></div>
+          <div class="stat"><span class="stat-num">200m</span><span class="stat-label">Abbatiale</span></div>
+          <div class="stat"><span class="stat-num">2min</span><span class="stat-label">de la gare</span></div>
+        </div>
+      </div>
+      <div>
+        <img class="intro-img" src="photos/chambre.jpg" alt="Chambre – Le Triozon – Issoire">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIE -->
+<section id="galerie">
+  <div class="container">
+    <p class="section-label">Photos</p>
+    <h2 class="section-title">L'appartement <em>en images</em></h2>
+    <p class="section-lead">Cliquez sur une photo pour l'agrandir.</p>
+
+    <div class="gallery-grid" id="galleryGrid">
+      <div class="gallery-item" onclick="openLightbox(0)">
+        <img src="photos/salon_canape.jpg" alt="Salon avec canapé convertible – Le Triozon">
+        <div class="caption">Salon · Canapé convertible</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(1)">
+        <img src="photos/chambre.jpg" alt="Chambre double – Le Triozon">
+        <div class="caption">Chambre · Lit double</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(2)">
+        <img src="photos/cuisine.jpg" alt="Cuisine équipée – Le Triozon">
+        <div class="caption">Cuisine équipée</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(3)">
+        <img src="photos/salle_de_bain.jpg" alt="Salle d'eau – Le Triozon">
+        <div class="caption">Salle d'eau</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(4)">
+        <img src="photos/salon_vue.jpg" alt="Vue sur le béal – Le Triozon">
+        <div class="caption">Vue sur la cour de la mairie et le béal</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <button class="lightbox-prev" onclick="prevPhoto()">‹</button>
+  <img src="" alt="" id="lightboxImg">
+  <button class="lightbox-next" onclick="nextPhoto()">›</button>
+</div>
+
+<!-- ÉQUIPEMENTS -->
+<section id="equipements">
+  <div class="container">
+    <p class="section-label">Ce que propose ce logement</p>
+    <h2 class="section-title">Équipements &amp; <em>Confort</em></h2>
+    <p class="section-lead">Tout le nécessaire pour un séjour serein, que ce soit pour les vacances ou un déplacement professionnel.</p>
+
+    <div class="equip-grid">
+      <div class="equip-card">
+        <div class="equip-icon">🍳</div>
+        <div><div class="equip-name">Cuisine équipée</div><div class="equip-detail">Réfrigérateur · Plaques · Four · Micro-ondes · Lave-vaisselle</div></div>
+      </div>
+      <div class="equip-card">
+        <div class="equip-icon">☕</div>
+        <div><div class="equip-name">Petit-déjeuner facilité</div><div class="equip-detail">Cafetière · Bouilloire · Grille-pain</div></div>
+      </div>
+      <div class="equip-card">
+        <div class="equip-icon">📶</div>
+        <div><div class="equip-name">WiFi fibre</div><div class="equip-detail">Connexion rapide incluse</div></div>
+      </div>
+      <div class="equip-card">
+        <div class="equip-icon">💻</div>
+        <div><div class="equip-name">Espace de travail</div><div class="equip-detail">Bureau pratique dans la chambre</div></div>
+      </div>
+      <div class="equip-card">
+        <div class="equip-icon">📺</div>
+        <div><div class="equip-name">Télévision</div><div class="equip-detail">TV dans le salon</div></div>
+      </div>
+      <div class="equip-card">
+        <div class="equip-icon">🛋️</div>
+        <div><div class="equip-name">Canapé convertible</div><div class="equip-detail">Couchage pour 2 voyageurs supplémentaires</div></div>
+      </div>
+      <div class="equip-card">
+        <div class="equip-icon">🚗</div>
+        <div><div class="equip-name">Parking gratuit</div><div class="equip-detail">Stationnement facile dans le quartier</div></div>
+      </div>
+      <div class="equip-card">
+        <div class="equip-icon">🔑</div>
+        <div><div class="equip-name">Arrivée autonome</div><div class="equip-detail">Boîte à clés sécurisée · Check-in flexible</div></div>
+      </div>
+      <div class="equip-card">
+        <div class="equip-icon">🗺️</div>
+        <div><div class="equip-name">Documentation touristique</div><div class="equip-detail">Dépliants et guides sur la région</div></div>
+      </div>
+      <div class="equip-card">
+        <div class="equip-icon">🫧</div>
+        <div><div class="equip-name">Produits ménagers</div><div class="equip-detail">Aspirateur balai, serpillière, produits fournis</div></div>
+      </div>
+      <div class="equip-card">
+        <div class="equip-icon">👕</div>
+        <div><div class="equip-name">Laverie</div><div class="equip-detail">Laverie automatique à 300 m</div></div>
+      </div>
+      <div class="equip-card">
+        <div class="equip-icon">🔥</div>
+        <div><div class="equip-name">Détecteur de fumée</div><div class="equip-detail">Sécurité incendie en place</div></div>
+      </div>
+    </div>
+
+    <!-- CONDITIONS -->
+    <h3 style="font-family:var(--serif);font-size:1.5rem;margin:56px 0 24px;color:var(--charcoal);">Conditions &amp; Tarifs optionnels</h3>
+    <div class="conditions-grid">
+      <div class="cond-card">
+        <div class="cond-icon">🧹</div>
+        <div class="cond-text"><span class="cond-price">30 €</span>Forfait ménage fin de séjour (en option)</div>
+      </div>
+      <div class="cond-card">
+        <div class="cond-icon">🛁</div>
+        <div class="cond-text"><span class="cond-price">20 €</span>Draps par lit double (en option)</div>
+      </div>
+      <div class="cond-card">
+        <div class="cond-icon">🪥</div>
+        <div class="cond-text"><span class="cond-price">5 €</span>Serviettes par personne (en option)</div>
+      </div>
+      <div class="cond-card">
+        <div class="cond-icon">🕐</div>
+        <div class="cond-text">Arrivée à partir de <strong>16h00</strong></div>
+      </div>
+      <div class="cond-card">
+        <div class="cond-icon">🕚</div>
+        <div class="cond-text">Départ avant <strong>11h00</strong></div>
+      </div>
+      <div class="cond-card">
+        <div class="cond-icon">👤</div>
+        <div class="cond-text"><strong>4 voyageurs</strong> maximum</div>
+      </div>
+      <div class="cond-card">
+        <div class="cond-icon">🚫</div>
+        <div class="cond-text">Animaux non acceptés · Non-fumeurs</div>
+      </div>
+      <div class="cond-card">
+        <div class="cond-icon">⭐⭐</div>
+        <div class="cond-text">Classé <strong>meublé de tourisme</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMPLACEMENT -->
+<section id="emplacement">
+  <div class="container">
+    <p class="section-label">Situation</p>
+    <h2 class="section-title">Tout à pied depuis <em>Le Triozon</em></h2>
+    <p class="section-lead">En plein cœur d'Issoire, à deux pas du patrimoine roman et des commodités du quotidien.</p>
+
+    <div class="location-grid">
+      <ul class="poi-list">
+        <li class="poi-item">
+          <span class="poi-icon">⛪</span>
+          <div>
+            <div class="poi-name">Abbatiale Saint-Austremoine</div>
+            <div class="poi-sub">Joyau de l'art roman auvergnat</div>
+          </div>
+          <span class="poi-dist">200 m</span>
+        </li>
+        <li class="poi-item">
+          <span class="poi-icon">🏛️</span>
+          <div>
+            <div class="poi-name">Office de Tourisme</div>
+            <div class="poi-sub">Centre historique d'Issoire</div>
+          </div>
+          <span class="poi-dist">200 m</span>
+        </li>
+        <li class="poi-item">
+          <span class="poi-icon">🚉</span>
+          <div>
+            <div class="poi-name">Gare d'Issoire</div>
+            <div class="poi-sub">Liaison Clermont-Ferrand · Brioude</div>
+          </div>
+          <span class="poi-dist">250 m</span>
+        </li>
+        <li class="poi-item">
+          <span class="poi-icon">🌳</span>
+          <div>
+            <div class="poi-name">Parc Cassin</div>
+            <div class="poi-sub">Parc arboré en cœur de ville</div>
+          </div>
+          <span class="poi-dist">à pied</span>
+        </li>
+        <li class="poi-item">
+          <span class="poi-icon">🍽️</span>
+          <div>
+            <div class="poi-name">Restaurants &amp; commerces</div>
+            <div class="poi-sub">Tous accessibles à pied</div>
+          </div>
+          <span class="poi-dist">à pied</span>
+        </li>
+        <li class="poi-item">
+          <span class="poi-icon">🛣️</span>
+          <div>
+            <div class="poi-name">Autoroute A75</div>
+            <div class="poi-sub">Vers Clermont-Ferrand, Millau</div>
+          </div>
+          <span class="poi-dist">5 min</span>
+        </li>
+        <li class="poi-item">
+          <span class="poi-icon">🏔️</span>
+          <div>
+            <div class="poi-name">Chaîne des Puys · Sancy</div>
+            <div class="poi-sub">Volcans, randonnées, stations</div>
+          </div>
+          <span class="poi-dist">45 min</span>
+        </li>
+        <li class="poi-item">
+          <span class="poi-icon">🏘️</span>
+          <div>
+            <div class="poi-name">Usson · Montpeyroux</div>
+            <div class="poi-sub">Plus Beaux Villages de France</div>
+          </div>
+          <span class="poi-dist">15 min</span>
+        </li>
+      </ul>
+
+      <div>
+        <iframe
+          class="map-embed"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY&q=Abbatiale+Saint-Austremoine+Issoire&zoom=15"
+          title="Carte Issoire centre">
+        </iframe>
+        <p style="font-size:.78rem;color:var(--slate);margin-top:10px;text-align:center;">📍 Issoire, Puy-de-Dôme (63) · L'adresse exacte vous sera communiquée après réservation</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HÔTE -->
+<section id="hote">
+  <div class="container">
+    <p class="section-label">Votre hôte</p>
+    <h2 class="section-title" style="margin-bottom:36px;">Bonjour, je suis <em>Sidonie</em></h2>
+    <div class="hote-inner">
+      <img class="hote-photo" src="https://a0.muscache.com/im/pictures/user/User/original/9f605a51-0e55-4af8-be87-c73bf73c2642.jpeg?im_w=240" alt="Sidonie – votre hôte">
+      <div>
+        <div class="hote-stars">★★★★★</div>
+        <div class="hote-name">Sidonie</div>
+        <div class="hote-meta">Hôte depuis 4 ans · Note globale 5,0 ⭐ · Taux de réponse 100 % · Répond dans l'heure</div>
+        <p>Passionnée par l'Auvergne et ses richesses, je suis disponible pour vous aider à profiter au mieux de votre séjour à Issoire et dans la région.</p>
+        <blockquote class="hote-quote">« J'ai aménagé Le Triozon avec soin pour que vous vous y sentiez vraiment chez vous — un pied-à-terre confortable à deux pas des plus belles pages de l'art roman auvergnat. »</blockquote>
+        <div class="hote-btns">
+          <a href="#contact" class="btn btn-dark">✉️ Nous contacter</a>
+          <a href="https://www.airbnb.fr/rooms/1707765215213559980" target="_blank" rel="noopener" class="btn btn-ghost">Voir l'annonce Airbnb →</a>
+          <a href="livret_accueil_triozon.html" class="btn btn-ghost">📖 Livret d'accueil</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner">
+  <h2>Prêt à séjourner au cœur d'<em style="font-style:italic;">Issoire</em> ?</h2>
+  <p>Contactez Sidonie pour vérifier les disponibilités ou réservez directement sur Airbnb.</p>
+  <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+    <a href="#contact" class="btn">✉️ Contacter Sidonie</a>
+    <a href="https://www.airbnb.fr/rooms/1707765215213559980" target="_blank" rel="noopener" class="btn btn-outline" style="background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.4);">🏠 Réserver sur Airbnb →</a>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container" style="max-width:740px;">
+    <p class="section-label">Réservation &amp; Renseignements</p>
+    <h2 class="section-title">Contact</h2>
+    <p class="section-lead">Une question, une demande de disponibilité ? Écrivez directement à Sidonie !</p>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="prenom">Prénom *</label>
+        <input type="text" id="prenom" required placeholder="Votre prénom">
+      </div>
+      <div class="form-group">
+        <label for="nom">Nom *</label>
+        <input type="text" id="nom" required placeholder="Votre nom">
+      </div>
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input type="email" id="email" required placeholder="votre@email.com">
+      </div>
+      <div class="form-group">
+        <label for="tel">Téléphone</label>
+        <input type="tel" id="tel" placeholder="06 XX XX XX XX">
+      </div>
+      <div class="form-group">
+        <label for="arrivee">Date d'arrivée souhaitée</label>
+        <input type="date" id="arrivee">
+      </div>
+      <div class="form-group">
+        <label for="depart">Date de départ souhaitée</label>
+        <input type="date" id="depart">
+      </div>
+      <div class="form-group">
+        <label for="voyageurs">Nombre de voyageurs</label>
+        <select id="voyageurs">
+          <option value="">Sélectionner…</option>
+          <option>1 voyageur</option>
+          <option>2 voyageurs</option>
+          <option>3 voyageurs</option>
+          <option>4 voyageurs</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="linge">Linge de maison</label>
+        <select id="linge">
+          <option value="">Je verrai plus tard</option>
+          <option>Je fournis mon linge</option>
+          <option>Draps uniquement (20 €/lit)</option>
+          <option>Serviettes uniquement (5 €/pers.)</option>
+          <option>Draps + Serviettes</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label for="message">Message *</label>
+        <textarea id="message" required placeholder="Votre message…"></textarea>
+      </div>
+    </div>
+    <button class="btn btn-primary form-submit" onclick="handleSubmit()">✉️ Envoyer mon message</button>
+    <div class="success-msg" id="successMsg">✅ <strong>Message envoyé !</strong> Sidonie vous répondra dans les plus brefs délais. À très bientôt !</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a href="#logement">Le logement</a>
+    <a href="#galerie">Photos</a>
+    <a href="#equipements">Équipements</a>
+    <a href="livret_accueil_triozon.html">📖 Livret d'accueil</a>
+    <a href="https://www.airbnb.fr/rooms/1707765215213559980" target="_blank" rel="noopener">Airbnb</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <p><strong style="color:rgba(254,252,249,.7);">Le Triozon – T2 Cosy · Issoire (63500) · Auvergne-Rhône-Alpes</strong></p>
+  <p style="margin-top:6px;">Sidonie · Votre hôte 🏛️ · <a href="mailto:contact@letriozon.fr">contact@letriozon.fr</a></p>
+</footer>
+
+<script>
+  // Lightbox
+  const photos = [
+    { src: 'photos/salon_canape.jpg', alt: 'Salon – canapé convertible' },
+    { src: 'photos/chambre.jpg', alt: 'Chambre – lit double' },
+    { src: 'photos/cuisine.jpg', alt: 'Cuisine équipée' },
+    { src: 'photos/salle_de_bain.jpg', alt: "Salle d'eau" },
+    { src: 'photos/salon_vue.jpg', alt: 'Vue sur la cour et le béal' },
+  ];
+  let currentPhoto = 0;
+
+  function openLightbox(i) {
+    currentPhoto = i;
+    updateLightbox();
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function updateLightbox() {
+    const lb = document.getElementById('lightboxImg');
+    lb.src = photos[currentPhoto].src;
+    lb.alt = photos[currentPhoto].alt;
+  }
+  function prevPhoto() { currentPhoto = (currentPhoto - 1 + photos.length) % photos.length; updateLightbox(); }
+  function nextPhoto() { currentPhoto = (currentPhoto + 1) % photos.length; updateLightbox(); }
+
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeLightbox();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (!document.getElementById('lightbox').classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') prevPhoto();
+    if (e.key === 'ArrowRight') nextPhoto();
+  });
+
+  // Contact form
+  function handleSubmit() {
+    const req = ['prenom','nom','email','message'];
+    for (const id of req) {
+      if (!document.getElementById(id).value.trim()) {
+        alert('Merci de remplir tous les champs obligatoires (*).');
+        return;
+      }
+    }
+    document.getElementById('successMsg').style.display = 'block';
+  }
+</script>
+
+</body>
+</html>

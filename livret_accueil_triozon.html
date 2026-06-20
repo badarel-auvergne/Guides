@@ -619,6 +619,33 @@ footer {
 }
 footer strong { color: rgba(255,255,255,0.85); }
 
+/* ── LANG SWITCHER ───────────────────────────────────────────────────────*/
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-left: auto;
+  padding-left: 16px;
+  flex-shrink: 0;
+}
+.lang-btn {
+  background: none;
+  border: 1.5px solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 3px 5px;
+  transition: border-color .2s, opacity .2s;
+  opacity: 0.45;
+}
+.lang-btn:hover { opacity: 1; }
+.lang-btn.active {
+  border-color: var(--v4);
+  opacity: 1;
+  background: rgba(255,255,255,0.08);
+}
+
 /* ── RESPONSIVE ──────────────────────────────────────────────────────────*/
 @media (max-width: 640px) {
   .quickbar { grid-template-columns: repeat(2, 1fr); }
@@ -656,6 +683,11 @@ footer strong { color: rgba(255,255,255,0.85); }
   <a href="#depart">🧹 Départ</a>
   <a href="#activites">🗺️ Activités</a>
   <a href="#contacts">📞 Contacts</a>
+  <div class="lang-switcher">
+    <button class="lang-btn active" id="lang-fr" onclick="setLang('fr')" title="Français">🇫🇷</button>
+    <button class="lang-btn" id="lang-en" onclick="setLang('en')" title="English">🇬🇧</button>
+    <button class="lang-btn" id="lang-de" onclick="setLang('de')" title="Deutsch">🇩🇪</button>
+  </div>
 </nav>
 
 <!-- ── HERO ───────────────────────────────────────────────────────────── -->
@@ -1079,5 +1111,506 @@ footer strong { color: rgba(255,255,255,0.85); }
   Sidonie · 06 64 51 32 45 · Livret d'accueil · 2026
 </footer>
 
+<script>
+const T = {
+  fr: {
+    // nav
+    'nav.accueil': '💬 Accueil', 'nav.arrivee': '🔑 Arrivée', 'nav.parking': '🚗 Parking',
+    'nav.linge': '🛁 Linge', 'nav.equip': '🏠 Équipements', 'nav.regles': '📜 Règles',
+    'nav.depart': '🧹 Départ', 'nav.activites': '🗺️ Activités', 'nav.contacts': '📞 Contacts',
+    // hero
+    'hero.eyebrow': '🌿 Livret d\'accueil · Issoire, Puy-de-Dôme',
+    'hero.title': 'Bienvenue au <em>Triozon</em>',
+    'hero.sub': '3 boulevard Triozon Bayle · 63500 Issoire · 1<sup>er</sup> étage',
+    // quickbar
+    'qi.arrivee.label': '📅 Arrivée', 'qi.arrivee.val': 'dès 16h00',
+    'qi.depart.label': '🕚 Départ', 'qi.depart.val': 'avant 11h00',
+    'qi.wifi.label': '📶 WiFi', 'qi.wifi.val': 'fourni sur place',
+    'qi.sidonie.label': '📱 Sidonie', 'qi.sidonie.val': '06 64 51 32 45',
+    // bienvenue
+    'bvn.title': 'Bonjour et bienvenue !', 'bvn.subtitle': 'Un mot de votre hôte',
+    'bvn.p': 'J\'espère que vous y passerez un séjour agréable et ressourçant, et que vous profiterez de notre belle région. N\'hésitez pas à m\'appeler si il vous manquait quoi que ce soit ou pour un conseil sur la région !',
+    'bvn.sig': 'Sidonie 🌿 &nbsp;·&nbsp; 06 64 51 32 45',
+    'bvn.alert': 'Merci de m\'indiquer votre <strong>horaire d\'arrivée à l\'avance</strong> — je pourrai mieux organiser votre accueil !',
+    'bvn.pmr': 'Situé au 1<sup>er</sup> étage sans ascenseur, ce logement n\'est malheureusement <strong>pas adapté aux personnes à mobilité réduite (PMR)</strong>.',
+    // arrivee
+    'arr.title': 'Arrivée &amp; accès', 'arr.subtitle': 'Code et clés communiqués avant votre arrivée',
+    'arr.card.label': 'Boîte à clés — entrée de l\'immeuble',
+    'arr.card.val': 'Code communiqué avant votre arrivée',
+    'arr.p': 'Vous y trouverez le <strong>badge d\'accès à l\'immeuble</strong> et les <strong>clés de l\'appartement</strong>. L\'appartement se trouve au <strong>1<sup>er</sup> étage</strong>.',
+    'arr.tip': 'La porte met quelques instants à se débloquer avec le badge — pas d\'inquiétude !',
+    // stationnement
+    'stat.title': 'Stationnement', 'stat.subtitle': 'La plupart des places sont gratuites dans le quartier',
+    'stat.intro': 'On trouve facilement des places — avec un peu de chance, même au pied de l\'immeuble !',
+    'stat.alert': '<strong>Places bleues</strong> : réservées 30 min, du mardi au vendredi en journée et payant dans le cœur de ville.',
+    'park1.name': 'Bd Triozon Bayle', 'park1.note': 'Devant l\'immeuble · Gratuit',
+    'park2.name': 'Rue de la Gare', 'park2.note': '2 min à pied',
+    'park3.name': 'Parking de l\'Abbatiale', 'park3.note': 'Gratuit · face à l\'abbatiale',
+    'park4.name': 'Parking Suzanne Noël', 'park4.note': 'Tournez sous un porche à droite, après la mairie et la poste',
+    // linge
+    'linge.title': 'Linge de maison', 'linge.subtitle': 'À commander à l\'avance si besoin',
+    'linge.intro': 'Les draps et serviettes ne sont <strong>pas inclus par défaut</strong>. Vous pouvez apporter les vôtres, ou me les commander à l\'avance :',
+    'price.h1': 'Prestation', 'price.h2': 'Tarif',
+    'price.r1': 'Draps &amp; taies <span style="color:var(--ink3);font-size:.82rem">— par chambre</span>',
+    'price.r2': 'Serviette <span style="color:var(--ink3);font-size:.82rem">— 1 grande + 1 petite · par personne</span>',
+    'bed1.label': '🛏️ Lit 1', 'bed1.desc': 'Chambre — drap housse 140×190 cm · couette 220×240 cm · 2 oreillers 60×60',
+    'bed2.label': '🛋️ Lit 2', 'bed2.desc': 'Canapé convertible — drap housse 140×200 cm · couette 220×240 cm · 2 oreillers 60×60',
+    // equipements
+    'equip.title': 'Équipements &amp; appareils', 'equip.subtitle': 'Tout ce que vous trouverez sur place',
+    'equip.provided': 'Fourni à votre arrivée :',
+    'equip.i1': 'TV connectée', 'equip.i2': 'WiFi', 'equip.i3': 'Savon &amp; shampooing',
+    'equip.i4': 'Liquide vaisselle, éponge, produits ménagers', 'equip.i5': 'Torchons de cuisine', 'equip.i6': 'Dépliants région',
+    'heat.title': 'Chauffage',
+    'heat.p': 'L\'appartement est équipé d\'une <strong>chaudière à gaz à eau chaude</strong>, située dans la cuisine. Les radiateurs sont munis de <strong>robinets thermostatiques</strong> — tournez simplement pour régler la température souhaitée pièce par pièce. Si l\'eau n\'est pas assez chaude, vous pouvez la régler directement sur la chaudière.',
+    'trash.title': 'Poubelles &amp; tri sélectif',
+    'trash.p': 'En sortant de l\'immeuble, <strong>traversez la rue vers la gauche</strong> : vous trouverez les conteneurs tout-venant et recyclage.',
+    // regles
+    'reg.title': 'Règles de la maison',
+    'reg.r1': '🚭 <span>Logement <strong>non-fumeur</strong></span>',
+    'reg.r2': '🐾 <span><strong>Animaux</strong> non acceptés</span>',
+    'reg.r3': '🔇 <span>Respecter la <strong>tranquillité des voisins</strong>, notamment en soirée</span>',
+    'reg.r4': '🪟 <span><strong>Fenêtres fermées</strong> en cas d\'absence prolongée</span>',
+    // depart
+    'dep.title': 'Départ — avant 11h00', 'dep.subtitle': 'Quelques petites choses avant de repartir',
+    'dep.intro': 'Un <strong>forfait ménage de 30 €</strong> est disponible à la réservation. Si vous faites le ménage vous-même, merci de laisser le logement parfaitement propre, prêt à être reloué. <strong>Dans tous les cas :</strong>',
+    'dep.s1': '🍽️ Vaisselle propre et rangée', 'dep.s2': '🗑️ Poubelles vidées',
+    'dep.s3': '🛁 Linge en tas dans la salle de bain', 'dep.s4': '🪟 Fenêtres et volets fermées, lumières éteintes',
+    'dep.s5': '🔑 Clés et badge redéposés dans la boîte à clés',
+    // activites
+    'act.title': 'Découvrir Issoire &amp; la région', 'act.subtitle': 'Issoire et l\'Auvergne ont beaucoup à offrir !',
+    'act.h.issoire': 'À ne pas rater à Issoire',
+    'act.l1': '🛒 <strong>Le marché du samedi matin</strong> — incontournable, en plein air au cœur de la ville',
+    'act.l2': '⛪ <strong>L\'Abbatiale Saint-Austremoine &amp; la tour de l\'horloge</strong> — joyau de l\'art roman auvergnat',
+    'act.l3': '🚶 <strong>Balade dans les ruelles</strong> du centre historique — charme et architecture médiévale',
+    'act.l4': '🏊 <strong>Le centre aqualudique</strong> — accessible à pied par le souterrain de la gare',
+    'act.l5': '🌿 <strong>Le parc Cassin &amp; la promenade le long de la Couze</strong> — une balade au frais très agréable',
+    'event.eyebrow': '🎪 Vendredis soir · Juillet–Août',
+    'event.title': 'Les Vendred\'Issoire',
+    'event.desc': 'Chaque vendredi soir en juillet-août : concerts, spectacles de rue et marchés nocturnes autour de l\'abbatiale illuminée !',
+    'ot.box': '<strong>Office de tourisme du Pays d\'Issoire</strong> — à seulement 200 m de l\'appartement',
+    'act.h.restos': 'Quelques bonnes tables à Issoire',
+    'r1.name': 'Le P\'tit Roseau', 'r1.desc': 'Cuisine du marché, produits locaux et de saison. Cadre chaleureux, belle carte de vins auvergnats.',
+    'r2.name': 'L\'Agastache', 'r2.desc': 'Table inventive et végétale, herbes aromatiques et producteurs locaux à l\'honneur.',
+    'r3.name': 'Hobistro', 'r3.desc': 'Bistrot convivial à l\'ambiance décontractée. Plats généreux, bonne sélection de bières artisanales.',
+    'r4.name': 'L\'Acérola', 'r4.desc': 'Cuisine soignée et créative, belle terrasse en saison. Une valeur sûre au cœur d\'Issoire.',
+    'act.h.volcans': 'Volcans &amp; grands sites naturels',
+    'v1.name': 'Puy de Dôme', 'v1.dist': '~45 min', 'v1.desc': 'Le sommet emblématique (1 465 m), classé UNESCO. Montée à pied ou en Panoramique des Dômes. Vue à 360° sur la chaîne des volcans.',
+    'v2.name': 'Puy de Sancy', 'v2.dist': '~1h', 'v2.desc': 'Point culminant du Massif Central (1 886 m). Téléphérique, randonnées, sources de la Dordogne. Ski en hiver, fraîcheur en été.',
+    'v3.name': 'Vallée de la Chaudefour', 'v3.dist': '~1h', 'v3.desc': 'Réserve naturelle nationale au cœur du Sancy. Paysage volcanique, flore protégée, marmottes et vautours fauves.',
+    'v4.name': 'Lac Pavin · Besse', 'v4.dist': '~45 min', 'v4.desc': 'Lac volcanique le plus profond de France, dans un cratère parfait. Baignade, kayak, randonnée autour du lac (2 km).',
+    'v5.name': 'Vulcania', 'v5.dist': '~50 min', 'v5.desc': 'Le plus grand parc européen dédié au volcanisme. Idéal en famille, spectacles immersifs et attractions.',
+    'act.h.villages': 'Villages &amp; patrimoine',
+    'p1.name': 'Montpeyroux', 'p1.dist': '~10 min', 'p1.desc': 'Plus beau village de France, perché sur son éperon basaltique à deux pas d\'Issoire. À faire à pied !',
+    'p2.name': 'Usson', 'p2.dist': '~20 min', 'p2.desc': 'Village perché célèbre pour la Reine Margot et ses orgues volcaniques. Vue imprenable sur la plaine.',
+    'p3.name': 'Saint-Nectaire', 'p3.dist': '~30 min', 'p3.desc': 'Village fromager de renom et belle église romane. Marché, caves d\'affinage, sources thermales.',
+    'p4.name': 'Brioude', 'p4.dist': '~30 min', 'p4.desc': 'La basilique Saint-Julien — la plus grande église romane d\'Auvergne, aux chapiteaux extraordinaires.',
+    'p5.name': 'La Chaise-Dieu', 'p5.dist': '~50 min', 'p5.desc': 'Abbaye bénédictine majestueuse et festival de musique classique de renommée internationale (août).',
+    'act.h.biefs': '💧 Les biefs d\'Issoire',
+    'biefs.p': 'Méconnus mais fascinants, les <strong>biefs d\'Issoire</strong> forment un réseau de canaux historiques qui parcourt la ville souterrainement et en surface.',
+    'biefs.btn': '📄 Télécharger la brochure (PDF)',
+    'act.h.loisirs': 'Loisirs &amp; sorties nature',
+    'l1.name': 'Parc animalier d\'Auvergne', 'l1.dist': '~20 min · Ardes-sur-Couze', 'l1.desc': 'Lynx, loups, ours, rapaces et faune locale dans un cadre naturel préservé. Idéal en famille.',
+    'l2.name': 'Grotte de Perrier', 'l2.dist': '~15 min', 'l2.desc': 'Ancien village troglodyte creusé dans la roche volcanique. Visite guidée fascinante, vue panoramique.',
+    'thankyou.h': '🙏 Un petit mot ou un avis sur votre séjour me ferait vraiment plaisir !',
+    'thankyou.p': 'Si vous avez des remarques ou des suggestions, je suis toujours ouverte aux retours. Beau séjour ! 🌿',
+    // contacts
+    'cnt.title': 'Contacts utiles', 'cnt.subtitle': 'En cas de besoin, vous n\'êtes jamais loin d\'une aide',
+    'urg.samu': 'SAMU', 'urg.pompiers': 'Pompiers', 'urg.police': 'Police', 'urg.eu': 'Urgences EU',
+    'sidonie.p': '06 64 51 32 45 · N\'hésitez pas, je suis disponible pour vous aider !',
+    // footer
+    'footer': '<strong>Le Triozon · Appartement au cœur d\'Issoire</strong><br>3 boulevard Triozon Bayle · 63500 Issoire · 1<sup>er</sup> étage<br>Sidonie · 06 64 51 32 45 · Livret d\'accueil · 2026',
+  },
+
+  en: {
+    'nav.accueil': '💬 Welcome', 'nav.arrivee': '🔑 Arrival', 'nav.parking': '🚗 Parking',
+    'nav.linge': '🛁 Linen', 'nav.equip': '🏠 Amenities', 'nav.regles': '📜 House rules',
+    'nav.depart': '🧹 Check-out', 'nav.activites': '🗺️ Activities', 'nav.contacts': '📞 Contacts',
+    'hero.eyebrow': '🌿 Guest Guide · Issoire, Puy-de-Dôme',
+    'hero.title': 'Welcome to <em>Le Triozon</em>',
+    'hero.sub': '3 boulevard Triozon Bayle · 63500 Issoire · 1<sup>st</sup> floor',
+    'qi.arrivee.label': '📅 Check-in', 'qi.arrivee.val': 'from 4:00 PM',
+    'qi.depart.label': '🕚 Check-out', 'qi.depart.val': 'before 11:00 AM',
+    'qi.wifi.label': '📶 WiFi', 'qi.wifi.val': 'provided on site',
+    'qi.sidonie.label': '📱 Sidonie', 'qi.sidonie.val': '+33 6 64 51 32 45',
+    'bvn.title': 'Hello and welcome!', 'bvn.subtitle': 'A word from your host',
+    'bvn.p': 'I hope you have a wonderful and restful stay and that you enjoy our beautiful region. Don\'t hesitate to call me if you need anything or want tips about the area!',
+    'bvn.sig': 'Sidonie 🌿 &nbsp;·&nbsp; +33 6 64 51 32 45',
+    'bvn.alert': 'Please let me know your <strong>estimated arrival time in advance</strong> — it helps me organise your welcome!',
+    'bvn.pmr': 'Located on the <strong>1<sup>st</sup> floor with no lift</strong>, this apartment is unfortunately <strong>not suitable for people with reduced mobility</strong>.',
+    'arr.title': 'Arrival &amp; access', 'arr.subtitle': 'Code and keys sent before your arrival',
+    'arr.card.label': 'Key safe — building entrance',
+    'arr.card.val': 'Code provided before your arrival',
+    'arr.p': 'Inside you will find the <strong>building access fob</strong> and the <strong>apartment keys</strong>. The apartment is on the <strong>1<sup>st</sup> floor</strong>.',
+    'arr.tip': 'The door takes a few seconds to unlock with the fob — no need to worry!',
+    'stat.title': 'Parking', 'stat.subtitle': 'Most spots are free in the neighbourhood',
+    'stat.intro': 'Parking is easy to find — you might even get a spot right outside the building!',
+    'stat.alert': '<strong>Blue zones</strong>: 30-minute limit, Tuesday to Friday during the day and paid parking in the city centre.',
+    'park1.name': 'Bd Triozon Bayle', 'park1.note': 'Outside the building · Free',
+    'park2.name': 'Rue de la Gare', 'park2.note': '2 min walk',
+    'park3.name': 'Abbatiale car park', 'park3.note': 'Free · opposite the abbey',
+    'park4.name': 'Suzanne Noël car park', 'park4.note': 'Turn under an archway on the right, past the town hall and post office',
+    'linge.title': 'Bed linen &amp; towels', 'linge.subtitle': 'To be ordered in advance if needed',
+    'linge.intro': 'Bed linen and towels are <strong>not included by default</strong>. You can bring your own, or order them from me in advance:',
+    'price.h1': 'Service', 'price.h2': 'Price',
+    'price.r1': 'Bed linen &amp; pillowcases <span style="color:var(--ink3);font-size:.82rem">— per bed</span>',
+    'price.r2': 'Towels <span style="color:var(--ink3);font-size:.82rem">— 1 bath + 1 hand towel · per person</span>',
+    'bed1.label': '🛏️ Bed 1', 'bed1.desc': 'Bedroom — fitted sheet 140×190 cm · duvet 220×240 cm · 2 pillows 60×60',
+    'bed2.label': '🛋️ Bed 2', 'bed2.desc': 'Sofa bed — fitted sheet 140×200 cm · duvet 220×240 cm · 2 pillows 60×60',
+    'equip.title': 'Amenities &amp; appliances', 'equip.subtitle': 'Everything you will find on site',
+    'equip.provided': 'Provided on arrival:',
+    'equip.i1': 'Smart TV', 'equip.i2': 'WiFi', 'equip.i3': 'Soap &amp; shampoo',
+    'equip.i4': 'Washing-up liquid, sponge, cleaning products', 'equip.i5': 'Kitchen cloths', 'equip.i6': 'Regional brochures',
+    'heat.title': 'Heating',
+    'heat.p': 'The apartment has a <strong>gas boiler</strong> located in the kitchen. Radiators have <strong>thermostatic valves</strong> — simply turn to set your desired temperature room by room. If the water is not hot enough, you can adjust it directly on the boiler.',
+    'trash.title': 'Bins &amp; recycling',
+    'trash.p': 'When leaving the building, <strong>cross the street to the left</strong>: you will find the general waste and recycling bins.',
+    'reg.title': 'House rules',
+    'reg.r1': '🚭 <span><strong>No smoking</strong></span>',
+    'reg.r2': '🐾 <span><strong>No pets</strong></span>',
+    'reg.r3': '🔇 <span>Please respect <strong>neighbours\' quiet hours</strong>, especially in the evening</span>',
+    'reg.r4': '🪟 <span><strong>Close windows</strong> when leaving for an extended period</span>',
+    'dep.title': 'Check-out — before 11:00 AM', 'dep.subtitle': 'A few things to do before you leave',
+    'dep.intro': 'A <strong>€30 cleaning fee</strong> is available at booking. If you clean yourself, please leave the apartment spotless, ready for the next guest. <strong>In all cases:</strong>',
+    'dep.s1': '🍽️ Dishes washed and put away', 'dep.s2': '🗑️ Bins emptied',
+    'dep.s3': '🛁 Linen piled in the bathroom', 'dep.s4': '🪟 Windows and shutters closed, lights off',
+    'dep.s5': '🔑 Keys and fob returned to the key safe',
+    'act.title': 'Discover Issoire &amp; the region', 'act.subtitle': 'Issoire and the Auvergne have so much to offer!',
+    'act.h.issoire': 'Must-sees in Issoire',
+    'act.l1': '🛒 <strong>The Saturday morning market</strong> — unmissable, open-air in the heart of town',
+    'act.l2': '⛪ <strong>Abbatiale Saint-Austremoine &amp; the clock tower</strong> — a jewel of Auvergne Romanesque art',
+    'act.l3': '🚶 <strong>A stroll through the old lanes</strong> of the historic centre — charm and medieval architecture',
+    'act.l4': '🏊 <strong>The leisure pool centre</strong> — accessible on foot through the station underpass',
+    'act.l5': '🌿 <strong>Cassin Park &amp; the walk along the Couze river</strong> — a lovely cool stroll',
+    'event.eyebrow': '🎪 Friday evenings · July–August',
+    'event.title': 'Les Vendred\'Issoire',
+    'event.desc': 'Every Friday evening in July and August: concerts, street performances and night markets around the illuminated abbey!',
+    'ot.box': '<strong>Issoire Tourist Office</strong> — only 200 m from the apartment',
+    'act.h.restos': 'Recommended restaurants in Issoire',
+    'r1.name': 'Le P\'tit Roseau', 'r1.desc': 'Market cuisine, local and seasonal produce. Warm setting, fine selection of Auvergne wines.',
+    'r2.name': 'L\'Agastache', 'r2.desc': 'Creative vegetable-forward cooking, aromatic herbs and local producers in the spotlight.',
+    'r3.name': 'Hobistro', 'r3.desc': 'Relaxed, convivial bistro. Generous dishes and a good range of craft beers.',
+    'r4.name': 'L\'Acérola', 'r4.desc': 'Refined, creative cooking and a lovely terrace in season. A reliable favourite in central Issoire.',
+    'act.h.volcans': 'Volcanoes &amp; great natural sites',
+    'v1.name': 'Puy de Dôme', 'v1.dist': '~45 min', 'v1.desc': 'The iconic 1,465 m summit, UNESCO-listed. Hike up or take the Panoramique des Dômes rack railway. 360° view over the volcanic chain.',
+    'v2.name': 'Puy de Sancy', 'v2.dist': '~1 hr', 'v2.desc': 'Highest point in the Massif Central (1,886 m). Cable car, hikes, source of the Dordogne river. Ski in winter, cool air in summer.',
+    'v3.name': 'Chaudefour Valley', 'v3.dist': '~1 hr', 'v3.desc': 'National nature reserve in the heart of the Sancy. Volcanic landscape, protected flora, marmots and griffon vultures.',
+    'v4.name': 'Lac Pavin · Besse', 'v4.dist': '~45 min', 'v4.desc': 'France\'s deepest volcanic lake, nestled in a perfect crater. Swimming, kayaking, walk around the lake (2 km).',
+    'v5.name': 'Vulcania', 'v5.dist': '~50 min', 'v5.desc': 'Europe\'s largest theme park dedicated to volcanoes. Great for families, immersive shows and attractions.',
+    'act.h.villages': 'Villages &amp; heritage',
+    'p1.name': 'Montpeyroux', 'p1.dist': '~10 min', 'p1.desc': 'One of the Most Beautiful Villages of France, perched on its basalt spur just outside Issoire. Perfect for a walk!',
+    'p2.name': 'Usson', 'p2.dist': '~20 min', 'p2.desc': 'Hilltop village famous for Queen Margot and its volcanic organ pipes. Stunning views over the plain.',
+    'p3.name': 'Saint-Nectaire', 'p3.dist': '~30 min', 'p3.desc': 'Renowned cheese village and beautiful Romanesque church. Market, maturing caves, thermal springs.',
+    'p4.name': 'Brioude', 'p4.dist': '~30 min', 'p4.desc': 'The Basilica of Saint-Julien — the largest Romanesque church in the Auvergne, with extraordinary capitals.',
+    'p5.name': 'La Chaise-Dieu', 'p5.dist': '~50 min', 'p5.desc': 'Majestic Benedictine abbey and internationally renowned classical music festival (August).',
+    'act.h.biefs': '💧 The Biefs of Issoire',
+    'biefs.p': 'Little-known but fascinating, the <strong>biefs of Issoire</strong> form a network of historic canals running both underground and at street level through the town.',
+    'biefs.btn': '📄 Download brochure (PDF)',
+    'act.h.loisirs': 'Outdoor activities &amp; nature',
+    'l1.name': 'Auvergne Wildlife Park', 'l1.dist': '~20 min · Ardes-sur-Couze', 'l1.desc': 'Lynx, wolves, bears, birds of prey and local wildlife in a preserved natural setting. Great for families.',
+    'l2.name': 'Perrier Cave', 'l2.dist': '~15 min', 'l2.desc': 'Former troglodyte village carved into volcanic rock. Fascinating guided tour, panoramic views.',
+    'thankyou.h': '🙏 A brief review or kind word about your stay would mean a lot!',
+    'thankyou.p': 'If you have any comments or suggestions, I\'m always happy to hear them. Enjoy your stay! 🌿',
+    'cnt.title': 'Useful contacts', 'cnt.subtitle': 'Help is never far away',
+    'urg.samu': 'SAMU (Med.)', 'urg.pompiers': 'Fire dept.', 'urg.police': 'Police', 'urg.eu': 'EU Emergency',
+    'sidonie.p': '+33 6 64 51 32 45 · Don\'t hesitate — I\'m here to help!',
+    'footer': '<strong>Le Triozon · Apartment in the heart of Issoire</strong><br>3 boulevard Triozon Bayle · 63500 Issoire · 1<sup>st</sup> floor<br>Sidonie · +33 6 64 51 32 45 · Guest Guide · 2026',
+  },
+
+  de: {
+    'nav.accueil': '💬 Willkommen', 'nav.arrivee': '🔑 Anreise', 'nav.parking': '🚗 Parken',
+    'nav.linge': '🛁 Wäsche', 'nav.equip': '🏠 Ausstattung', 'nav.regles': '📜 Hausregeln',
+    'nav.depart': '🧹 Abreise', 'nav.activites': '🗺️ Aktivitäten', 'nav.contacts': '📞 Kontakte',
+    'hero.eyebrow': '🌿 Gästemappe · Issoire, Puy-de-Dôme',
+    'hero.title': 'Willkommen im <em>Triozon</em>',
+    'hero.sub': '3 boulevard Triozon Bayle · 63500 Issoire · 1. Obergeschoss',
+    'qi.arrivee.label': '📅 Check-in', 'qi.arrivee.val': 'ab 16:00 Uhr',
+    'qi.depart.label': '🕚 Check-out', 'qi.depart.val': 'vor 11:00 Uhr',
+    'qi.wifi.label': '📶 WLAN', 'qi.wifi.val': 'vor Ort vorhanden',
+    'qi.sidonie.label': '📱 Sidonie', 'qi.sidonie.val': '+33 6 64 51 32 45',
+    'bvn.title': 'Hallo und herzlich willkommen!', 'bvn.subtitle': 'Ein paar Worte von Ihrer Gastgeberin',
+    'bvn.p': 'Ich hoffe, Sie verbringen einen angenehmen und erholsamen Aufenthalt und genießen unsere schöne Region. Zögern Sie nicht, mich anzurufen, wenn Ihnen etwas fehlt oder Sie Tipps für die Umgebung wünschen!',
+    'bvn.sig': 'Sidonie 🌿 &nbsp;·&nbsp; +33 6 64 51 32 45',
+    'bvn.alert': 'Bitte teilen Sie mir Ihre <strong>voraussichtliche Ankunftszeit im Voraus</strong> mit — so kann ich Ihren Empfang besser vorbereiten!',
+    'bvn.pmr': 'Die Wohnung befindet sich im <strong>1. Obergeschoss ohne Aufzug</strong> und ist leider <strong>nicht für Personen mit eingeschränkter Mobilität geeignet</strong>.',
+    'arr.title': 'Anreise &amp; Zugang', 'arr.subtitle': 'Code und Schlüssel vor Ihrer Ankunft mitgeteilt',
+    'arr.card.label': 'Schlüsselsafe — Gebäudeeingang',
+    'arr.card.val': 'Code wird vor Ihrer Ankunft mitgeteilt',
+    'arr.p': 'Darin finden Sie den <strong>Gebäude-Zugangschip</strong> und den <strong>Wohnungsschlüssel</strong>. Die Wohnung befindet sich im <strong>1. Obergeschoss</strong>.',
+    'arr.tip': 'Die Tür braucht einen kurzen Moment zum Entsperren — kein Grund zur Sorge!',
+    'stat.title': 'Parken', 'stat.subtitle': 'Die meisten Plätze sind im Viertel kostenlos',
+    'stat.intro': 'Parkplätze sind leicht zu finden — manchmal sogar direkt vor dem Gebäude!',
+    'stat.alert': '<strong>Blaue Zonen</strong>: 30-Minuten-Limit, Dienstag bis Freitag tagsüber und kostenpflichtig im Stadtzentrum.',
+    'park1.name': 'Bd Triozon Bayle', 'park1.note': 'Vor dem Gebäude · Kostenlos',
+    'park2.name': 'Rue de la Gare', 'park2.note': '2 Min. zu Fuß',
+    'park3.name': 'Parkplatz Abbatiale', 'park3.note': 'Kostenlos · gegenüber der Abteikirche',
+    'park4.name': 'Parkplatz Suzanne Noël', 'park4.note': 'Biegen Sie rechts unter einem Torbogen ab, hinter dem Rathaus und der Post',
+    'linge.title': 'Bettwäsche &amp; Handtücher', 'linge.subtitle': 'Bei Bedarf im Voraus bestellen',
+    'linge.intro': 'Bettwäsche und Handtücher sind <strong>standardmäßig nicht inbegriffen</strong>. Sie können Ihre eigene mitbringen oder im Voraus bei mir bestellen:',
+    'price.h1': 'Leistung', 'price.h2': 'Preis',
+    'price.r1': 'Bettwäsche &amp; Kissenbezüge <span style="color:var(--ink3);font-size:.82rem">— pro Bett</span>',
+    'price.r2': 'Handtücher <span style="color:var(--ink3);font-size:.82rem">— 1 Badetuch + 1 Handtuch · pro Person</span>',
+    'bed1.label': '🛏️ Bett 1', 'bed1.desc': 'Schlafzimmer — Spannbettlaken 140×190 cm · Bettdecke 220×240 cm · 2 Kissen 60×60',
+    'bed2.label': '🛋️ Bett 2', 'bed2.desc': 'Schlafsofa — Spannbettlaken 140×200 cm · Bettdecke 220×240 cm · 2 Kissen 60×60',
+    'equip.title': 'Ausstattung &amp; Geräte', 'equip.subtitle': 'Was Sie vor Ort vorfinden',
+    'equip.provided': 'Bei Ihrer Ankunft bereitgestellt:',
+    'equip.i1': 'Smart TV', 'equip.i2': 'WLAN', 'equip.i3': 'Seife &amp; Shampoo',
+    'equip.i4': 'Spülmittel, Schwamm, Reinigungsmittel', 'equip.i5': 'Küchentücher', 'equip.i6': 'Regionale Broschüren',
+    'heat.title': 'Heizung',
+    'heat.p': 'Die Wohnung verfügt über eine <strong>Gasheizung mit Warmwasser</strong> in der Küche. Die Heizkörper sind mit <strong>Thermostatventilen</strong> ausgestattet — drehen Sie einfach zum Einstellen der gewünschten Temperatur in jedem Zimmer. Falls das Wasser nicht heiß genug ist, können Sie es direkt am Kessel regulieren.',
+    'trash.title': 'Müll &amp; Mülltrennung',
+    'trash.p': 'Wenn Sie das Gebäude verlassen, <strong>überqueren Sie die Straße nach links</strong>: Dort finden Sie die Rest- und Recyclingtonnen.',
+    'reg.title': 'Hausregeln',
+    'reg.r1': '🚭 <span><strong>Nichtraucher</strong>-Unterkunft</span>',
+    'reg.r2': '🐾 <span><strong>Keine Haustiere</strong></span>',
+    'reg.r3': '🔇 <span>Bitte die <strong>Ruhe der Nachbarn</strong> respektieren, insbesondere abends</span>',
+    'reg.r4': '🪟 <span><strong>Fenster schließen</strong> bei längerer Abwesenheit</span>',
+    'dep.title': 'Abreise — vor 11:00 Uhr', 'dep.subtitle': 'Ein paar Dinge vor Ihrer Abreise',
+    'dep.intro': 'Eine <strong>Endreinigungspauschale von 30 €</strong> kann bei der Buchung hinzugefügt werden. Wenn Sie selbst reinigen, hinterlassen Sie die Wohnung bitte tadellos sauber und bereit für den nächsten Gast. <strong>In jedem Fall:</strong>',
+    'dep.s1': '🍽️ Geschirr abgewaschen und weggeräumt', 'dep.s2': '🗑️ Müll geleert',
+    'dep.s3': '🛁 Wäsche im Haufen im Badezimmer', 'dep.s4': '🪟 Fenster und Läden geschlossen, Lichter ausgeschaltet',
+    'dep.s5': '🔑 Schlüssel und Chip zurück in den Schlüsselsafe',
+    'act.title': 'Issoire &amp; die Region entdecken', 'act.subtitle': 'Issoire und die Auvergne haben so viel zu bieten!',
+    'act.h.issoire': 'Highlights in Issoire',
+    'act.l1': '🛒 <strong>Der Samstagmorgenmarkt</strong> — unverzichtbar, im Freien im Herzen der Stadt',
+    'act.l2': '⛪ <strong>Abteikirche Saint-Austremoine &amp; Uhrturm</strong> — Juwel der auvergnischen Romanik',
+    'act.l3': '🚶 <strong>Spaziergang durch die Gässchen</strong> der Altstadt — Charme und mittelalterliche Architektur',
+    'act.l4': '🏊 <strong>Das Freizeitbad</strong> — zu Fuß durch den Unterführung am Bahnhof erreichbar',
+    'act.l5': '🌿 <strong>Cassin-Park &amp; Spaziergang entlang der Couze</strong> — eine herrlich kühle Runde',
+    'event.eyebrow': '🎪 Freitagabende · Juli–August',
+    'event.title': 'Les Vendred\'Issoire',
+    'event.desc': 'Jeden Freitagabend im Juli und August: Konzerte, Straßenshows und Nachtmärkte rund um die beleuchtete Abteikirche!',
+    'ot.box': '<strong>Touristenbüro des Pays d\'Issoire</strong> — nur 200 m von der Wohnung entfernt',
+    'act.h.restos': 'Restaurantempfehlungen in Issoire',
+    'r1.name': 'Le P\'tit Roseau', 'r1.desc': 'Marktküche, lokale und saisonale Produkte. Gemütliches Ambiente, schöne Karte mit auvergnischen Weinen.',
+    'r2.name': 'L\'Agastache', 'r2.desc': 'Kreative, gemüsebetonte Küche mit Kräutern und regionalen Erzeugern im Mittelpunkt.',
+    'r3.name': 'Hobistro', 'r3.desc': 'Geselliges, lockeres Bistro. Großzügige Gerichte und eine gute Auswahl an Craft-Bier.',
+    'r4.name': 'L\'Acérola', 'r4.desc': 'Gepflegte, kreative Küche und schöne Terrasse in der Saison. Eine zuverlässige Adresse im Herzen von Issoire.',
+    'act.h.volcans': 'Vulkane &amp; Naturhighlights',
+    'v1.name': 'Puy de Dôme', 'v1.dist': '~45 Min.', 'v1.desc': 'Der ikonische Gipfel (1.465 m), UNESCO-Weltkulturerbe. Zu Fuß oder mit der Zahnradbahn Panoramique des Dômes. 360°-Blick über die Vulkankette.',
+    'v2.name': 'Puy de Sancy', 'v2.dist': '~1 Std.', 'v2.desc': 'Höchster Punkt des Zentralmassivs (1.886 m). Seilbahn, Wanderwege, Dordogne-Quellen. Ski im Winter, Kühle im Sommer.',
+    'v3.name': 'Chaudefour-Tal', 'v3.dist': '~1 Std.', 'v3.desc': 'Nationales Naturschutzgebiet im Herzen des Sancy. Vulkanlandschaft, geschützte Flora, Murmeltiere und Gänsegeier.',
+    'v4.name': 'Lac Pavin · Besse', 'v4.dist': '~45 Min.', 'v4.desc': 'Frankreichs tiefster Vulkansee in einem perfekten Krater. Baden, Kajak, Rundweg um den See (2 km).',
+    'v5.name': 'Vulcania', 'v5.dist': '~50 Min.', 'v5.desc': 'Europas größter Freizeitpark rund um das Thema Vulkanismus. Ideal für Familien, immersive Shows und Attraktionen.',
+    'act.h.villages': 'Dörfer &amp; Kulturerbe',
+    'p1.name': 'Montpeyroux', 'p1.dist': '~10 Min.', 'p1.desc': 'Eines der schönsten Dörfer Frankreichs, auf einem Basaltfelsen bei Issoire gelegen. Perfekt für einen Spaziergang!',
+    'p2.name': 'Usson', 'p2.dist': '~20 Min.', 'p2.desc': 'Hügeliges Dorf bekannt durch Königin Margot und seine Vulkansäulen. Atemberaubender Blick über die Ebene.',
+    'p3.name': 'Saint-Nectaire', 'p3.dist': '~30 Min.', 'p3.desc': 'Bekanntes Käsedorf mit schöner romanischer Kirche. Markt, Reifungskeller, Thermalquellen.',
+    'p4.name': 'Brioude', 'p4.dist': '~30 Min.', 'p4.desc': 'Die Basilika Saint-Julien — die größte romanische Kirche der Auvergne mit außergewöhnlichen Kapitellen.',
+    'p5.name': 'La Chaise-Dieu', 'p5.dist': '~50 Min.', 'p5.desc': 'Majestätische Benediktinerabtei und international renommiertes klassisches Musikfestival (August).',
+    'act.h.biefs': '💧 Die Biefs von Issoire',
+    'biefs.p': 'Wenig bekannt, aber faszinierend: Die <strong>Biefs von Issoire</strong> bilden ein historisches Kanalnetz, das die Stadt unter- und oberirdisch durchzieht.',
+    'biefs.btn': '📄 Broschüre herunterladen (PDF)',
+    'act.h.loisirs': 'Outdoor &amp; Naturerlebnisse',
+    'l1.name': 'Tierpark Auvergne', 'l1.dist': '~20 Min. · Ardes-sur-Couze', 'l1.desc': 'Luchse, Wölfe, Bären, Greifvögel und heimische Tierwelt in naturnaher Umgebung. Ideal für Familien.',
+    'l2.name': 'Höhle von Perrier', 'l2.dist': '~15 Min.', 'l2.desc': 'Ehemaliges Troglodytendorf in Vulkangestein. Faszinierende Führung, Panoramablick.',
+    'thankyou.h': '🙏 Ein kurzes Feedback oder eine Bewertung Ihres Aufenthalts würde mich sehr freuen!',
+    'thankyou.p': 'Wenn Sie Anmerkungen oder Vorschläge haben, bin ich immer offen für Rückmeldungen. Schönen Aufenthalt! 🌿',
+    'cnt.title': 'Nützliche Kontakte', 'cnt.subtitle': 'Im Notfall ist Hilfe nie weit',
+    'urg.samu': 'SAMU (Med.)', 'urg.pompiers': 'Feuerwehr', 'urg.police': 'Polizei', 'urg.eu': 'EU-Notruf',
+    'sidonie.p': '+33 6 64 51 32 45 · Zögern Sie nicht — ich bin für Sie da!',
+    'footer': '<strong>Le Triozon · Wohnung im Herzen von Issoire</strong><br>3 boulevard Triozon Bayle · 63500 Issoire · 1. OG<br>Sidonie · +33 6 64 51 32 45 · Gästemappe · 2026',
+  }
+};
+
+let currentLang = 'fr';
+
+function setLang(lang) {
+  currentLang = lang;
+  const t = T[lang];
+  document.documentElement.lang = lang;
+
+  // Flag buttons
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('lang-' + lang).classList.add('active');
+
+  // Nav links (skip brand and lang switcher)
+  const navLinks = document.querySelectorAll('.nav a');
+  const navKeys = ['nav.accueil','nav.arrivee','nav.parking','nav.linge','nav.equip','nav.regles','nav.depart','nav.activites','nav.contacts'];
+  navLinks.forEach((a, i) => { if (navKeys[i]) a.innerHTML = t[navKeys[i]]; });
+
+  // Hero
+  document.querySelector('.hero-eyebrow').innerHTML = t['hero.eyebrow'];
+  document.querySelector('.hero-title').innerHTML = t['hero.title'];
+  document.querySelector('.hero-sub').innerHTML = t['hero.sub'];
+
+  // Quickbar
+  const qiLabels = document.querySelectorAll('.qi-label');
+  const qiVals = document.querySelectorAll('.qi-val');
+  [['qi.arrivee','qi.depart','qi.wifi','qi.sidonie']].flat().forEach((k, i) => {
+    if(qiLabels[i]) qiLabels[i].innerHTML = t[k+'.label'];
+    if(qiVals[i]) qiVals[i].innerHTML = t[k+'.val'];
+  });
+
+  // Bienvenue
+  document.querySelector('#bienvenue .sec-title').innerHTML = t['bvn.title'];
+  document.querySelector('#bienvenue .sec-subtitle').innerHTML = t['bvn.subtitle'];
+  const wbox = document.querySelector('.welcome-box');
+  wbox.querySelector('p').innerHTML = t['bvn.p'];
+  wbox.querySelector('.welcome-sig').innerHTML = t['bvn.sig'];
+  const alerts = document.querySelectorAll('#bienvenue .alert span:last-child, #bienvenue .info-box span:last-child');
+  if(alerts[0]) alerts[0].innerHTML = t['bvn.alert'];
+  if(alerts[1]) alerts[1].innerHTML = t['bvn.pmr'];
+
+  // Arrivée
+  document.querySelector('#arrivee .sec-title').innerHTML = t['arr.title'];
+  document.querySelector('#arrivee .sec-subtitle').innerHTML = t['arr.subtitle'];
+  document.querySelector('#arrivee .ac-label').innerHTML = t['arr.card.label'];
+  document.querySelector('#arrivee .ac-val').innerHTML = t['arr.card.val'];
+  const arrPs = document.querySelectorAll('#arrivee p');
+  arrPs.forEach(p => { if(p.innerHTML.includes('badge')) p.innerHTML = t['arr.p']; });
+  const arrTip = document.querySelector('#arrivee .info-box span:last-child');
+  if(arrTip) arrTip.innerHTML = t['arr.tip'];
+
+  // Stationnement
+  document.querySelector('#stationnement .sec-title').innerHTML = t['stat.title'];
+  document.querySelector('#stationnement .sec-subtitle').innerHTML = t['stat.subtitle'];
+  const statIntroP = document.querySelector('#stationnement > p');
+  if(statIntroP) statIntroP.innerHTML = t['stat.intro'];
+  const statAlert = document.querySelector('#stationnement .alert span:last-child');
+  if(statAlert) statAlert.innerHTML = t['stat.alert'];
+  const parkNames = document.querySelectorAll('.parking-name');
+  const parkNotes = document.querySelectorAll('.parking-note');
+  [[1,2,3,4]].flat().forEach((n,i) => {
+    if(parkNames[i]) parkNames[i].innerHTML = t['park'+n+'.name'];
+    if(parkNotes[i]) parkNotes[i].innerHTML = t['park'+n+'.note'];
+  });
+
+  // Linge
+  document.querySelector('#linge .sec-title').innerHTML = t['linge.title'];
+  document.querySelector('#linge .sec-subtitle').innerHTML = t['linge.subtitle'];
+  const lingeP = document.querySelector('#linge > p');
+  if(lingeP) lingeP.innerHTML = t['linge.intro'];
+  const priceHeads = document.querySelectorAll('.price-head');
+  if(priceHeads[0]) priceHeads[0].innerHTML = t['price.h1'];
+  if(priceHeads[1]) priceHeads[1].innerHTML = t['price.h2'];
+  const priceRows = document.querySelectorAll('.price-row');
+  if(priceRows[0]) priceRows[0].innerHTML = t['price.r1'];
+  if(priceRows[1]) priceRows[1].innerHTML = t['price.r2'];
+  const bedItems = document.querySelectorAll('.bed-item');
+  [[1,2]].flat().forEach((n,i) => {
+    if(!bedItems[i]) return;
+    bedItems[i].querySelector('.bed-label').innerHTML = t['bed'+n+'.label'];
+    bedItems[i].querySelector('.bed-desc').innerHTML = t['bed'+n+'.desc'];
+  });
+
+  // Équipements
+  document.querySelector('#equipements .sec-title').innerHTML = t['equip.title'];
+  document.querySelector('#equipements .sec-subtitle').innerHTML = t['equip.subtitle'];
+  const equipP = document.querySelector('#equipements > p');
+  if(equipP) equipP.innerHTML = t['equip.provided'];
+  const equipItems = document.querySelectorAll('.equip-item');
+  [1,2,3,4,5,6].forEach((n,i) => {
+    if(!equipItems[i]) return;
+    const emoji = equipItems[i].querySelector('.equip-emoji');
+    const text = emoji ? emoji.outerHTML + t['equip.i'+n] : t['equip.i'+n];
+    equipItems[i].innerHTML = text;
+  });
+  // Heating & trash subsections
+  const subH3s = document.querySelectorAll('#equipements h3');
+  if(subH3s[0]) subH3s[0].innerHTML = t['heat.title'];
+  if(subH3s[1]) subH3s[1].innerHTML = t['trash.title'];
+  const subPs = document.querySelectorAll('#equipements .sec-head ~ p, #equipements [style*="margin-top:28px"] p');
+  subPs.forEach(p => {
+    if(p.innerHTML.includes('chaudière') || p.innerHTML.includes('boiler') || p.innerHTML.includes('Gasheiz')) p.innerHTML = t['heat.p'];
+    if(p.innerHTML.includes('traversez') || p.innerHTML.includes('cross') || p.innerHTML.includes('überquer')) p.innerHTML = t['trash.p'];
+  });
+
+  // Règles
+  document.querySelector('#regles .sec-title').innerHTML = t['reg.title'];
+  const ruleItems = document.querySelectorAll('.rule-item');
+  [1,2,3,4].forEach((n,i) => { if(ruleItems[i]) ruleItems[i].innerHTML = t['reg.r'+n]; });
+
+  // Départ
+  document.querySelector('#depart .sec-title').innerHTML = t['dep.title'];
+  document.querySelector('#depart .sec-subtitle').innerHTML = t['dep.subtitle'];
+  const depP = document.querySelector('#depart > p');
+  if(depP) depP.innerHTML = t['dep.intro'];
+  const depSteps = document.querySelectorAll('.depart-step');
+  [1,2,3,4,5].forEach((n,i) => { if(depSteps[i]) depSteps[i].innerHTML = t['dep.s'+n]; });
+
+  // Activités
+  document.querySelector('#activites .sec-title').innerHTML = t['act.title'];
+  document.querySelector('#activites .sec-subtitle').innerHTML = t['act.subtitle'];
+  const catTitles = document.querySelectorAll('.cat-title');
+  const catKeys = ['act.h.issoire','act.h.restos','act.h.volcans','act.h.villages','act.h.biefs','act.h.loisirs'];
+  catTitles.forEach((el, i) => { if(catKeys[i]) el.innerHTML = t[catKeys[i]]; });
+
+  const issLis = document.querySelectorAll('.issoire-list li');
+  [1,2,3,4,5].forEach((n,i) => { if(issLis[i]) issLis[i].innerHTML = t['act.l'+n]; });
+
+  document.querySelector('.event-eyebrow').innerHTML = t['event.eyebrow'];
+  document.querySelector('.event-title').innerHTML = t['event.title'];
+  document.querySelector('.event-desc').innerHTML = t['event.desc'];
+
+  const otBox = document.querySelector('.ot-box span:last-child');
+  if(otBox) otBox.innerHTML = t['ot.box'];
+
+  const restoNames = document.querySelectorAll('.resto-name');
+  const restoDescs = document.querySelectorAll('.resto-desc');
+  [1,2,3,4].forEach((n,i) => {
+    if(restoNames[i]) restoNames[i].innerHTML = t['r'+n+'.name'];
+    if(restoDescs[i]) restoDescs[i].innerHTML = t['r'+n+'.desc'];
+  });
+
+  // Volcans alentours
+  const alRows = document.querySelectorAll('.alentour-grid');
+  // Grid 1 = volcans, Grid 2 = villages, Grid 3 = loisirs
+  if(alRows[0]) {
+    const rows = alRows[0].querySelectorAll('.alentour-row');
+    [1,2,3,4,5].forEach((n,i) => {
+      if(!rows[i]) return;
+      rows[i].querySelector('.al-name').innerHTML = t['v'+n+'.name'];
+      rows[i].querySelector('.al-dist').innerHTML = t['v'+n+'.dist'];
+      rows[i].querySelector('.al-right').innerHTML = t['v'+n+'.desc'];
+    });
+  }
+  if(alRows[1]) {
+    const rows = alRows[1].querySelectorAll('.alentour-row');
+    [1,2,3,4,5].forEach((n,i) => {
+      if(!rows[i]) return;
+      rows[i].querySelector('.al-name').innerHTML = t['p'+n+'.name'];
+      rows[i].querySelector('.al-dist').innerHTML = t['p'+n+'.dist'];
+      rows[i].querySelector('.al-right').innerHTML = t['p'+n+'.desc'];
+    });
+  }
+  if(alRows[2]) {
+    const rows = alRows[2].querySelectorAll('.alentour-row');
+    [1,2].forEach((n,i) => {
+      if(!rows[i]) return;
+      rows[i].querySelector('.al-name').innerHTML = t['l'+n+'.name'];
+      rows[i].querySelector('.al-dist').innerHTML = t['l'+n+'.dist'];
+      rows[i].querySelector('.al-right').innerHTML = t['l'+n+'.desc'];
+    });
+  }
+
+  // Biefs
+  const bieifsInfoBox = document.querySelector('.info-box[style*="flex-direction"]');
+  if(bieifsInfoBox) {
+    const biefP = bieifsInfoBox.querySelector('p');
+    if(biefP) biefP.innerHTML = t['biefs.p'];
+    const biefBtn = bieifsInfoBox.querySelector('a');
+    if(biefBtn) biefBtn.innerHTML = t['biefs.btn'];
+  }
+
+  // Merci
+  document.querySelector('.thankyou h3').innerHTML = t['thankyou.h'];
+  document.querySelector('.thankyou p').innerHTML = t['thankyou.p'];
+
+  // Contacts
+  document.querySelector('#contacts .sec-title').innerHTML = t['cnt.title'];
+  document.querySelector('#contacts .sec-subtitle').innerHTML = t['cnt.subtitle'];
+  const urgLabels = document.querySelectorAll('.urg-label');
+  ['urg.samu','urg.pompiers','urg.police','urg.eu'].forEach((k,i) => {
+    if(urgLabels[i]) urgLabels[i].innerHTML = t[k];
+  });
+  const sidonieP = document.querySelector('.urg-sidonie > div');
+  if(sidonieP) {
+    const strong = sidonieP.querySelector('strong');
+    sidonieP.innerHTML = (strong ? strong.outerHTML : '<strong>Sidonie — votre hôte</strong>') + '<br>' + t['sidonie.p'];
+  }
+
+  // Footer
+  document.querySelector('footer').innerHTML = t['footer'];
+}
+</script>
 </body>
-</html>

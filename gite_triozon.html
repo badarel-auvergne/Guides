@@ -1421,7 +1421,9 @@
     if(footerLinks[3]) footerLinks[3].innerHTML = t['footer.livret'];
   }
 
-
+  // Contact form
+  function handleSubmit() {
+    const req = ['prenom','nom','email','message'];
     for (const id of req) {
       if (!document.getElementById(id).value.trim()) {
         alert(translations[currentLang]['alert.required']);

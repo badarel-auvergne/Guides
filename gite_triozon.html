@@ -97,6 +97,31 @@
     }
     .nav-cta:hover { background: var(--brown) !important; }
 
+    /* ========== LANG SWITCHER ========== */
+    .lang-switcher {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-left: 8px;
+    }
+    .lang-btn {
+      background: none;
+      border: 1.5px solid transparent;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1.3rem;
+      line-height: 1;
+      padding: 3px 5px;
+      transition: border-color .2s, transform .15s;
+      opacity: 0.55;
+    }
+    .lang-btn:hover { opacity: 1; transform: scale(1.15); }
+    .lang-btn.active {
+      border-color: var(--taupe);
+      opacity: 1;
+      background: var(--stone);
+    }
+
     /* hamburger */
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
     .hamburger span { display: block; width: 22px; height: 2px; background: var(--charcoal); border-radius: 2px; transition: .3s; }
@@ -488,6 +513,11 @@
       <li><a href="livret_accueil_triozon.html" class="nav-links">📖 Livret d'accueil</a></li>
       <li><a href="#contact" class="nav-cta">✉️ Contact</a></li>
     </ul>
+    <div class="lang-switcher">
+      <button class="lang-btn active" id="lang-fr" onclick="setLang('fr')" title="Français">🇫🇷</button>
+      <button class="lang-btn" id="lang-en" onclick="setLang('en')" title="English">🇬🇧</button>
+      <button class="lang-btn" id="lang-de" onclick="setLang('de')" title="Deutsch">🇩🇪</button>
+    </div>
     <button class="hamburger" id="ham" aria-label="Menu" onclick="document.getElementById('navMobile').classList.toggle('open')">
       <span></span><span></span><span></span>
     </button>
@@ -923,16 +953,480 @@
     if (e.key === 'ArrowRight') nextPhoto();
   });
 
-  // Contact form
-  function handleSubmit() {
-    const req = ['prenom','nom','email','message'];
+  // ============================================================
+  // TRADUCTIONS / TRANSLATIONS / ÜBERSETZUNGEN
+  // ============================================================
+  const translations = {
+    fr: {
+      // nav
+      'nav.logement': 'Le logement',
+      'nav.photos': 'Photos',
+      'nav.equip': 'Équipements',
+      'nav.situation': 'Situation',
+      'nav.hote': "L'hôte",
+      'nav.livret': '📖 Livret d\'accueil',
+      'nav.contact': '✉️ Contact',
+      // hero
+      'hero.eyebrow': '🏛️ Issoire · Centre historique · Auvergne',
+      'hero.title': 'Le Triozon',
+      'hero.sub': "T2 cosy entièrement équipé, au cœur d'Issoire — à 200 m de l'Abbatiale et 2 min de la gare.",
+      'hero.badge1': '🏠 Logement entier',
+      'hero.badge2': '👤 4 voyageurs',
+      'hero.badge3': '🛏 1 chambre + canapé-lit',
+      'hero.badge4': '📶 Fibre WiFi',
+      'hero.badge5': '⭐⭐ Meublé tourisme',
+      'hero.btn1': '✉️ Nous contacter',
+      'hero.btn2': 'Voir les photos ↓',
+      // intro
+      'intro.label': 'Le logement',
+      'intro.title': 'Un <em>cocon issoirien</em><br>tout confort',
+      'intro.p1': "Bienvenue dans ce T2 traversant, idéalement placé pour explorer l'Auvergne ou pour un déplacement professionnel. D'un côté, le boulevard avec vue sur les platanes ; de l'autre, la cour de la mairie et le béal.",
+      'intro.p2': "Arrivée autonome par boîte à clés, appartement entièrement équipé, tout à pied : aucune voiture nécessaire pour profiter des commerces, restaurants et trésors patrimoniaux d'Issoire.",
+      'stat.voyageurs': 'voyageurs',
+      'stat.lits': 'lits',
+      'stat.abbatiale': 'Abbatiale',
+      'stat.gare': 'de la gare',
+      // galerie
+      'galerie.label': 'Photos',
+      'galerie.title': "L'appartement <em>en images</em>",
+      'galerie.lead': 'Cliquez sur une photo pour l\'agrandir.',
+      'cap.salon': 'Salon · Canapé convertible',
+      'cap.chambre': 'Chambre · Lit double',
+      'cap.cuisine': 'Cuisine équipée',
+      'cap.sdb': "Salle d'eau",
+      'cap.vue': 'Vue sur la cour de la mairie et le béal',
+      // equipements
+      'equip.label': 'Ce que propose ce logement',
+      'equip.title': 'Équipements &amp; <em>Confort</em>',
+      'equip.lead': 'Tout le nécessaire pour un séjour serein, que ce soit pour les vacances ou un déplacement professionnel.',
+      'eq1.name': 'Cuisine équipée', 'eq1.detail': 'Réfrigérateur · Plaques · Four · Micro-ondes · Lave-vaisselle',
+      'eq2.name': 'Petit-déjeuner facilité', 'eq2.detail': 'Cafetière · Bouilloire · Grille-pain',
+      'eq3.name': 'WiFi fibre', 'eq3.detail': 'Connexion rapide incluse',
+      'eq4.name': 'Espace de travail', 'eq4.detail': 'Bureau pratique dans la chambre',
+      'eq5.name': 'Télévision', 'eq5.detail': 'TV dans le salon',
+      'eq6.name': 'Canapé convertible', 'eq6.detail': 'Couchage pour 2 voyageurs supplémentaires',
+      'eq7.name': 'Parking gratuit', 'eq7.detail': 'Stationnement facile dans le quartier',
+      'eq8.name': 'Arrivée autonome', 'eq8.detail': 'Boîte à clés sécurisée · Check-in flexible',
+      'eq9.name': 'Documentation touristique', 'eq9.detail': 'Dépliants et guides sur la région',
+      'eq10.name': 'Produits ménagers', 'eq10.detail': 'Aspirateur balai, serpillière, produits fournis',
+      'eq11.name': 'Laverie', 'eq11.detail': 'Laverie automatique à 300 m',
+      'eq12.name': 'Détecteur de fumée', 'eq12.detail': 'Sécurité incendie en place',
+      'cond.title': 'Conditions &amp; Tarifs optionnels',
+      'cond1': 'Forfait ménage fin de séjour (en option)',
+      'cond2': 'Draps par lit double (en option)',
+      'cond3': 'Serviettes par personne (en option)',
+      'cond4': 'Arrivée à partir de <strong>16h00</strong>',
+      'cond5': 'Départ avant <strong>11h00</strong>',
+      'cond6': '<strong>4 voyageurs</strong> maximum',
+      'cond7': 'Animaux non acceptés · Non-fumeurs',
+      'cond8': 'Classé <strong>meublé de tourisme</strong>',
+      // emplacement
+      'empl.label': 'Situation',
+      'empl.title': 'Tout à pied depuis <em>Le Triozon</em>',
+      'empl.lead': "En plein cœur d'Issoire, à deux pas du patrimoine roman et des commodités du quotidien.",
+      'poi1.name': 'Abbatiale Saint-Austremoine', 'poi1.sub': "Joyau de l'art roman auvergnat",
+      'poi2.name': 'Office de Tourisme', 'poi2.sub': "Centre historique d'Issoire",
+      'poi3.name': 'Gare d\'Issoire', 'poi3.sub': 'Liaison Clermont-Ferrand · Brioude',
+      'poi4.name': 'Parc Cassin', 'poi4.sub': 'Parc arboré en cœur de ville',
+      'poi5.name': 'Restaurants &amp; commerces', 'poi5.sub': 'Tous accessibles à pied',
+      'poi6.name': 'Autoroute A75', 'poi6.sub': 'Vers Clermont-Ferrand, Millau',
+      'poi7.name': 'Chaîne des Puys · Sancy', 'poi7.sub': 'Volcans, randonnées, stations',
+      'poi8.name': 'Usson · Montpeyroux', 'poi8.sub': 'Plus Beaux Villages de France',
+      'map.note': '📍 Issoire, Puy-de-Dôme (63) · L\'adresse exacte vous sera communiquée après réservation',
+      // hote
+      'hote.label': 'Votre hôte',
+      'hote.title': 'Bonjour, je suis <em>Sidonie</em>',
+      'hote.meta': 'Hôte depuis 4 ans · Note globale 5,0 ⭐ · Taux de réponse 100 % · Répond dans l\'heure',
+      'hote.p': "Passionnée par l'Auvergne et ses richesses, je suis disponible pour vous aider à profiter au mieux de votre séjour à Issoire et dans la région.",
+      'hote.quote': '« J\'ai aménagé Le Triozon avec soin pour que vous vous y sentiez vraiment chez vous — un pied-à-terre confortable à deux pas des plus belles pages de l\'art roman auvergnat. »',
+      'hote.btn1': '✉️ Nous contacter',
+      'hote.btn2': 'Voir l\'annonce Airbnb →',
+      'hote.btn3': '📖 Livret d\'accueil',
+      // cta
+      'cta.title': "Prêt à séjourner au cœur d'<em style=\"font-style:italic;\">Issoire</em> ?",
+      'cta.p': 'Contactez Sidonie pour vérifier les disponibilités ou réservez directement sur Airbnb.',
+      'cta.btn1': '✉️ Contacter Sidonie',
+      'cta.btn2': '🏠 Réserver sur Airbnb →',
+      // contact
+      'contact.label': 'Réservation &amp; Renseignements',
+      'contact.title': 'Contact',
+      'contact.lead': 'Une question, une demande de disponibilité ? Écrivez directement à Sidonie !',
+      'lbl.prenom': 'Prénom *', 'ph.prenom': 'Votre prénom',
+      'lbl.nom': 'Nom *', 'ph.nom': 'Votre nom',
+      'lbl.email': 'Email *', 'ph.email': 'votre@email.com',
+      'lbl.tel': 'Téléphone', 'ph.tel': '06 XX XX XX XX',
+      'lbl.arrivee': "Date d'arrivée souhaitée",
+      'lbl.depart': 'Date de départ souhaitée',
+      'lbl.voyageurs': 'Nombre de voyageurs',
+      'opt.select': 'Sélectionner…', 'opt.v1': '1 voyageur', 'opt.v2': '2 voyageurs', 'opt.v3': '3 voyageurs', 'opt.v4': '4 voyageurs',
+      'lbl.linge': 'Linge de maison',
+      'opt.l0': 'Je verrai plus tard', 'opt.l1': 'Je fournis mon linge', 'opt.l2': 'Draps uniquement (20 €/lit)', 'opt.l3': 'Serviettes uniquement (5 €/pers.)', 'opt.l4': 'Draps + Serviettes',
+      'lbl.message': 'Message *', 'ph.message': 'Votre message…',
+      'btn.submit': '✉️ Envoyer mon message',
+      'success.msg': '✅ <strong>Message envoyé !</strong> Sidonie vous répondra dans les plus brefs délais. À très bientôt !',
+      'alert.required': 'Merci de remplir tous les champs obligatoires (*).',
+      // footer
+      'footer.logement': 'Le logement', 'footer.photos': 'Photos', 'footer.equip': 'Équipements', 'footer.livret': '📖 Livret d\'accueil',
+    },
+
+    en: {
+      'nav.logement': 'The apartment',
+      'nav.photos': 'Photos',
+      'nav.equip': 'Amenities',
+      'nav.situation': 'Location',
+      'nav.hote': 'Host',
+      'nav.livret': '📖 Guest guide',
+      'nav.contact': '✉️ Contact',
+      'hero.eyebrow': '🏛️ Issoire · Historic centre · Auvergne',
+      'hero.title': 'Le Triozon',
+      'hero.sub': 'A cosy 1-bedroom apartment, fully equipped, in the heart of Issoire — 200 m from the Abbatiale and 2 min from the train station.',
+      'hero.badge1': '🏠 Entire apartment',
+      'hero.badge2': '👤 4 guests',
+      'hero.badge3': '🛏 1 bedroom + sofa bed',
+      'hero.badge4': '📶 Fibre WiFi',
+      'hero.badge5': '⭐⭐ Classified holiday rental',
+      'hero.btn1': '✉️ Get in touch',
+      'hero.btn2': 'See photos ↓',
+      'intro.label': 'The apartment',
+      'intro.title': 'A <em>cosy retreat</em><br>in Issoire',
+      'intro.p1': 'Welcome to this bright apartment, perfectly located to explore the Auvergne or for a business trip. On one side, the boulevard with its plane trees; on the other, the town hall courtyard and the béal canal.',
+      'intro.p2': 'Self check-in with a key safe, fully equipped apartment — everything within walking distance: no car needed to enjoy the shops, restaurants and heritage of Issoire.',
+      'stat.voyageurs': 'guests',
+      'stat.lits': 'beds',
+      'stat.abbatiale': 'Abbatiale',
+      'stat.gare': 'from station',
+      'galerie.label': 'Photos',
+      'galerie.title': 'The apartment <em>in pictures</em>',
+      'galerie.lead': 'Click on a photo to enlarge.',
+      'cap.salon': 'Living room · Sofa bed',
+      'cap.chambre': 'Bedroom · Double bed',
+      'cap.cuisine': 'Fully equipped kitchen',
+      'cap.sdb': 'Shower room',
+      'cap.vue': 'View of the town hall courtyard and the béal',
+      'equip.label': 'What this place offers',
+      'equip.title': 'Amenities &amp; <em>Comfort</em>',
+      'equip.lead': 'Everything you need for a relaxing stay, whether for a holiday or a business trip.',
+      'eq1.name': 'Equipped kitchen', 'eq1.detail': 'Fridge · Hob · Oven · Microwave · Dishwasher',
+      'eq2.name': 'Breakfast essentials', 'eq2.detail': 'Coffee maker · Kettle · Toaster',
+      'eq3.name': 'Fibre WiFi', 'eq3.detail': 'Fast connection included',
+      'eq4.name': 'Workspace', 'eq4.detail': 'Practical desk in the bedroom',
+      'eq5.name': 'Television', 'eq5.detail': 'TV in the living room',
+      'eq6.name': 'Sofa bed', 'eq6.detail': 'Sleeping space for 2 additional guests',
+      'eq7.name': 'Free parking', 'eq7.detail': 'Easy street parking nearby',
+      'eq8.name': 'Self check-in', 'eq8.detail': 'Secure key safe · Flexible check-in',
+      'eq9.name': 'Tourist information', 'eq9.detail': 'Brochures and guides to the region',
+      'eq10.name': 'Cleaning supplies', 'eq10.detail': 'Vacuum cleaner, mop, products provided',
+      'eq11.name': 'Laundromat', 'eq11.detail': 'Self-service laundry 300 m away',
+      'eq12.name': 'Smoke detector', 'eq12.detail': 'Fire safety in place',
+      'cond.title': 'Conditions &amp; Optional fees',
+      'cond1': 'End-of-stay cleaning fee (optional)',
+      'cond2': 'Bed linen per double bed (optional)',
+      'cond3': 'Towels per person (optional)',
+      'cond4': 'Check-in from <strong>4:00 PM</strong>',
+      'cond5': 'Check-out before <strong>11:00 AM</strong>',
+      'cond6': '<strong>4 guests</strong> maximum',
+      'cond7': 'No pets · Non-smoking',
+      'cond8': 'Officially classified <strong>holiday rental</strong>',
+      'empl.label': 'Location',
+      'empl.title': 'All within walking distance of <em>Le Triozon</em>',
+      'empl.lead': 'Right in the heart of Issoire, steps away from Romanesque heritage and everyday amenities.',
+      'poi1.name': 'Abbatiale Saint-Austremoine', 'poi1.sub': 'Jewel of Auvergne Romanesque art',
+      'poi2.name': 'Tourist Office', 'poi2.sub': "Issoire's historic centre",
+      'poi3.name': 'Issoire Train Station', 'poi3.sub': 'Clermont-Ferrand · Brioude line',
+      'poi4.name': 'Cassin Park', 'poi4.sub': 'Tree-lined park in the city centre',
+      'poi5.name': 'Restaurants &amp; shops', 'poi5.sub': 'All accessible on foot',
+      'poi6.name': 'A75 Motorway', 'poi6.sub': 'Towards Clermont-Ferrand, Millau',
+      'poi7.name': 'Chaîne des Puys · Sancy', 'poi7.sub': 'Volcanoes, hikes, ski resorts',
+      'poi8.name': 'Usson · Montpeyroux', 'poi8.sub': 'Most Beautiful Villages of France',
+      'map.note': '📍 Issoire, Puy-de-Dôme (63) · Exact address provided after booking',
+      'hote.label': 'Your host',
+      'hote.title': 'Hello, I\'m <em>Sidonie</em>',
+      'hote.meta': 'Host for 4 years · Overall rating 5.0 ⭐ · 100% response rate · Replies within an hour',
+      'hote.p': 'Passionate about the Auvergne and its treasures, I\'m here to help you make the most of your stay in Issoire and the surrounding region.',
+      'hote.quote': '"I decorated Le Triozon with care so you truly feel at home — a comfortable base a stone\'s throw from the finest pages of Auvergne Romanesque art."',
+      'hote.btn1': '✉️ Get in touch',
+      'hote.btn2': 'See Airbnb listing →',
+      'hote.btn3': '📖 Guest guide',
+      'cta.title': 'Ready to stay in the heart of <em style="font-style:italic;">Issoire</em>?',
+      'cta.p': 'Contact Sidonie to check availability or book directly on Airbnb.',
+      'cta.btn1': '✉️ Contact Sidonie',
+      'cta.btn2': '🏠 Book on Airbnb →',
+      'contact.label': 'Booking &amp; Enquiries',
+      'contact.title': 'Contact',
+      'contact.lead': 'A question or availability request? Write directly to Sidonie!',
+      'lbl.prenom': 'First name *', 'ph.prenom': 'Your first name',
+      'lbl.nom': 'Last name *', 'ph.nom': 'Your last name',
+      'lbl.email': 'Email *', 'ph.email': 'your@email.com',
+      'lbl.tel': 'Phone', 'ph.tel': '+44 XX XXXX XXXX',
+      'lbl.arrivee': 'Desired check-in date',
+      'lbl.depart': 'Desired check-out date',
+      'lbl.voyageurs': 'Number of guests',
+      'opt.select': 'Select…', 'opt.v1': '1 guest', 'opt.v2': '2 guests', 'opt.v3': '3 guests', 'opt.v4': '4 guests',
+      'lbl.linge': 'Bed linen & towels',
+      'opt.l0': 'I\'ll decide later', 'opt.l1': 'I\'ll bring my own', 'opt.l2': 'Bed linen only (€20/bed)', 'opt.l3': 'Towels only (€5/person)', 'opt.l4': 'Bed linen + Towels',
+      'lbl.message': 'Message *', 'ph.message': 'Your message…',
+      'btn.submit': '✉️ Send my message',
+      'success.msg': '✅ <strong>Message sent!</strong> Sidonie will get back to you as soon as possible. See you soon!',
+      'alert.required': 'Please fill in all required fields (*).',
+      'footer.logement': 'The apartment', 'footer.photos': 'Photos', 'footer.equip': 'Amenities', 'footer.livret': '📖 Guest guide',
+    },
+
+    de: {
+      'nav.logement': 'Die Wohnung',
+      'nav.photos': 'Fotos',
+      'nav.equip': 'Ausstattung',
+      'nav.situation': 'Lage',
+      'nav.hote': 'Gastgeber',
+      'nav.livret': '📖 Gästemappe',
+      'nav.contact': '✉️ Kontakt',
+      'hero.eyebrow': '🏛️ Issoire · Historisches Zentrum · Auvergne',
+      'hero.title': 'Le Triozon',
+      'hero.sub': 'Gemütliche 2-Zimmer-Wohnung, voll ausgestattet, im Herzen von Issoire — 200 m von der Abteikirche und 2 Min. vom Bahnhof.',
+      'hero.badge1': '🏠 Gesamte Wohnung',
+      'hero.badge2': '👤 4 Gäste',
+      'hero.badge3': '🛏 1 Schlafzimmer + Schlafsofa',
+      'hero.badge4': '📶 Glasfaser-WLAN',
+      'hero.badge5': '⭐⭐ Klassifiziertes Ferienapartment',
+      'hero.btn1': '✉️ Kontakt aufnehmen',
+      'hero.btn2': 'Fotos ansehen ↓',
+      'intro.label': 'Die Wohnung',
+      'intro.title': 'Ein <em>gemütliches Zuhause</em><br>in Issoire',
+      'intro.p1': 'Willkommen in dieser hellen Durchgangswohnung, ideal gelegen für die Erkundung der Auvergne oder eine Dienstreise. Auf einer Seite der Boulevard mit Blick auf die Platanen, auf der anderen der Rathausinnenhof und der Béal-Kanal.',
+      'intro.p2': 'Autonome Anreise mit Schlüsselsafe, vollständig ausgestattete Wohnung — alles zu Fuß erreichbar: kein Auto nötig, um die Geschäfte, Restaurants und Sehenswürdigkeiten von Issoire zu genießen.',
+      'stat.voyageurs': 'Gäste',
+      'stat.lits': 'Betten',
+      'stat.abbatiale': 'Abteikirche',
+      'stat.gare': 'zum Bahnhof',
+      'galerie.label': 'Fotos',
+      'galerie.title': 'Die Wohnung <em>in Bildern</em>',
+      'galerie.lead': 'Klicken Sie auf ein Foto, um es zu vergrößern.',
+      'cap.salon': 'Wohnzimmer · Schlafsofa',
+      'cap.chambre': 'Schlafzimmer · Doppelbett',
+      'cap.cuisine': 'Voll ausgestattete Küche',
+      'cap.sdb': 'Duschbad',
+      'cap.vue': 'Blick auf den Rathausinnenhof und den Béal',
+      'equip.label': 'Was diese Unterkunft bietet',
+      'equip.title': 'Ausstattung &amp; <em>Komfort</em>',
+      'equip.lead': 'Alles Notwendige für einen entspannten Aufenthalt — ob Urlaub oder Dienstreise.',
+      'eq1.name': 'Ausgestattete Küche', 'eq1.detail': 'Kühlschrank · Herd · Backofen · Mikrowelle · Geschirrspüler',
+      'eq2.name': 'Frühstück leicht gemacht', 'eq2.detail': 'Kaffeemaschine · Wasserkocher · Toaster',
+      'eq3.name': 'Glasfaser-WLAN', 'eq3.detail': 'Schnelle Verbindung inklusive',
+      'eq4.name': 'Arbeitsbereich', 'eq4.detail': 'Praktischer Schreibtisch im Schlafzimmer',
+      'eq5.name': 'Fernseher', 'eq5.detail': 'TV im Wohnzimmer',
+      'eq6.name': 'Schlafsofa', 'eq6.detail': 'Schlafmöglichkeit für 2 weitere Gäste',
+      'eq7.name': 'Kostenloser Parkplatz', 'eq7.detail': 'Einfaches Parken in der Umgebung',
+      'eq8.name': 'Selbst-Check-in', 'eq8.detail': 'Sicherer Schlüsselsafe · Flexibler Check-in',
+      'eq9.name': 'Touristisches Informationsmaterial', 'eq9.detail': 'Broschüren und Reiseführer zur Region',
+      'eq10.name': 'Reinigungsmittel', 'eq10.detail': 'Staubsauger, Wischmopp, Mittel vorhanden',
+      'eq11.name': 'Wäscherei', 'eq11.detail': 'Selbstbedienungswaschsalon 300 m entfernt',
+      'eq12.name': 'Rauchmelder', 'eq12.detail': 'Brandschutz vorhanden',
+      'cond.title': 'Konditionen &amp; Optionale Gebühren',
+      'cond1': 'Endreinigung (optional)',
+      'cond2': 'Bettwäsche pro Doppelbett (optional)',
+      'cond3': 'Handtücher pro Person (optional)',
+      'cond4': 'Check-in ab <strong>16:00 Uhr</strong>',
+      'cond5': 'Check-out vor <strong>11:00 Uhr</strong>',
+      'cond6': 'Maximal <strong>4 Gäste</strong>',
+      'cond7': 'Keine Haustiere · Nichtraucher',
+      'cond8': 'Offiziell klassifiziertes <strong>Ferienapartment</strong>',
+      'empl.label': 'Lage',
+      'empl.title': 'Alles fußläufig von <em>Le Triozon</em>',
+      'empl.lead': 'Mitten im Herzen von Issoire, in unmittelbarer Nähe des romanischen Kulturerbes und aller Einrichtungen des täglichen Bedarfs.',
+      'poi1.name': 'Abteikirche Saint-Austremoine', 'poi1.sub': 'Juwel der auvergnischen Romanik',
+      'poi2.name': 'Touristenbüro', 'poi2.sub': 'Historisches Zentrum von Issoire',
+      'poi3.name': 'Bahnhof Issoire', 'poi3.sub': 'Linie Clermont-Ferrand · Brioude',
+      'poi4.name': 'Cassin-Park', 'poi4.sub': 'Baumreicher Park im Stadtzentrum',
+      'poi5.name': 'Restaurants &amp; Geschäfte', 'poi5.sub': 'Alle fußläufig erreichbar',
+      'poi6.name': 'Autobahn A75', 'poi6.sub': 'Richtung Clermont-Ferrand, Millau',
+      'poi7.name': 'Vulkankette Puys · Sancy', 'poi7.sub': 'Vulkane, Wanderwege, Skigebiete',
+      'poi8.name': 'Usson · Montpeyroux', 'poi8.sub': 'Schönste Dörfer Frankreichs',
+      'map.note': '📍 Issoire, Puy-de-Dôme (63) · Genaue Adresse wird nach der Buchung mitgeteilt',
+      'hote.label': 'Ihre Gastgeberin',
+      'hote.title': 'Hallo, ich bin <em>Sidonie</em>',
+      'hote.meta': 'Gastgeberin seit 4 Jahren · Gesamtnote 5,0 ⭐ · Antwortrate 100 % · Antwortet innerhalb einer Stunde',
+      'hote.p': 'Mit großer Leidenschaft für die Auvergne und ihre Schätze stehe ich Ihnen gerne zur Verfügung, damit Sie Ihren Aufenthalt in Issoire und der Region in vollen Zügen genießen können.',
+      'hote.quote': '„Ich habe Le Triozon mit Sorgfalt eingerichtet, damit Sie sich wirklich wie zu Hause fühlen — eine komfortable Unterkunft, nur einen Steinwurf von den schönsten Seiten der auvergnischen Romanik entfernt."',
+      'hote.btn1': '✉️ Kontakt aufnehmen',
+      'hote.btn2': 'Airbnb-Inserat ansehen →',
+      'hote.btn3': '📖 Gästemappe',
+      'cta.title': 'Bereit für einen Aufenthalt im Herzen von <em style="font-style:italic;">Issoire</em>?',
+      'cta.p': 'Kontaktieren Sie Sidonie, um die Verfügbarkeit zu prüfen, oder buchen Sie direkt auf Airbnb.',
+      'cta.btn1': '✉️ Sidonie kontaktieren',
+      'cta.btn2': '🏠 Auf Airbnb buchen →',
+      'contact.label': 'Buchung &amp; Anfragen',
+      'contact.title': 'Kontakt',
+      'contact.lead': 'Eine Frage oder Verfügbarkeitsanfrage? Schreiben Sie direkt an Sidonie!',
+      'lbl.prenom': 'Vorname *', 'ph.prenom': 'Ihr Vorname',
+      'lbl.nom': 'Nachname *', 'ph.nom': 'Ihr Nachname',
+      'lbl.email': 'E-Mail *', 'ph.email': 'ihre@email.de',
+      'lbl.tel': 'Telefon', 'ph.tel': '+49 XXX XXXXXXX',
+      'lbl.arrivee': 'Gewünschtes Anreisedatum',
+      'lbl.depart': 'Gewünschtes Abreisedatum',
+      'lbl.voyageurs': 'Anzahl der Gäste',
+      'opt.select': 'Auswählen…', 'opt.v1': '1 Gast', 'opt.v2': '2 Gäste', 'opt.v3': '3 Gäste', 'opt.v4': '4 Gäste',
+      'lbl.linge': 'Bettwäsche &amp; Handtücher',
+      'opt.l0': 'Entscheide ich später', 'opt.l1': 'Ich bringe meine eigene', 'opt.l2': 'Nur Bettwäsche (20 €/Bett)', 'opt.l3': 'Nur Handtücher (5 €/Person)', 'opt.l4': 'Bettwäsche + Handtücher',
+      'lbl.message': 'Nachricht *', 'ph.message': 'Ihre Nachricht…',
+      'btn.submit': '✉️ Nachricht senden',
+      'success.msg': '✅ <strong>Nachricht gesendet!</strong> Sidonie wird sich so schnell wie möglich bei Ihnen melden. Bis bald!',
+      'alert.required': 'Bitte füllen Sie alle Pflichtfelder aus (*).',
+      'footer.logement': 'Die Wohnung', 'footer.photos': 'Fotos', 'footer.equip': 'Ausstattung', 'footer.livret': '📖 Gästemappe',
+    }
+  };
+
+  let currentLang = 'fr';
+
+  function setLang(lang) {
+    currentLang = lang;
+    const t = translations[lang];
+
+    // Update html lang attr
+    document.documentElement.lang = lang;
+
+    // Flag buttons
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('lang-' + lang).classList.add('active');
+
+    // Nav links
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const navMobile = document.querySelectorAll('.nav-mobile a');
+    const navLabels = ['nav.logement','nav.photos','nav.equip','nav.situation','nav.hote','nav.livret','nav.contact'];
+    navLinks.forEach((a, i) => { if (navLabels[i]) a.innerHTML = t[navLabels[i]]; });
+    navMobile.forEach((a, i) => { if (navLabels[i]) a.innerHTML = t[navLabels[i]]; });
+
+    // Hero
+    document.querySelector('.hero-eyebrow').innerHTML = t['hero.eyebrow'];
+    document.querySelector('.hero-title').innerHTML = t['hero.title'];
+    document.querySelector('.hero-sub').innerHTML = t['hero.sub'];
+    const badges = document.querySelectorAll('.hero-badges .badge');
+    ['hero.badge1','hero.badge2','hero.badge3','hero.badge4','hero.badge5'].forEach((k,i) => { if(badges[i]) badges[i].innerHTML = t[k]; });
+    const heroBtns = document.querySelectorAll('.hero-btns .btn');
+    if(heroBtns[0]) heroBtns[0].innerHTML = t['hero.btn1'];
+    if(heroBtns[1]) heroBtns[1].innerHTML = t['hero.btn2'];
+
+    // Intro
+    document.querySelector('#logement .section-label').innerHTML = t['intro.label'];
+    document.querySelector('#logement .section-title').innerHTML = t['intro.title'];
+    const introPs = document.querySelectorAll('#logement .intro-grid > div:first-child p');
+    if(introPs[0]) introPs[0].innerHTML = t['intro.p1'];
+    if(introPs[1]) introPs[1].innerHTML = t['intro.p2'];
+    const statLabels = document.querySelectorAll('.stat-label');
+    ['stat.voyageurs','stat.lits','stat.abbatiale','stat.gare'].forEach((k,i) => { if(statLabels[i]) statLabels[i].innerHTML = t[k]; });
+
+    // Galerie
+    document.querySelector('#galerie .section-label').innerHTML = t['galerie.label'];
+    document.querySelector('#galerie .section-title').innerHTML = t['galerie.title'];
+    document.querySelector('#galerie .section-lead').innerHTML = t['galerie.lead'];
+    const caps = document.querySelectorAll('.gallery-item .caption');
+    ['cap.salon','cap.chambre','cap.cuisine','cap.sdb','cap.vue'].forEach((k,i) => { if(caps[i]) caps[i].innerHTML = t[k]; });
+
+    // Equipements
+    document.querySelector('#equipements .section-label').innerHTML = t['equip.label'];
+    document.querySelector('#equipements .section-title').innerHTML = t['equip.title'];
+    document.querySelector('#equipements .section-lead').innerHTML = t['equip.lead'];
+    const equips = document.querySelectorAll('.equip-card');
+    for(let i=1; i<=12; i++) {
+      const card = equips[i-1];
+      if(!card) continue;
+      card.querySelector('.equip-name').innerHTML = t['eq'+i+'.name'];
+      card.querySelector('.equip-detail').innerHTML = t['eq'+i+'.detail'];
+    }
+    document.querySelector('#equipements h3').innerHTML = t['cond.title'];
+    const conds = document.querySelectorAll('.cond-card .cond-text');
+    for(let i=1; i<=8; i++) {
+      const c = conds[i-1];
+      if(!c) continue;
+      const price = c.querySelector('.cond-price');
+      if(price) {
+        const priceHtml = price.outerHTML;
+        c.innerHTML = priceHtml + t['cond'+i];
+      } else {
+        c.innerHTML = t['cond'+i];
+      }
+    }
+
+    // Emplacement
+    document.querySelector('#emplacement .section-label').innerHTML = t['empl.label'];
+    document.querySelector('#emplacement .section-title').innerHTML = t['empl.title'];
+    document.querySelector('#emplacement .section-lead').innerHTML = t['empl.lead'];
+    const pois = document.querySelectorAll('.poi-item');
+    for(let i=1; i<=8; i++) {
+      const p = pois[i-1];
+      if(!p) continue;
+      p.querySelector('.poi-name').innerHTML = t['poi'+i+'.name'];
+      p.querySelector('.poi-sub').innerHTML = t['poi'+i+'.sub'];
+    }
+    const mapNote = document.querySelector('#emplacement .container > .location-grid > div > p');
+    if(mapNote) mapNote.innerHTML = t['map.note'];
+
+    // Hôte
+    document.querySelector('#hote .section-label').innerHTML = t['hote.label'];
+    document.querySelector('#hote .section-title').innerHTML = t['hote.title'];
+    document.querySelector('.hote-meta').innerHTML = t['hote.meta'];
+    document.querySelector('#hote .hote-inner > div > p').innerHTML = t['hote.p'];
+    document.querySelector('.hote-quote').innerHTML = t['hote.quote'];
+    const hoteBtns = document.querySelectorAll('.hote-btns .btn');
+    if(hoteBtns[0]) hoteBtns[0].innerHTML = t['hote.btn1'];
+    if(hoteBtns[1]) hoteBtns[1].innerHTML = t['hote.btn2'];
+    if(hoteBtns[2]) hoteBtns[2].innerHTML = t['hote.btn3'];
+
+    // CTA Banner
+    document.querySelector('.cta-banner h2').innerHTML = t['cta.title'];
+    document.querySelector('.cta-banner p').innerHTML = t['cta.p'];
+    const ctaBtns = document.querySelectorAll('.cta-banner .btn');
+    if(ctaBtns[0]) ctaBtns[0].innerHTML = t['cta.btn1'];
+    if(ctaBtns[1]) ctaBtns[1].innerHTML = t['cta.btn2'];
+
+    // Contact
+    document.querySelector('#contact .section-label').innerHTML = t['contact.label'];
+    document.querySelector('#contact .section-title').innerHTML = t['contact.title'];
+    document.querySelector('#contact .section-lead').innerHTML = t['contact.lead'];
+    document.querySelector('label[for="prenom"]').innerHTML = t['lbl.prenom'];
+    document.getElementById('prenom').placeholder = t['ph.prenom'];
+    document.querySelector('label[for="nom"]').innerHTML = t['lbl.nom'];
+    document.getElementById('nom').placeholder = t['ph.nom'];
+    document.querySelector('label[for="email"]').innerHTML = t['lbl.email'];
+    document.getElementById('email').placeholder = t['ph.email'];
+    document.querySelector('label[for="tel"]').innerHTML = t['lbl.tel'];
+    document.getElementById('tel').placeholder = t['ph.tel'];
+    document.querySelector('label[for="arrivee"]').innerHTML = t['lbl.arrivee'];
+    document.querySelector('label[for="depart"]').innerHTML = t['lbl.depart'];
+    document.querySelector('label[for="voyageurs"]').innerHTML = t['lbl.voyageurs'];
+    const vOpts = document.getElementById('voyageurs').options;
+    vOpts[0].text = t['opt.select'];
+    vOpts[1].text = t['opt.v1'];
+    vOpts[2].text = t['opt.v2'];
+    vOpts[3].text = t['opt.v3'];
+    vOpts[4].text = t['opt.v4'];
+    document.querySelector('label[for="linge"]').innerHTML = t['lbl.linge'];
+    const lOpts = document.getElementById('linge').options;
+    lOpts[0].text = t['opt.l0'];
+    lOpts[1].text = t['opt.l1'];
+    lOpts[2].text = t['opt.l2'];
+    lOpts[3].text = t['opt.l3'];
+    lOpts[4].text = t['opt.l4'];
+    document.querySelector('label[for="message"]').innerHTML = t['lbl.message'];
+    document.getElementById('message').placeholder = t['ph.message'];
+    document.querySelector('.form-submit').innerHTML = t['btn.submit'];
+
+    // Footer
+    const footerLinks = document.querySelectorAll('.footer-links a');
+    if(footerLinks[0]) footerLinks[0].innerHTML = t['footer.logement'];
+    if(footerLinks[1]) footerLinks[1].innerHTML = t['footer.photos'];
+    if(footerLinks[2]) footerLinks[2].innerHTML = t['footer.equip'];
+    if(footerLinks[3]) footerLinks[3].innerHTML = t['footer.livret'];
+  }
+
+
     for (const id of req) {
       if (!document.getElementById(id).value.trim()) {
-        alert('Merci de remplir tous les champs obligatoires (*).');
+        alert(translations[currentLang]['alert.required']);
         return;
       }
     }
-    document.getElementById('successMsg').style.display = 'block';
+    const msg = document.getElementById('successMsg');
+    msg.innerHTML = translations[currentLang]['success.msg'];
+    msg.style.display = 'block';
   }
 </script>
 

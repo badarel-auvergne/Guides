@@ -236,6 +236,7 @@
 <nav class="sticky-nav">
   <a href="#bienvenue" class="t" data-key="nav_bienvenue">💬 Accueil</a>
   <a href="#preparer" class="t" data-key="nav_preparer">🛏 Préparer le séjour</a>
+  <a href="#accessibilite" class="t" data-key="nav_access">♿ Accessibilité</a>
   <a href="#arrivee" class="t" data-key="nav_arrivee">🔑 Arrivée</a>
   <a href="#maison" class="t" data-key="nav_maison">🏠 La maison</a>
   <a href="#chat" class="t" data-key="nav_chat">🐱 Patate</a>
@@ -290,10 +291,29 @@
         <div class="ic-note t" data-key="card_checkout">Départ avant 11h00</div>
         <div class="ic-note t" data-key="card_arrival_time" style="margin-top:6px;color:var(--terre);font-weight:700;">📲 Merci de m'indiquer votre horaire d'arrivée à l'avance !</div>
       </div>
-      <div class="info-card">
-        <div class="ic-label t" data-key="card_pmr_label">♿ Accessibilité</div>
-        <div class="ic-val t" data-key="card_pmr_val" style="font-size:.9rem;color:var(--gris);">Non adapté PMR</div>
-        <div class="ic-note t" data-key="card_pmr_note">Contactez-moi avant votre arrivée pour tout besoin particulier.</div>
+    </div>
+  </section>
+
+  <!-- ACCESSIBILITÉ -->
+  <section id="accessibilite">
+    <div class="sec-head">
+      <div class="sec-icon">♿</div>
+      <div>
+        <div class="sec-title t" data-key="access_title">Accessibilité</div>
+        <div class="sec-sub t" data-key="access_sub">Informations importantes avant votre arrivée</div>
+      </div>
+    </div>
+    <div class="alerte" style="margin-bottom:16px">
+      <span class="alerte-ico">⚠️</span>
+      <p class="t" data-key="access_alert"><strong>Ce logement n'est malheureusement pas adapté aux personnes à mobilité réduite (PMR).</strong> Merci d'en tenir compte lors de votre réservation.</p>
+    </div>
+    <div class="item-list">
+      <div class="item">
+        <div class="item-emoji">📞</div>
+        <div>
+          <div class="item-title t" data-key="access_contact_title">Besoin d'informations spécifiques ?</div>
+          <div class="item-desc t" data-key="access_contact_desc">N'hésitez pas à me contacter avant votre arrivée pour tout besoin particulier. Je ferai mon possible pour adapter votre accueil.</div>
+        </div>
       </div>
     </div>
   </section>
@@ -561,6 +581,13 @@
           <div class="item-desc t" data-key="equip_cuisine_bbq">Un petit barbecue est à votre disposition. Merci de ne pas l'allumer directement sur la terrasse (risque de taches) mais plutôt sur l'herbe à côté. Restez vigilants face aux risques d'incendie (le tuyau d'arrosage se branche directement sur la terrasse si besoin).</div>
         </div>
       </div>
+      <div class="item">
+        <div class="item-emoji">🧹</div>
+        <div>
+          <div class="item-title t" data-key="equip_menage_title">Matériel de ménage</div>
+          <div class="item-desc t" data-key="equip_menage_desc">Vous trouverez <strong>aspirateur balai, serpillière, éponges et torchons</strong> dans le <strong>placard aux rideaux oranges</strong>. Les <strong>produits ménagers</strong> se trouvent <strong>sous l'évier</strong>. N'hésitez pas à vous en servir en cours de séjour !</div>
+        </div>
+      </div>
     </div>
 
     <!-- Photo terrasse vue -->
@@ -777,6 +804,7 @@
       hero_sub: '12 lieu-dit Badarel · 63570 Bansat · Auvergne',
       nav_bienvenue: '💬 Accueil',
       nav_preparer: '🛏 Préparer le séjour',
+      nav_access: '♿ Accessibilité',
       nav_arrivee: '🔑 Arrivée',
       nav_maison: '🏠 La maison',
       nav_chat: '🐱 Patate',
@@ -799,9 +827,11 @@
       card_checkin: 'Arrivée dès 16h00',
       card_checkout: 'Départ avant 11h00',
       card_arrival_time: '📲 Merci de m\'indiquer votre horaire d\'arrivée à l\'avance !',
-      card_pmr_label: '♿ Accessibilité',
-      card_pmr_val: 'Non adapté PMR',
-      card_pmr_note: 'Contactez-moi avant votre arrivée pour tout besoin particulier.',
+      access_title: 'Accessibilité',
+      access_sub: 'Informations importantes avant votre arrivée',
+      access_alert: '<strong>Ce logement n\'est malheureusement pas adapté aux personnes à mobilité réduite (PMR).</strong> Merci d\'en tenir compte lors de votre réservation.',
+      access_contact_title: 'Besoin d\'informations spécifiques ?',
+      access_contact_desc: 'N\'hésitez pas à me contacter avant votre arrivée pour tout besoin particulier. Je ferai mon possible pour adapter votre accueil.',
       preparer_title: 'Préparer votre séjour',
       preparer_sub: 'Ce qu\'il faut prévoir avant votre arrivée',
       preparer_linen_title: 'Linge de maison — à prévoir à l\'avance',
@@ -842,6 +872,8 @@
       equip_cuisine_fritcoc: 'Situées dans le placard aux rideaux oranges. Merci d\'utiliser la friteuse à huile exclusivement à l\'extérieur (une rallonge est prévue à cet effet).',
       equip_cuisine_bbq_title: 'Barbecue',
       equip_cuisine_bbq: 'Un petit barbecue est à votre disposition. Merci de ne pas l\'allumer directement sur la terrasse (risque de taches) mais plutôt sur l\'herbe à côté. Restez vigilants face aux risques d\'incendie (le tuyau d\'arrosage se branche directement sur la terrasse si besoin).',
+      equip_menage_title: 'Matériel de ménage',
+      equip_menage_desc: 'Vous trouverez <strong>aspirateur balai, serpillière, éponges et torchons</strong> dans le <strong>placard aux rideaux oranges</strong>. Les <strong>produits ménagers</strong> se trouvent <strong>sous l\'évier</strong>. N\'hésitez pas à vous en servir en cours de séjour !',
       jardin_title: 'Le Jardin &amp; Le Potager',
       jardin_sub: 'Un coup de main toujours bienvenu !',
       jardin_water_title: 'Arrosage',
@@ -895,6 +927,7 @@
       hero_sub: '12 lieu-dit Badarel · 63570 Bansat · Auvergne, France',
       nav_bienvenue: '💬 Welcome',
       nav_preparer: '🛏 Prepare your stay',
+      nav_access: '♿ Accessibility',
       nav_arrivee: '🔑 Arrival',
       nav_maison: '🏠 The house',
       nav_chat: '🐱 Patate',
@@ -917,9 +950,11 @@
       card_checkin: 'Check-in from 4:00 PM',
       card_checkout: 'Check-out before 11:00 AM',
       card_arrival_time: '📲 Please let me know your arrival time in advance!',
-      card_pmr_label: '♿ Accessibility',
-      card_pmr_val: 'Not adapted for reduced mobility',
-      card_pmr_note: 'Contact me before your arrival for any specific needs.',
+      access_title: 'Accessibility',
+      access_sub: 'Important information before your arrival',
+      access_alert: '<strong>Unfortunately, this accommodation is not adapted for people with reduced mobility (PMR).</strong> Please take this into account when booking.',
+      access_contact_title: 'Need specific information?',
+      access_contact_desc: 'Feel free to contact me before your arrival for any specific needs. I will do my best to adapt your stay.',
       preparer_title: 'Prepare your stay',
       preparer_sub: 'What to plan before you arrive',
       preparer_linen_title: 'Bed linen — to be arranged in advance',
@@ -953,13 +988,15 @@
       equip_chauffage_title: 'Heating: Wood stove &amp; heat pump',
       equip_chauffage_desc: '<ul class="puce-list"><li><span class="puce-ico">🪵</span> A remote control manages the heat pump on the ground floor. In winter, the stove is usually sufficient for the whole ground floor. A second heat pump unit is available in the upstairs bedroom.</li></ul>',
       equip_clim_title: 'Managing heat in summer',
-      equip_clim_desc: 'The house naturally stays cool. Before switching on the AC, try <strong>passive cooling first</strong>:<ul class="puce-list" style="margin-top:8px"><li><span class="puce-ico">🪟</span> Keep shutters, curtains and windows closed during the day.</li><li><span class="puce-ico">🌙</span> Air the house in the evening and morning to let the cool air in. Downstairs: circulate air between the sliding door and the front door (door stopper available). Upstairs: open bedroom windows and mezzanine skylights.</li><li><span class="puce-ico">🌀</span> The AC has a <strong>FAN mode</strong> (fan only) which is often sufficient and doesn't start the outdoor unit.</li><li><span class="puce-ico">🌡️</span> If you use the AC, AUTO at 23°C is the most efficient setting — setting it to 18° when it\'s 40° outside won\'t cool things down any faster and just strains the unit needlessly.</li></ul><div style="margin-top:12px"><a href="https://cdn.shopify.com/s/files/1/2600/0244/files/409733-409894-409913-409934-35-36-41_MANUAL-REMOTE_V8_20251205_LD.pdf?v=1772008133" target="_blank" rel="noopener" style="color:var(--vert);font-weight:700;font-size:.85rem;">📄 Full remote control manual</a></div>',
+      equip_clim_desc: 'The house naturally stays cool. Before switching on the AC, try <strong>passive cooling first</strong>:<ul class="puce-list" style="margin-top:8px"><li><span class="puce-ico">🪟</span> Keep shutters, curtains and windows closed during the day.</li><li><span class="puce-ico">🌙</span> Air the house in the evening and morning to let the cool air in. Downstairs: circulate air between the sliding door and the front door (door stopper available). Upstairs: open bedroom windows and mezzanine skylights.</li><li><span class="puce-ico">🌀</span> The AC has a <strong>FAN mode</strong> (fan only) which is often sufficient and doesn\'t start the outdoor unit.</li><li><span class="puce-ico">🌡️</span> If you use the AC, AUTO at 23°C is the most efficient setting — setting it to 18° when it\'s 40° outside won\'t cool things down any faster and just strains the unit needlessly.</li></ul><div style="margin-top:12px"><a href="https://cdn.shopify.com/s/files/1/2600/0244/files/409733-409894-409913-409934-35-36-41_MANUAL-REMOTE_V8_20251205_LD.pdf?v=1772008133" target="_blank" rel="noopener" style="color:var(--vert);font-weight:700;font-size:.85rem;">📄 Full remote control manual</a></div>',
       equip_cuisine_title: 'Kitchen &amp; Appliances',
       equip_cuisine_lave: '<strong>Dishwasher:</strong> press ON, select programme (I use P2). Tablets in the top left drawer. Quite noisy — avoid at night. Off-peak hours: 12pm–7pm.',
       equip_cuisine_fritcoc_title: 'Deep fryer &amp; Pressure cooker',
       equip_cuisine_fritcoc: 'Both in the cupboard with orange curtains. Please use the deep fryer <strong>outdoors only</strong> (extension lead provided).',
       equip_cuisine_bbq_title: 'BBQ',
       equip_cuisine_bbq: 'A small BBQ is available. Please don\'t light it directly on the terrace (stain risk) — use the grass beside. Stay alert to fire risk (the garden hose connects directly on the terrace if needed).',
+      equip_menage_title: 'Cleaning supplies',
+      equip_menage_desc: 'You\'ll find a <strong>stick vacuum, mop, sponges and cloths</strong> in the <strong>cupboard with the orange curtains</strong>. <strong>Cleaning products</strong> are <strong>under the sink</strong>. Feel free to use them during your stay!',
       jardin_title: 'The Garden &amp; Vegetable Patch',
       jardin_sub: 'A helping hand is always welcome!',
       jardin_water_title: 'Watering',

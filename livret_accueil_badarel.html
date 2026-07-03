@@ -103,6 +103,12 @@
   .tip { background:#f0f7f3; border:1px solid #a8d4b4; border-radius:12px; padding:16px 20px; display:flex; gap:12px; align-items:flex-start; margin-top:14px; }
   .tip p { font-size:.87rem; color:#2a5539; line-height:1.6; }
 
+  /* DEPART CHECKLIST */
+  .depart-note { font-size:.9rem; font-weight:700; margin:20px 0 10px; }
+  .depart-list { list-style:none; display:grid; gap:8px; margin-top:14px; }
+  .depart-list li { display:flex; gap:10px; align-items:baseline; font-size:.9rem; color:var(--brun); line-height:1.55; padding:10px 14px; background:white; border-radius:10px; box-shadow:0 1px 6px rgba(0,0,0,.05); }
+  .depart-list li .d-ico { font-size:16px; flex-shrink:0; }
+
   /* URGENCES ROW */
   .urgence-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:10px; }
   .urg-pill { background:white; border-radius:10px; padding:12px 14px; text-align:center; box-shadow:0 2px 6px rgba(0,0,0,.06); border-top:3px solid #e53935; }
@@ -209,6 +215,9 @@
   </button>
   <button class="lang-btn" id="btnEN" onclick="setLang('en')">
     <span>🇬🇧</span> EN
+  </button>
+  <button class="lang-btn" id="btnPL" onclick="setLang('pl')">
+    <span>🇵🇱</span> PL
   </button>
 </div>
 
@@ -608,27 +617,26 @@
 
     <div class="alerte" style="margin-bottom:20px">
       <span class="alerte-ico">🧹</span>
-      <p class="t" data-key="depart_cleaning_fee" style="font-size:1rem;">Pour que la maison soit toujours propre pour vous accueillir, un <strong style="font-size:1.1rem;">forfait ménage de 70€ vous est proposé</strong>. Il couvre le nettoyage complet de la maison. Merci de laisser toutefois la maison dans un état correct !</p>
+      <p class="t" data-key="depart_cleaning_fee" style="font-size:1rem;">Pour que la maison soit toujours propre pour vous accueillir, un <strong style="font-size:1.1rem;">forfait ménage de 70€ vous est proposé</strong>. Il couvre le nettoyage complet de la maison.</p>
     </div>
 
-    <div class="item-list">
-      <div class="item">
-        <div class="item-emoji">🍽️</div>
-        <div><div class="item-desc t" data-key="depart_dishes">Merci de laisser la vaisselle propre et rangée.</div></div>
-      </div>
-      <div class="item">
-        <div class="item-emoji">🗑️</div>
-        <div><div class="item-desc t" data-key="depart_bins">Videz les poubelles (voir section éco-gestes ci-dessus).</div></div>
-      </div>
-      <div class="item">
-        <div class="item-emoji">🛏️</div>
-        <div><div class="item-desc t" data-key="depart_linen">Laissez le linge à laver en tas sur la table du salon.</div></div>
-      </div>
-      <div class="item">
-        <div class="item-emoji">🏠</div>
-        <div><div class="item-desc t" data-key="depart_close">Laissez la maison dans l'état où vous l'avez trouvée. Fermez toutes les fenêtres, éteignez lumières et appareils, et déposez les clés à l'endroit convenu (boîte à clés ou remise en main propre).</div></div>
-      </div>
-    </div>
+    <p class="depart-note t" data-key="depart_always_title" style="color:var(--vert);">Dans tous les cas, merci de :</p>
+    <ul class="depart-list t" data-key="depart_always_list">
+      <li><span class="d-ico">🍽️</span> Laisser la vaisselle propre et rangée.</li>
+      <li><span class="d-ico">🗑️</span> Vider les poubelles (voir la section éco-gestes ci-dessus).</li>
+      <li><span class="d-ico">🛏️</span> Laisser le linge à laver en tas sur la table du salon.</li>
+      <li><span class="d-ico">🪟</span> Fermer toutes les fenêtres et volets.</li>
+      <li><span class="d-ico">💡</span> Éteindre les lumières et les appareils électriques.</li>
+      <li><span class="d-ico">🔑</span> Déposer les clés à l'endroit convenu.</li>
+    </ul>
+
+    <p class="depart-note t" data-key="depart_clean_title" style="color:var(--terre);">Si vous n'optez pas pour le forfait ménage, merci également de :</p>
+    <ul class="depart-list t" data-key="depart_clean_list">
+      <li><span class="d-ico">🧹</span> Passer l'aspirateur et la serpillière dans toutes les pièces.</li>
+      <li><span class="d-ico">🚿</span> Nettoyer les sanitaires (WC, douche, lavabo).</li>
+      <li><span class="d-ico">🍳</span> Nettoyer la cuisine : plans de travail, plaques de cuisson, intérieur du frigo et du micro-ondes.</li>
+      <li><span class="d-ico">🛋️</span> Vérifier qu'aucune miette ou tache ne subsiste sur le canapé ou la literie — une attention particulière aux tomettes en terre cuite.</li>
+    </ul>
 
     <div class="tip" style="margin-top:20px; border:2px solid var(--vert-cl); padding:20px 24px;">
       <span style="font-size:26px">🙏</span>
@@ -767,6 +775,8 @@
       preparer_linen_tip: 'Si vous n\'avez pas commandé les draps, merci de ne pas utiliser la literie sans draps — les matelas et couettes ne sont pas protégés autrement. En cas de doute, contactez-moi avant votre arrivée.',
       preparer_check_title: 'Liste récap avant de partir',
       preparer_check_desc: '✅ Linge de maison commandé (ou à apporter)<br>✅ Horaire d\'arrivée communiqué à Sidonie<br>✅ Guide des activités consulté 🥾',
+      preparer_beds_title: 'Literie — tailles des lits',
+      preparer_beds_desc: '<strong>Chambre 1 :</strong> 1 lit 140 cm · 1 couette 220×240 cm · 4 oreillers 60×60 cm<br><strong>Chambre 2 :</strong> 1 lit 140 cm · 1 couette 220×240 cm · 4 oreillers 60×60 cm<br><strong>Chambre 3 :</strong> 2 lits 90 cm · 2 couettes 140×200 cm · 4 oreillers 60×60 cm',
       maison_title: 'La Maison',
       maison_sub: 'Tout ce que vous trouverez sur place',
       maison_rooms_title: 'Les chambres',
@@ -810,11 +820,11 @@
       eco_energy_desc: 'Pensez à éteindre les lumières en quittant une pièce, à ne pas laisser les fenêtres ouvertes avec le chauffage allumé, et à éteindre la PAC en cas d\'absence prolongée. Merci pour la planète ! 🌍',
       depart_title: 'Départ',
       depart_sub: 'Quelques petites choses avant de repartir — départ avant 11h00',
-      depart_cleaning_fee: 'Pour que la maison soit toujours propre pour vous accueillir, un <strong style="font-size:1.1rem;">forfait ménage de 70€ vous est proposé</strong>. Il couvre le nettoyage complet de la maison. Merci de laisser toutefois la maison dans un état correct !',
-      depart_dishes: 'Merci de laisser la vaisselle propre et rangée.',
-      depart_bins: 'Videz les poubelles (voir section éco-gestes ci-dessus).',
-      depart_linen: 'Laissez le linge à laver en tas sur la table du salon.',
-      depart_close: 'Laissez la maison dans l\'état où vous l\'avez trouvée. Fermez toutes les fenêtres, éteignez lumières et appareils, et déposez les clés à l\'endroit convenu (boîte à clés ou remise en main propre).',
+      depart_cleaning_fee: 'Pour que la maison soit toujours propre pour vous accueillir, un <strong style="font-size:1.1rem;">forfait ménage de 70€ vous est proposé</strong>. Il couvre le nettoyage complet de la maison.',
+      depart_always_title: 'Dans tous les cas, merci de :',
+      depart_always_list: '<li><span class="d-ico">🍽️</span> Laisser la vaisselle propre et rangée.</li><li><span class="d-ico">🗑️</span> Vider les poubelles (voir la section éco-gestes ci-dessus).</li><li><span class="d-ico">🛏️</span> Laisser le linge à laver en tas sur la table du salon.</li><li><span class="d-ico">🪟</span> Fermer toutes les fenêtres et volets.</li><li><span class="d-ico">💡</span> Éteindre les lumières et les appareils électriques.</li><li><span class="d-ico">🔑</span> Déposer les clés à l\'endroit convenu.</li>',
+      depart_clean_title: 'Si vous n\'optez pas pour le forfait ménage, merci également de :',
+      depart_clean_list: '<li><span class="d-ico">🧹</span> Passer l\'aspirateur et la serpillière dans toutes les pièces.</li><li><span class="d-ico">🚿</span> Nettoyer les sanitaires (WC, douche, lavabo).</li><li><span class="d-ico">🍳</span> Nettoyer la cuisine : plans de travail, plaques de cuisson, intérieur du frigo et du micro-ondes.</li><li><span class="d-ico">🛋️</span> Vérifier qu\'aucune miette ou tache ne subsiste sur le canapé ou la literie — une attention particulière aux tomettes en terre cuite.</li>',
       depart_thanks: '<strong>Un petit mot ou un avis sur votre expérience me ferait vraiment plaisir !</strong><br>Et si vous avez des remarques pour améliorer le séjour, je suis toujours ouverte aux retours. Merci pour votre confiance 🌿',
       act_title: 'À faire dans la région',
       act_sub: 'Un aperçu — le guide complet est disponible séparément',
@@ -889,6 +899,8 @@
       preparer_linen_tip: 'If you haven\'t ordered sheets, please do not use the bedding without them — the mattresses and duvets are not otherwise protected. If in doubt, contact me before your arrival.',
       preparer_check_title: 'Pre-departure checklist',
       preparer_check_desc: '✅ Bed linen ordered (or packed to bring)<br>✅ Arrival time shared with Sidonie<br>✅ Activities guide consulted 🥾',
+      preparer_beds_title: 'Bedding — bed sizes',
+      preparer_beds_desc: '<strong>Bedroom 1:</strong> 1 bed 140 cm · 1 duvet 220×240 cm · 4 pillows 60×60 cm<br><strong>Bedroom 2:</strong> 1 bed 140 cm · 1 duvet 220×240 cm · 4 pillows 60×60 cm<br><strong>Bedroom 3:</strong> 2 beds 90 cm · 2 duvets 140×200 cm · 4 pillows 60×60 cm',
       maison_title: 'The House',
       maison_sub: 'Everything you\'ll find on site',
       maison_rooms_title: 'The bedrooms',
@@ -932,11 +944,11 @@
       eco_energy_desc: 'Remember to turn off the lights when leaving a room, avoid leaving windows open with the heating on, and switch off the heat pump if you\'re away for a long period. Thank you for the planet! 🌍',
       depart_title: 'Departure',
       depart_sub: 'A few things before you leave — check-out before 11:00 AM',
-      depart_cleaning_fee: 'To ensure the house is always clean and welcoming, a <strong style="font-size:1.1rem;">cleaning fee of €70 is available</strong>. This covers a full clean of the property. That said, please do leave the house in a reasonable state!',
-      depart_dishes: 'Please leave the dishes clean and put away.',
-      depart_bins: 'Empty the bins (see the eco tips section above).',
-      depart_linen: 'Leave any linen to be washed in a pile on the living room table.',
-      depart_close: 'Leave the house as you found it. Close all windows, switch off lights and appliances, and return the keys to the agreed location (key box or in person).',
+      depart_cleaning_fee: 'To ensure the house is always clean and welcoming, a <strong style="font-size:1.1rem;">cleaning fee of €70 is available</strong>. This covers a full clean of the property.',
+      depart_always_title: 'In all cases, please:',
+      depart_always_list: '<li><span class="d-ico">🍽️</span> Leave the dishes clean and put away.</li><li><span class="d-ico">🗑️</span> Empty the bins (see the eco tips section above).</li><li><span class="d-ico">🛏️</span> Leave any linen to be washed in a pile on the living room table.</li><li><span class="d-ico">🪟</span> Close all windows and shutters.</li><li><span class="d-ico">💡</span> Switch off lights and electrical appliances.</li><li><span class="d-ico">🔑</span> Return the keys to the agreed location.</li>',
+      depart_clean_title: 'If you\'re not taking the cleaning fee option, please also:',
+      depart_clean_list: '<li><span class="d-ico">🧹</span> Vacuum and mop all rooms.</li><li><span class="d-ico">🚿</span> Clean the bathroom (toilet, shower, sink).</li><li><span class="d-ico">🍳</span> Clean the kitchen: countertops, hob, inside the fridge and microwave.</li><li><span class="d-ico">🛋️</span> Check no crumbs or stains remain on the sofa or bedding — extra care with the terracotta floor tiles.</li>',
       depart_thanks: '<strong>A few kind words or a review of your stay would mean a lot to me!</strong><br>And if you have any suggestions to improve future stays, I\'m always open to feedback. Thank you for your trust 🌿',
       act_title: 'Things to do in the area',
       act_sub: 'A glimpse — the full guide is available separately',
@@ -961,6 +973,130 @@
       urg_medecin: 'On-call doctor',
       footer_host: 'Sidonie · &#43;&#51;&#51;&nbsp;&#54;&nbsp;&#54;&#52;&nbsp;&#53;&#49;&nbsp;&#51;&#50;&nbsp;&#52;&#53; · Your direct neighbour 🌿',
       footer_copy: 'Welcome booklet · 2026',
+    },
+    pl: {
+      hero_eyebrow: '🌿 Powitalnik · Osada Badarel',
+      hero_title: 'Witamy w<br>moim <em>domu</em>!',
+      hero_sub: '12 lieu-dit Badarel · 63570 Bansat · Owernia, Francja',
+      nav_bienvenue: '💬 Powitanie',
+      nav_preparer: '🛏 Przygotowanie pobytu',
+      nav_access: '♿ Dostępność',
+      nav_arrivee: '🔑 Przyjazd',
+      nav_maison: '🏠 Dom',
+      nav_equip: '⚙️ Wyposażenie',
+      nav_eco: '🌿 Eko-nawyki',
+      nav_depart: '🧹 Wyjazd',
+      nav_activites: '🥾 Atrakcje',
+      nav_contacts: '📞 Kontakt',
+      welcome_msg: 'Dzień dobry i witamy w moim domu! 🎉<br><br>Mam nadzieję, że spędzicie tu regenerujący pobyt i skorzystacie z uroków naszego pięknego regionu. Ten dom jest moim domem — włożyłam w jego ekologiczny remont wiele troski i miłości. Zadbajcie o niego, a on odwdzięczy się Wam tym samym!<br><br>Jestem Waszą bezpośrednią sąsiadką i pozostaję do dyspozycji, jeśli potrzebujecie porady dotyczącej regionu lub pomocy. Śmiało dzwońcie!',
+      welcome_sig: 'Z przyjemnością, Sidonie 🌿<br><span style="font-size:.9rem;opacity:.8">&#43;&#51;&#51;&nbsp;&#54;&nbsp;&#54;&#52;&nbsp;&#53;&#49;&nbsp;&#51;&#50;&nbsp;&#52;&#53;</span>',
+      card_addr_label: '📍 Adres',
+      card_addr_note: '63570 Bansat · Ostatni dom w osadzie, po lewej stronie (wschodniej)',
+      card_wifi_label: '📶 Hasło WiFi',
+      card_rules_label: '🏠 Zasady domu',
+      card_rules_val: '🥿 Prosimy o zdjęcie obuwia',
+      card_rules_note: 'Przy wejściu, dziękujemy · 🚭 Dom niepalący',
+      card_host_label: '📞 Gospodyni',
+      card_hours_label: '🕐 Godziny',
+      card_checkin: 'Zameldowanie od 16:00',
+      card_checkout: 'Wymeldowanie przed 11:00',
+      card_arrival_time: '📲 Prosimy o wcześniejsze podanie godziny przyjazdu!',
+      access_title: 'Dostępność',
+      access_sub: 'Ważne informacje przed przyjazdem',
+      access_alert: '<strong>Niestety ten obiekt nie jest dostosowany dla osób o ograniczonej mobilności (PMR).</strong> Prosimy wziąć to pod uwagę przy rezerwacji.',
+      access_visual_title: 'Zaburzenia widzenia',
+      access_visual_desc: 'W domu (na stole w salonie) dostępny jest powitalnik dużą czcionką z piktogramami. Zawiera najważniejsze informacje z tego przewodnika w bardziej czytelnej formie.',
+      access_contact_title: 'Potrzebujecie konkretnych informacji?',
+      access_contact_desc: 'Śmiało skontaktujcie się ze mną przed przyjazdem w razie szczególnych potrzeb. Zrobię, co w mojej mocy, aby dostosować powitanie.',
+      arrivee_title: 'Przyjazd i klucze',
+      arrivee_sub: 'Wszystko, aby znaleźć dom i dobrze się urządzić',
+      arrivee_find_title: 'Jak znaleźć dom',
+      arrivee_find_desc: 'Uwaga, Badarel to osada położona kilka kilometrów od wsi Bansat. Po dotarciu do Badarel szukajcie <strong>ostatniego domu w osadzie, po lewej stronie (wschodniej), otoczonego drewnianym ogrodzeniem</strong>.',
+      arrivee_keys_title: 'Przekazanie kluczy',
+      arrivee_keys_desc: 'Jeśli to możliwe i w zależności od godziny Waszego przyjazdu, powitam Was osobiście, oprowadzę po domu i odpowiem na pytania — albo wcześniej przekażę Wam miejsce, gdzie znajdują się klucze. W każdym przypadku skontaktuję się z Wami przed przyjazdem, aby to razem zorganizować!',
+      arrivee_parking_title: 'Parking',
+      arrivee_parking_desc: 'Bezpłatny parking przed domem (maksymalnie 2 samochody).<br><br>🚗 <strong>Samochód 1:</strong> prosimy zaparkować po prawej stronie, z jednym kołem na trawie, aby można było dojechać do końca parkingu. Możecie skorzystać z klina dostępnego za kołami — i nie zapomnijcie zostawić wrzuconego biegu!<br><br>🚗 <strong>Samochód 2:</strong> trzymajcie się lewej strony wzdłuż ogrodzenia i zjedźcie na sam dół.',
+      preparer_title: 'Przygotowanie pobytu',
+      preparer_sub: 'Co warto przygotować przed przyjazdem',
+      preparer_linen_title: 'Pościel i ręczniki — do przygotowania wcześniej',
+      preparer_linen_desc: 'Pościel i ręczniki <strong>nie są wliczone domyślnie</strong>. Możecie przywieźć własne albo zamówić je u mnie wcześniej:',
+      preparer_linen_tip: 'Jeśli nie zamówiliście pościeli, prosimy nie korzystać z łóżek bez niej — materace i kołdry nie są inaczej chronione. W razie wątpliwości skontaktujcie się ze mną przed przyjazdem.',
+      preparer_check_title: 'Lista kontrolna przed wyjazdem',
+      preparer_check_desc: '✅ Zamówiona pościel (lub zabrana ze sobą)<br>✅ Godzina przyjazdu przekazana Sidonie<br>✅ Sprawdzony przewodnik po atrakcjach 🥾',
+      preparer_beds_title: 'Pościel — rozmiary łóżek',
+      preparer_beds_desc: '<strong>Sypialnia 1:</strong> 1 łóżko 140 cm · 1 kołdra 220×240 cm · 4 poduszki 60×60 cm<br><strong>Sypialnia 2:</strong> 1 łóżko 140 cm · 1 kołdra 220×240 cm · 4 poduszki 60×60 cm<br><strong>Sypialnia 3:</strong> 2 łóżka 90 cm · 2 kołdry 140×200 cm · 4 poduszki 60×60 cm',
+      maison_title: 'Dom',
+      maison_sub: 'Wszystko, co znajdziecie na miejscu',
+      maison_rooms_title: 'Sypialnie',
+      maison_rooms_desc: '<strong>Sypialnia 1:</strong> 2 pojedyncze łóżka 90×190 · kołdry 140×200<br><strong>Sypialnia 2:</strong> łóżko 140×190 · kołdra 240×220<br><strong>Sypialnia 3:</strong> łóżko 140×190 · kołdra 240×220<br>2 poduszki 60×60 na osobę.',
+      maison_linen_title: 'Pościel i ręczniki — opcjonalnie',
+      maison_linen_desc: 'Pościel i ręczniki nie są wliczone domyślnie, dostępne opcjonalnie:',
+      tarif_sheets: 'za sypialnię<br>Pościel i poszewki',
+      tarif_towels: 'za osobę<br>Ręcznik kąpielowy (1 duży i 1 mały)',
+      maison_linen_tip: 'Jeśli nie zamówiliście odpowiedniego rozmiaru pościeli, prosimy nie korzystać z łóżek bez niej. Skontaktujcie się ze mną.',
+      maison_provided_title: 'Zapewnione na miejscu',
+      maison_provided_desc: 'Ściereczki kuchenne · Mydło i szampon · Płyn do naczyń, gąbka i podstawowe środki czystości · Drewno do pieca.',
+      maison_leisure_title: 'Rozrywka',
+      maison_leisure_desc: 'Gry planszowe, komiksy, książki, ulotki o regionie — do Waszej dyspozycji.',
+      equip_title: 'Wyposażenie',
+      equip_sub: 'Instrukcje do urządzeń, które mają swoją specyfikę',
+      equip_poele_title: 'Piec na drewno',
+      equip_poele_desc: 'Drewno jest zapewnione i znajduje się w <strong>wiacie na drewno naprzeciwko domu</strong>. Podpałki są do Waszej dyspozycji.<br><br><strong>Wskazówki na dobry start:</strong> ułóżcie 3 średniej wielkości polana i umieśćcie podpałkę na ich styku. Możecie lekko uchylić popielnik, aby poprawić ciąg podczas rozpalania.',
+      equip_poele_alert: '<strong>WAŻNE:</strong> nie zostawiajcie otwartego popielnika bez nadzoru ani poza momentem rozpalania.<br><strong>UWAGA:</strong> nie spalajcie odpadów ani drewna impregnowanego.',
+      equip_pac_title: 'Ogrzewanie: piec na drewno i pompa ciepła',
+      equip_pac_desc: 'Pilot znajduje się na meblu w salonie. Steruje pompą ciepła na parterze. Zazwyczaj piec na drewno wystarcza, aby skutecznie ogrzać cały parter. Na piętrze dostępne są grzejniki elektryczne — ich termostaty znajdują się bezpośrednio na urządzeniach.',
+      equip_clim_title: 'Zarządzanie ciepłem latem: okiennice i klimatyzacja',
+      equip_clim_desc: 'Dom naturalnie zachowuje chłód. Przed włączeniem klimatyzacji lepiej postawić na zarządzanie pasywne: zamknijcie okiennice, zasłony i okna w ciągu dnia. Wietrzcie wieczorem i rano, aby wpuścić chłodne powietrze.<br><br>Klimatyzacja ma tryb <strong>FAN</strong> (sam wentylator, bez uruchamiania jednostki zewnętrznej), który często wystarcza. Jeśli włączacie klimatyzację, tryb <strong>AUTO przy 23°</strong> jest najbardziej efektywnym ustawieniem — ustawienie 18°, gdy na zewnątrz jest 40°, nie schłodzi szybciej, a jedynie niepotrzebnie obciąży urządzenie.<br><br><a href="https://cdn.shopify.com/s/files/1/2600/0244/files/409733-409894-409913-409934-35-36-41_MANUAL-REMOTE_V8_20251205_LD.pdf?v=1772008133" target="_blank" rel="noopener" style="color:var(--vert);font-weight:700;">📄 Pełna instrukcja pilota</a>',
+      equip_eco_alert: 'Prosimy o rozsądne korzystanie z ogrzewania i klimatyzacji. Mały gest dla planety!',
+      equip_dw_title: 'Zmywarka i pralka',
+      equip_dw_desc: 'Aby uruchomić <strong>zmywarkę</strong>: naciśnijcie <strong>ON</strong>, a następnie <strong>przekręćcie pokrętło do białej kropki</strong>. Tabletki znajdują się pod zlewem.<br><br>Obydwa urządzenia są dość głośne — odradzam uruchamianie ich w nocy. Najlepiej korzystać z nich <strong>między 12:00 a 19:00</strong>.',
+      equip_tv_title: 'Telewizor',
+      equip_tv_desc: 'Telewizor jest <strong>telewizorem smart</strong> — nie ma anteny.<br><br>🎮 <strong>Duży pilot:</strong> wyłącznie do włączania i wyłączania telewizora.<br>🕹️ <strong>Mały pilot:</strong> do nawigacji w menu.<br><br>📺 Aplikacja <strong>Molotov</strong> daje dostęp do francuskich kanałów naziemnych, oprócz TF1 i M6, które mają własne, osobne aplikacje.',
+      equip_plancha_title: 'Płyta grillowa plancha i mini-gofrownica do naleśników',
+      equip_plancha_desc: '<strong>Płyta plancha</strong> i <strong>mini-gofrownica do naleśników</strong> znajdują się w szafce w salonie. Do Waszej dyspozycji, śmiało korzystajcie!',
+      equip_cleaning_title: 'Sprzęt i środki czystości',
+      equip_cleaning_desc: 'W szafce w salonie znajdziecie <strong>odkurzacz, mopa, środki czystości, suszarkę na pranie i żelazko</strong>…',
+      eco_title: 'Życie w domu i eko-nawyki',
+      eco_sub: 'Dom z materiałów naturalnych, który zasługuje na trochę uwagi',
+      eco_tiles_title: 'Podłoga z terakoty — uwaga na plamy!',
+      eco_tiles_desc: 'Podłoga na parterze wyłożona jest naturalną terakotą, impregnowaną w sposób naturalny. Ta powierzchnia jest bardziej wrażliwa na plamy niż zwykłe płytki. <strong>W razie rozlania (czerwone wino, kawa, pomidor…), prosimy natychmiast wyczyścić</strong> — plama pozostawiona do wyschnięcia może stać się trwała.',
+      eco_sorting_title: 'Segregacja odpadów',
+      eco_sorting_desc: 'Przy wyjeździe z osady po lewej stronie (lub przy wjeździe po prawej) znajdziecie <strong>3 pojemniki</strong>:<br>• Jeden na <strong>odpady zmieszane</strong><br>• Jeden na <strong>puszki, papier, kartony, opakowania</strong><br>• <strong>Kompostownik</strong><br><br>Na <strong>szkło</strong> pojemniki dostępne są samochodem w Vernet-la-Varenne (przy jeziorze), w Sarpoil, w La Malotière…',
+      eco_compost_title: 'Kompost',
+      eco_compost_desc: 'Kompostownik znajduje się <strong>za domem, od strony północnej</strong> — wychodząc drzwiami z kuchni, skręćcie w prawo. Obierki, resztki owoców i warzyw, fusy po kawie — wszystko mile widziane!',
+      eco_energy_title: 'Oszczędzanie energii',
+      eco_energy_desc: 'Pamiętajcie o gaszeniu światła przy wychodzeniu z pomieszczenia, nie zostawiajcie otwartych okien przy włączonym ogrzewaniu i wyłączcie pompę ciepła w razie dłuższej nieobecności. Dziękujemy w imieniu planety! 🌍',
+      depart_title: 'Wyjazd',
+      depart_sub: 'Kilka rzeczy przed wyjazdem — wymeldowanie przed 11:00',
+      depart_cleaning_fee: 'Aby dom był zawsze czysty i gotowy na przyjęcie gości, proponujemy <strong style="font-size:1.1rem;">opłatę za sprzątanie w wysokości 70€</strong>. Obejmuje ona pełne sprzątanie domu.',
+      depart_always_title: 'W każdym przypadku prosimy o:',
+      depart_always_list: '<li><span class="d-ico">🍽️</span> Zostawcie naczynia czyste i poukładane.</li><li><span class="d-ico">🗑️</span> Opróżnijcie kosze (zobacz sekcję eko-nawyków powyżej).</li><li><span class="d-ico">🛏️</span> Zostawcie pościel do prania w stosie na stole w salonie.</li><li><span class="d-ico">🪟</span> Zamknijcie wszystkie okna i okiennice.</li><li><span class="d-ico">💡</span> Wyłączcie światła i urządzenia elektryczne.</li><li><span class="d-ico">🔑</span> Zostawcie klucze w ustalonym miejscu.</li>',
+      depart_clean_title: 'Jeśli nie wybieracie opcji sprzątania, prosimy również o:',
+      depart_clean_list: '<li><span class="d-ico">🧹</span> Odkurzcie i umyjcie podłogi we wszystkich pomieszczeniach.</li><li><span class="d-ico">🚿</span> Wyczyśćcie łazienkę (WC, prysznic, umywalka).</li><li><span class="d-ico">🍳</span> Wyczyśćcie kuchnię: blaty, płytę grzewczą, wnętrze lodówki i mikrofalówki.</li><li><span class="d-ico">🛋️</span> Sprawdźcie, czy na kanapie lub pościeli nie zostały okruchy ani plamy — szczególnie uważajcie na płytki z terakoty.</li>',
+      depart_thanks: '<strong>Kilka miłych słów lub opinia o Waszym pobycie sprawiłyby mi ogromną radość!</strong><br>A jeśli macie jakieś uwagi, które pomogłyby ulepszyć przyszłe pobyty, zawsze jestem otwarta na informacje zwrotne. Dziękuję za zaufanie 🌿',
+      act_title: 'Co robić w okolicy',
+      act_sub: 'Podgląd — pełny przewodnik dostępny osobno',
+      act_box_title: 'Rzeczy, których nie można przegapić w okolicy Badarel',
+      act_item1: '🏊 Zbiornik wodny Vernet · 5 min',
+      act_item2: '💎 Muzeum Ametystu · 5 min',
+      act_item3: '🦁 Park Zwierzęcy Ardes · 30 min',
+      act_item4: '🏰 Średniowieczne Sauxillanges · 8 km',
+      act_item5: '🌋 Puy de Dôme · 45 min',
+      act_item6: '🏔 Puy de Sancy · 50 min',
+      act_item7: '🛒 Targ w Issoire (sob.) · 20 min',
+      act_item8: '🎶 Guinguette Sauxillanges · 8 km',
+      act_item9: '⛪ La Chaise-Dieu · 45 min',
+      act_item10: '🧀 Saint-Nectaire · 30 min',
+      act_guide_link: '→ Zobacz pełny przewodnik po atrakcjach',
+      contacts_title: 'Przydatne kontakty',
+      contacts_sub: 'W razie potrzeby pomoc nigdy nie jest daleko',
+      contacts_emergency: 'W przypadku poważnego nagłego wypadku medycznego zadzwońcie pod <strong>15 (SAMU)</strong> lub <strong>112</strong>.',
+      urg_pompiers: 'Straż pożarna',
+      urg_police: 'Policja',
+      urg_eu: 'Alarm UE',
+      urg_medecin: 'Lekarz dyżurny',
+      footer_host: 'Sidonie · &#43;&#51;&#51;&nbsp;&#54;&nbsp;&#54;&#52;&nbsp;&#53;&#49;&nbsp;&#51;&#50;&nbsp;&#52;&#53; · Wasza bezpośrednia sąsiadka 🌿',
+      footer_copy: 'Powitalnik · 2026',
     }
   };
 
@@ -973,10 +1109,13 @@
     document.documentElement.lang = lang;
     document.title = lang === 'fr'
       ? 'Livret d\'accueil – Hameau de Badarel, Bansat'
+      : lang === 'pl'
+      ? 'Powitalnik – Osada Badarel, Bansat'
       : 'Welcome Booklet – Hamlet of Badarel, Bansat';
 
     document.getElementById('btnFR').classList.toggle('active', lang === 'fr');
     document.getElementById('btnEN').classList.toggle('active', lang === 'en');
+    document.getElementById('btnPL').classList.toggle('active', lang === 'pl');
 
     const dict = T[lang];
     document.querySelectorAll('.t[data-key]').forEach(el => {

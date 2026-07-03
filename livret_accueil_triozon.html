@@ -355,6 +355,31 @@ a:hover { text-decoration: underline; }
 }
 .equip-emoji { font-size: 1.5rem; display: block; margin-bottom: 6px; }
 
+.equip-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 20px;
+}
+.equip-card {
+  background: var(--sand);
+  border-radius: var(--r-sm);
+  padding: 18px;
+}
+.equip-card .ec-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--v6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+.equip-card .ec-title { font-weight: 600; font-size: 0.92rem; color: var(--ink); margin-bottom: 4px; }
+.equip-card .ec-desc { font-size: 0.82rem; color: var(--ink3); line-height: 1.4; }
+
 /* ── RULES ───────────────────────────────────────────────────────────────*/
 .rule-list {
   display: grid;
@@ -651,6 +676,7 @@ footer strong { color: rgba(255,255,255,0.85); }
   .quickbar { grid-template-columns: repeat(2, 1fr); }
   .parking-grid { grid-template-columns: 1fr; }
   .equip-grid { grid-template-columns: repeat(2, 1fr); }
+  .equip-cards { grid-template-columns: repeat(2, 1fr); }
   .rule-list { grid-template-columns: 1fr; }
   .urg-grid { grid-template-columns: repeat(2, 1fr); }
   .photo-band { grid-template-columns: 1fr; height: auto; }
@@ -687,6 +713,7 @@ footer strong { color: rgba(255,255,255,0.85); }
     <button class="lang-btn active" id="lang-fr" onclick="setLang('fr')" title="Français">🇫🇷</button>
     <button class="lang-btn" id="lang-en" onclick="setLang('en')" title="English">🇬🇧</button>
     <button class="lang-btn" id="lang-de" onclick="setLang('de')" title="Deutsch">🇩🇪</button>
+    <button class="lang-btn" id="lang-pl" onclick="setLang('pl')" title="Polski">🇵🇱</button>
   </div>
 </nav>
 
@@ -848,6 +875,11 @@ footer strong { color: rgba(255,255,255,0.85); }
         <span class="bed-desc">Canapé convertible — drap housse 140×200 cm · couette 220×240 cm · 2 oreillers 60×60</span>
       </div>
     </div>
+
+    <div class="info-box" style="margin-top:16px">
+      <span>🧺</span>
+      <span>L'appartement n'est pas équipé d'une <strong>machine à laver</strong>, mais vous trouverez une laverie à 300&nbsp;m (<strong>SUPER LAVERIE</strong>, 31 boulevard Triozon Bayle), ainsi qu'un <strong>étendoir</strong> dans le placard de la cuisine.</span>
+    </div>
   </section>
 
 <!-- ── ÉQUIPEMENTS ────────────────────────────────────────────────────── -->
@@ -860,13 +892,57 @@ footer strong { color: rgba(255,255,255,0.85); }
       </div>
     </div>
     <p style="font-size:.9rem;color:var(--ink3);margin-bottom:8px;font-style:italic">Fourni à votre arrivée :</p>
-    <div class="equip-grid">
-      <div class="equip-item"><span class="equip-emoji">📺</span>TV connectée</div>
-      <div class="equip-item"><span class="equip-emoji">📶</span>WiFi</div>
-      <div class="equip-item"><span class="equip-emoji">🧴</span>Savon &amp; shampooing</div>
-      <div class="equip-item"><span class="equip-emoji">🍽️</span>Liquide vaisselle, éponge, produits ménagers</div>
-      <div class="equip-item"><span class="equip-emoji">🧺</span>Torchons de cuisine</div>
-      <div class="equip-item"><span class="equip-emoji">🗺️</span>Dépliants région</div>
+    <div class="equip-cards">
+      <div class="equip-card">
+        <div class="ec-icon">🍳</div>
+        <div class="ec-title" data-tk="equip.c1t">Cuisine équipée</div>
+        <div class="ec-desc" data-tk="equip.c1d">Réfrigérateur · Plaques · Four · Micro-ondes · Lave-vaisselle</div>
+      </div>
+      <div class="equip-card">
+        <div class="ec-icon">☕</div>
+        <div class="ec-title" data-tk="equip.c2t">Petit-déjeuner facilité</div>
+        <div class="ec-desc" data-tk="equip.c2d">Cafetière · Bouilloire · Grille-pain</div>
+      </div>
+      <div class="equip-card">
+        <div class="ec-icon">📶</div>
+        <div class="ec-title" data-tk="equip.c3t">WiFi</div>
+        <div class="ec-desc" data-tk="equip.c3d">Connexion incluse</div>
+      </div>
+      <div class="equip-card">
+        <div class="ec-icon">💻</div>
+        <div class="ec-title" data-tk="equip.c4t">Espace de travail</div>
+        <div class="ec-desc" data-tk="equip.c4d">Bureau pratique sur place</div>
+      </div>
+      <div class="equip-card">
+        <div class="ec-icon">📺</div>
+        <div class="ec-title" data-tk="equip.c5t">Télévision</div>
+        <div class="ec-desc" data-tk="equip.c5d">TV connectée dans le salon</div>
+      </div>
+      <div class="equip-card">
+        <div class="ec-icon">🛋️</div>
+        <div class="ec-title" data-tk="equip.c6t">Canapé convertible</div>
+        <div class="ec-desc" data-tk="equip.c6d">Couchage pour 2 personnes supplémentaires</div>
+      </div>
+      <div class="equip-card">
+        <div class="ec-icon">🌀</div>
+        <div class="ec-title" data-tk="equip.c7t">Ventilateurs</div>
+        <div class="ec-desc" data-tk="equip.c7d">2 ventilateurs disponibles</div>
+      </div>
+      <div class="equip-card">
+        <div class="ec-icon">🧽</div>
+        <div class="ec-title" data-tk="equip.c8t">Produits ménagers</div>
+        <div class="ec-desc" data-tk="equip.c8d">Torchons, liquide vaisselle, éponge, produits fournis</div>
+      </div>
+      <div class="equip-card">
+        <div class="ec-icon">🧴</div>
+        <div class="ec-title" data-tk="equip.c9t">Salle de bain</div>
+        <div class="ec-desc" data-tk="equip.c9d">Savon &amp; shampooing fournis</div>
+      </div>
+      <div class="equip-card">
+        <div class="ec-icon">🗺️</div>
+        <div class="ec-title" data-tk="equip.c10t">Documentation touristique</div>
+        <div class="ec-desc" data-tk="equip.c10d">Dépliants et guides sur la région</div>
+      </div>
     </div>
 
     <div style="margin-top:28px">
@@ -1150,6 +1226,7 @@ const T = {
     // linge
     'linge.title': 'Linge de maison', 'linge.subtitle': 'À commander à l\'avance si besoin',
     'linge.intro': 'Les draps et serviettes ne sont <strong>pas inclus par défaut</strong>. Vous pouvez apporter les vôtres, ou me les commander à l\'avance :',
+    'linge.laundry': 'L\'appartement n\'est pas équipé d\'une <strong>machine à laver</strong>, mais vous trouverez une laverie à 300&nbsp;m (<strong>SUPER LAVERIE</strong>, 31 boulevard Triozon Bayle), ainsi qu\'un <strong>étendoir</strong> dans le placard de la cuisine.',
     'price.h1': 'Prestation', 'price.h2': 'Tarif',
     'price.r1': 'Draps &amp; taies <span style="color:var(--ink3);font-size:.82rem">— par chambre</span>',
     'price.r2': 'Serviette <span style="color:var(--ink3);font-size:.82rem">— 1 grande + 1 petite · par personne</span>',
@@ -1158,8 +1235,16 @@ const T = {
     // equipements
     'equip.title': 'Équipements &amp; appareils', 'equip.subtitle': 'Tout ce que vous trouverez sur place',
     'equip.provided': 'Fourni à votre arrivée :',
-    'equip.i1': 'TV connectée', 'equip.i2': 'WiFi', 'equip.i3': 'Savon &amp; shampooing',
-    'equip.i4': 'Liquide vaisselle, éponge, produits ménagers', 'equip.i5': 'Torchons de cuisine', 'equip.i6': 'Dépliants région',
+    'equip.c1t': 'Cuisine équipée', 'equip.c1d': 'Réfrigérateur · Plaques · Four · Micro-ondes · Lave-vaisselle',
+    'equip.c2t': 'Petit-déjeuner facilité', 'equip.c2d': 'Cafetière · Bouilloire · Grille-pain',
+    'equip.c3t': 'WiFi', 'equip.c3d': 'Connexion incluse',
+    'equip.c4t': 'Espace de travail', 'equip.c4d': 'Bureau pratique sur place',
+    'equip.c5t': 'Télévision', 'equip.c5d': 'TV connectée dans le salon',
+    'equip.c6t': 'Canapé convertible', 'equip.c6d': 'Couchage pour 2 personnes supplémentaires',
+    'equip.c7t': 'Ventilateurs', 'equip.c7d': '2 ventilateurs disponibles',
+    'equip.c8t': 'Produits ménagers', 'equip.c8d': 'Torchons, liquide vaisselle, éponge, produits fournis',
+    'equip.c9t': 'Salle de bain', 'equip.c9d': 'Savon &amp; shampooing fournis',
+    'equip.c10t': 'Documentation touristique', 'equip.c10d': 'Dépliants et guides sur la région',
     'heat.title': 'Chauffage',
     'heat.p': 'L\'appartement est équipé d\'une <strong>chaudière à gaz à eau chaude</strong>, située dans la cuisine. Les radiateurs sont munis de <strong>robinets thermostatiques</strong> — tournez simplement pour régler la température souhaitée pièce par pièce. Si l\'eau n\'est pas assez chaude, vous pouvez la régler directement sur la chaudière.',
     'trash.title': 'Poubelles &amp; tri sélectif',
@@ -1251,6 +1336,7 @@ const T = {
     'park4.name': 'Suzanne Noël car park', 'park4.note': 'Turn under an archway on the right, past the town hall and post office',
     'linge.title': 'Bed linen &amp; towels', 'linge.subtitle': 'To be ordered in advance if needed',
     'linge.intro': 'Bed linen and towels are <strong>not included by default</strong>. You can bring your own, or order them from me in advance:',
+    'linge.laundry': 'The apartment is not equipped with a <strong>washing machine</strong>, but you\'ll find a launderette 300&nbsp;m away (<strong>SUPER LAVERIE</strong>, 31 boulevard Triozon Bayle), as well as a <strong>drying rack</strong> in the kitchen cupboard.',
     'price.h1': 'Service', 'price.h2': 'Price',
     'price.r1': 'Bed linen &amp; pillowcases <span style="color:var(--ink3);font-size:.82rem">— per bed</span>',
     'price.r2': 'Towels <span style="color:var(--ink3);font-size:.82rem">— 1 bath + 1 hand towel · per person</span>',
@@ -1258,8 +1344,16 @@ const T = {
     'bed2.label': '🛋️ Bed 2', 'bed2.desc': 'Sofa bed — fitted sheet 140×200 cm · duvet 220×240 cm · 2 pillows 60×60',
     'equip.title': 'Amenities &amp; appliances', 'equip.subtitle': 'Everything you will find on site',
     'equip.provided': 'Provided on arrival:',
-    'equip.i1': 'Smart TV', 'equip.i2': 'WiFi', 'equip.i3': 'Soap &amp; shampoo',
-    'equip.i4': 'Washing-up liquid, sponge, cleaning products', 'equip.i5': 'Kitchen cloths', 'equip.i6': 'Regional brochures',
+    'equip.c1t': 'Fully equipped kitchen', 'equip.c1d': 'Fridge · Hob · Oven · Microwave · Dishwasher',
+    'equip.c2t': 'Breakfast made easy', 'equip.c2d': 'Coffee maker · Kettle · Toaster',
+    'equip.c3t': 'WiFi', 'equip.c3d': 'Connection included',
+    'equip.c4t': 'Workspace', 'equip.c4d': 'Practical desk on-site',
+    'equip.c5t': 'Television', 'equip.c5d': 'Smart TV in the living room',
+    'equip.c6t': 'Sofa bed', 'equip.c6d': 'Sleeps 2 extra guests',
+    'equip.c7t': 'Fans', 'equip.c7d': '2 fans available',
+    'equip.c8t': 'Cleaning supplies', 'equip.c8d': 'Kitchen cloths, washing-up liquid, sponge, products provided',
+    'equip.c9t': 'Bathroom', 'equip.c9d': 'Soap &amp; shampoo provided',
+    'equip.c10t': 'Tourist information', 'equip.c10d': 'Leaflets and guides about the region',
     'heat.title': 'Heating',
     'heat.p': 'The apartment has a <strong>gas boiler</strong> located in the kitchen. Radiators have <strong>thermostatic valves</strong> — simply turn to set your desired temperature room by room. If the water is not hot enough, you can adjust it directly on the boiler.',
     'trash.title': 'Bins &amp; recycling',
@@ -1346,6 +1440,7 @@ const T = {
     'park4.name': 'Parkplatz Suzanne Noël', 'park4.note': 'Biegen Sie rechts unter einem Torbogen ab, hinter dem Rathaus und der Post',
     'linge.title': 'Bettwäsche &amp; Handtücher', 'linge.subtitle': 'Bei Bedarf im Voraus bestellen',
     'linge.intro': 'Bettwäsche und Handtücher sind <strong>standardmäßig nicht inbegriffen</strong>. Sie können Ihre eigene mitbringen oder im Voraus bei mir bestellen:',
+    'linge.laundry': 'Die Wohnung verfügt über keine <strong>Waschmaschine</strong>, aber Sie finden einen Waschsalon in 300&nbsp;m Entfernung (<strong>SUPER LAVERIE</strong>, 31 boulevard Triozon Bayle) sowie einen <strong>Wäscheständer</strong> im Küchenschrank.',
     'price.h1': 'Leistung', 'price.h2': 'Preis',
     'price.r1': 'Bettwäsche &amp; Kissenbezüge <span style="color:var(--ink3);font-size:.82rem">— pro Bett</span>',
     'price.r2': 'Handtücher <span style="color:var(--ink3);font-size:.82rem">— 1 Badetuch + 1 Handtuch · pro Person</span>',
@@ -1353,8 +1448,16 @@ const T = {
     'bed2.label': '🛋️ Bett 2', 'bed2.desc': 'Schlafsofa — Spannbettlaken 140×200 cm · Bettdecke 220×240 cm · 2 Kissen 60×60',
     'equip.title': 'Ausstattung &amp; Geräte', 'equip.subtitle': 'Was Sie vor Ort vorfinden',
     'equip.provided': 'Bei Ihrer Ankunft bereitgestellt:',
-    'equip.i1': 'Smart TV', 'equip.i2': 'WLAN', 'equip.i3': 'Seife &amp; Shampoo',
-    'equip.i4': 'Spülmittel, Schwamm, Reinigungsmittel', 'equip.i5': 'Küchentücher', 'equip.i6': 'Regionale Broschüren',
+    'equip.c1t': 'Voll ausgestattete Küche', 'equip.c1d': 'Kühlschrank · Kochfeld · Backofen · Mikrowelle · Geschirrspüler',
+    'equip.c2t': 'Frühstück leicht gemacht', 'equip.c2d': 'Kaffeemaschine · Wasserkocher · Toaster',
+    'equip.c3t': 'WLAN', 'equip.c3d': 'Verbindung inklusive',
+    'equip.c4t': 'Arbeitsbereich', 'equip.c4d': 'Praktischer Schreibtisch vor Ort',
+    'equip.c5t': 'Fernseher', 'equip.c5d': 'Smart-TV im Wohnzimmer',
+    'equip.c6t': 'Schlafsofa', 'equip.c6d': 'Platz für 2 zusätzliche Gäste',
+    'equip.c7t': 'Ventilatoren', 'equip.c7d': '2 Ventilatoren verfügbar',
+    'equip.c8t': 'Reinigungsmittel', 'equip.c8d': 'Küchentücher, Spülmittel, Schwamm, Produkte vorhanden',
+    'equip.c9t': 'Badezimmer', 'equip.c9d': 'Seife &amp; Shampoo vorhanden',
+    'equip.c10t': 'Touristeninformation', 'equip.c10d': 'Broschüren und Reiseführer zur Region',
     'heat.title': 'Heizung',
     'heat.p': 'Die Wohnung verfügt über eine <strong>Gasheizung mit Warmwasser</strong> in der Küche. Die Heizkörper sind mit <strong>Thermostatventilen</strong> ausgestattet — drehen Sie einfach zum Einstellen der gewünschten Temperatur in jedem Zimmer. Falls das Wasser nicht heiß genug ist, können Sie es direkt am Kessel regulieren.',
     'trash.title': 'Müll &amp; Mülltrennung',
@@ -1409,6 +1512,109 @@ const T = {
     'urg.samu': 'SAMU (Med.)', 'urg.pompiers': 'Feuerwehr', 'urg.police': 'Polizei', 'urg.eu': 'EU-Notruf',
     'sidonie.p': '+33 6 64 51 32 45 · Zögern Sie nicht — ich bin für Sie da!',
     'footer': '<strong>Le Triozon · Wohnung im Herzen von Issoire</strong><br>3 boulevard Triozon Bayle · 63500 Issoire · 1. OG<br>Sidonie · +33 6 64 51 32 45 · Gästemappe · 2026',
+  },
+  pl: {
+    'nav.accueil': '💬 Powitanie', 'nav.arrivee': '🔑 Przyjazd', 'nav.parking': '🚗 Parking',
+    'nav.linge': '🛁 Pościel', 'nav.equip': '🏠 Wyposażenie', 'nav.regles': '📜 Zasady',
+    'nav.depart': '🧹 Wyjazd', 'nav.activites': '🗺️ Atrakcje', 'nav.contacts': '📞 Kontakt',
+    'hero.eyebrow': '🌿 Poradnik dla gości · Issoire, Puy-de-Dôme',
+    'hero.title': 'Witamy w <em>Triozon</em>',
+    'hero.sub': '3 boulevard Triozon Bayle · 63500 Issoire · 1. piętro',
+    'qi.arrivee.label': '📅 Zameldowanie', 'qi.arrivee.val': 'od 16:00',
+    'qi.depart.label': '🕚 Wymeldowanie', 'qi.depart.val': 'przed 11:00',
+    'qi.wifi.label': '📶 WiFi', 'qi.wifi.val': 'dostępne na miejscu',
+    'qi.sidonie.label': '📱 Sidonie', 'qi.sidonie.val': '+33 6 64 51 32 45',
+    'bvn.title': 'Witamy serdecznie!', 'bvn.subtitle': 'Kilka słów od Waszej gospodyni',
+    'bvn.p': 'Mam nadzieję, że spędzicie przyjemny i relaksujący pobyt oraz odkryjecie piękno naszego regionu. Nie wahajcie się do mnie zadzwonić, jeśli czegoś Wam brakuje lub potrzebujecie wskazówek dotyczących okolicy!',
+    'bvn.sig': 'Sidonie 🌿 &nbsp;·&nbsp; +33 6 64 51 32 45',
+    'bvn.alert': 'Proszę o podanie mi <strong>przewidywanej godziny przyjazdu z wyprzedzeniem</strong> — pozwoli mi to lepiej przygotować Wasze powitanie!',
+    'bvn.pmr': 'Mieszkanie znajduje się na <strong>1. piętrze bez windy</strong> i niestety <strong>nie jest dostosowane dla osób o ograniczonej mobilności</strong>.',
+    'arr.title': 'Przyjazd i dostęp', 'arr.subtitle': 'Kod i klucze przekazane przed przyjazdem',
+    'arr.card.label': 'Sejf na klucze — wejście do budynku',
+    'arr.card.val': 'Kod zostanie przekazany przed przyjazdem',
+    'arr.p': 'Znajdziecie w nim <strong>chip dostępu do budynku</strong> oraz <strong>klucz do mieszkania</strong>. Mieszkanie znajduje się na <strong>1. piętrze</strong>.',
+    'arr.tip': 'Drzwi potrzebują chwili, aby się odblokować — nie ma powodu do obaw!',
+    'stat.title': 'Parking', 'stat.subtitle': 'Większość miejsc w dzielnicy jest bezpłatna',
+    'stat.intro': 'Miejsca parkingowe są łatwe do znalezienia — czasem nawet tuż przed budynkiem!',
+    'stat.alert': '<strong>Strefy niebieskie</strong>: limit 30 minut, od wtorku do piątku w ciągu dnia, płatne w centrum miasta.',
+    'park1.name': 'Bd Triozon Bayle', 'park1.note': 'Przed budynkiem · Bezpłatnie',
+    'park2.name': 'Rue de la Gare', 'park2.note': '2 min pieszo',
+    'park3.name': 'Parking Abbatiale', 'park3.note': 'Bezpłatny · naprzeciwko kościoła opackiego',
+    'park4.name': 'Parking Suzanne Noël', 'park4.note': 'Skręćcie w prawo pod łukiem, za ratuszem i pocztą',
+    'linge.title': 'Pościel i ręczniki', 'linge.subtitle': 'Do zamówienia z wyprzedzeniem w razie potrzeby',
+    'linge.intro': 'Pościel i ręczniki <strong>nie są domyślnie wliczone</strong>. Możecie przywieźć własne lub zamówić je u mnie wcześniej:',
+    'linge.laundry': 'Mieszkanie nie jest wyposażone w <strong>pralkę</strong>, ale w odległości 300&nbsp;m znajdziecie pralnię samoobsługową (<strong>SUPER LAVERIE</strong>, 31 boulevard Triozon Bayle), a także <strong>suszarkę na pranie</strong> w szafce kuchennej.',
+    'price.h1': 'Usługa', 'price.h2': 'Cena',
+    'price.r1': 'Pościel i poszewki na poduszki <span style="color:var(--ink3);font-size:.82rem">— za łóżko</span>',
+    'price.r2': 'Ręczniki <span style="color:var(--ink3);font-size:.82rem">— 1 ręcznik kąpielowy + 1 ręcznik · na osobę</span>',
+    'bed1.label': '🛏️ Łóżko 1', 'bed1.desc': 'Sypialnia — prześcieradło z gumką 140×190 cm · kołdra 220×240 cm · 2 poduszki 60×60',
+    'bed2.label': '🛋️ Łóżko 2', 'bed2.desc': 'Sofa rozkładana — prześcieradło z gumką 140×200 cm · kołdra 220×240 cm · 2 poduszki 60×60',
+    'equip.title': 'Wyposażenie i sprzęty', 'equip.subtitle': 'Wszystko, co znajdziecie na miejscu',
+    'equip.provided': 'Zapewnione na Wasz przyjazd:',
+    'equip.c1t': 'W pełni wyposażona kuchnia', 'equip.c1d': 'Lodówka · Płyta grzewcza · Piekarnik · Mikrofalówka · Zmywarka',
+    'equip.c2t': 'Śniadanie bez trudu', 'equip.c2d': 'Ekspres do kawy · Czajnik · Toster',
+    'equip.c3t': 'WiFi', 'equip.c3d': 'Połączenie wliczone',
+    'equip.c4t': 'Miejsce do pracy', 'equip.c4d': 'Praktyczne biurko na miejscu',
+    'equip.c5t': 'Telewizor', 'equip.c5d': 'Smart TV w salonie',
+    'equip.c6t': 'Sofa rozkładana', 'equip.c6d': 'Miejsce do spania dla 2 dodatkowych osób',
+    'equip.c7t': 'Wentylatory', 'equip.c7d': '2 dostępne wentylatory',
+    'equip.c8t': 'Środki czystości', 'equip.c8d': 'Ściereczki kuchenne, płyn do naczyń, gąbka, dostarczone środki',
+    'equip.c9t': 'Łazienka', 'equip.c9d': 'Mydło i szampon zapewnione',
+    'equip.c10t': 'Informacja turystyczna', 'equip.c10d': 'Ulotki i przewodniki po regionie',
+    'heat.title': 'Ogrzewanie',
+    'heat.p': 'Mieszkanie jest wyposażone w <strong>ogrzewanie gazowe z ciepłą wodą</strong> w kuchni. Grzejniki posiadają <strong>zawory termostatyczne</strong> — wystarczy przekręcić, aby ustawić żądaną temperaturę w każdym pomieszczeniu. Jeśli woda nie jest wystarczająco gorąca, można ją wyregulować bezpośrednio przy piecu.',
+    'trash.title': 'Śmieci i segregacja',
+    'trash.p': 'Wychodząc z budynku, <strong>przejdźcie przez ulicę w lewo</strong>: tam znajdziecie pojemniki na odpady zmieszane i surowce wtórne.',
+    'reg.title': 'Zasady domu',
+    'reg.r1': '🚭 <span>Lokal dla <strong>niepalących</strong></span>',
+    'reg.r2': '🐾 <span><strong>Zwierzęta niedozwolone</strong></span>',
+    'reg.r3': '🔇 <span>Prosimy o poszanowanie <strong>spokoju sąsiadów</strong>, zwłaszcza wieczorem</span>',
+    'reg.r4': '🪟 <span><strong>Zamykajcie okna</strong> podczas dłuższej nieobecności</span>',
+    'dep.title': 'Wyjazd — przed 11:00', 'dep.subtitle': 'Kilka rzeczy przed wyjazdem',
+    'dep.intro': 'Opcjonalną <strong>opłatę za sprzątanie końcowe w wysokości 30 €</strong> można dodać przy rezerwacji. Jeśli sprzątacie sami, prosimy zostawić mieszkanie nienagannie czyste i gotowe dla kolejnego gościa. <strong>W każdym przypadku:</strong>',
+    'dep.s1': '🍽️ Naczynia umyte i odłożone', 'dep.s2': '🗑️ Kosze opróżnione',
+    'dep.s3': '🛁 Pościel złożona w stos w łazience', 'dep.s4': '🪟 Okna i okiennice zamknięte, światła wyłączone',
+    'dep.s5': '🔑 Klucze i chip odłożone do sejfu na klucze',
+    'act.title': 'Odkryjcie Issoire i region', 'act.subtitle': 'Issoire i Owernia mają tak wiele do zaoferowania!',
+    'act.h.issoire': 'Atrakcje w Issoire',
+    'act.l1': '🛒 <strong>Sobotni poranny targ</strong> — obowiązkowy punkt, na świeżym powietrzu w sercu miasta',
+    'act.l2': '⛪ <strong>Kościół opacki Saint-Austremoine i wieża zegarowa</strong> — perła owerniackiej sztuki romańskiej',
+    'act.l3': '🚶 <strong>Spacer uliczkami</strong> starego miasta — urok i średniowieczna architektura',
+    'act.l4': '🏊 <strong>Centrum rekreacyjne z basenem</strong> — dostępne pieszo przez przejście podziemne przy dworcu',
+    'act.l5': '🌿 <strong>Park Cassin i spacer wzdłuż rzeki Couze</strong> — cudownie orzeźwiająca trasa',
+    'event.eyebrow': '🎪 Piątkowe wieczory · lipiec–sierpień',
+    'event.title': 'Les Vendred\'Issoire',
+    'event.desc': 'Każdego piątkowego wieczoru w lipcu i sierpniu: koncerty, uliczne pokazy i nocne targi wokół podświetlonego kościoła opackiego!',
+    'ot.box': '<strong>Biuro turystyczne regionu Issoire</strong> — zaledwie 200 m od mieszkania',
+    'act.h.restos': 'Polecane restauracje w Issoire',
+    'r1.name': 'Le P\'tit Roseau', 'r1.desc': 'Kuchnia targowa, lokalne i sezonowe produkty. Przytulna atmosfera, ładna karta win owerniackich.',
+    'r2.name': 'L\'Agastache', 'r2.desc': 'Kreatywna kuchnia z naciskiem na warzywa, zioła i lokalnych producentów.',
+    'r3.name': 'Hobistro', 'r3.desc': 'Przyjazne, swobodne bistro. Obfite dania i dobry wybór piw rzemieślniczych.',
+    'r4.name': 'L\'Acérola', 'r4.desc': 'Starannie przygotowana, kreatywna kuchnia i piękny taras w sezonie. Pewny adres w sercu Issoire.',
+    'act.h.volcans': 'Wulkany i atrakcje przyrodnicze',
+    'v1.name': 'Puy de Dôme', 'v1.dist': '~45 min', 'v1.desc': 'Kultowy szczyt (1465 m), wpisany na listę UNESCO. Pieszo lub kolejką zębatą Panoramique des Dômes. Panorama 360° na łańcuch wulkaniczny.',
+    'v2.name': 'Puy de Sancy', 'v2.dist': '~1 godz.', 'v2.desc': 'Najwyższy punkt Masywu Centralnego (1886 m). Kolejka linowa, szlaki piesze, źródła Dordogne. Narty zimą, chłód latem.',
+    'v3.name': 'Dolina Chaudefour', 'v3.dist': '~1 godz.', 'v3.desc': 'Krajowy rezerwat przyrody w sercu masywu Sancy. Wulkaniczny krajobraz, chroniona flora, świstaki i sępy płowe.',
+    'v4.name': 'Jezioro Pavin · Besse', 'v4.dist': '~45 min', 'v4.desc': 'Najgłębsze jezioro wulkaniczne we Francji, w idealnym kraterze. Kąpiel, kajaki, trasa spacerowa wokół jeziora (2 km).',
+    'v5.name': 'Vulcania', 'v5.dist': '~50 min', 'v5.desc': 'Największy w Europie park rozrywki poświęcony wulkanizmowi. Idealny dla rodzin, immersyjne pokazy i atrakcje.',
+    'act.h.villages': 'Wioski i dziedzictwo',
+    'p1.name': 'Montpeyroux', 'p1.dist': '~10 min', 'p1.desc': 'Jedna z najpiękniejszych wiosek Francji, położona na bazaltowej skale niedaleko Issoire. Idealna na spacer!',
+    'p2.name': 'Usson', 'p2.dist': '~20 min', 'p2.desc': 'Wioska na wzgórzu znana z Królowej Margot i kolumn wulkanicznych. Zapierający dech widok na równinę.',
+    'p3.name': 'Saint-Nectaire', 'p3.dist': '~30 min', 'p3.desc': 'Słynna wioska serowarska z pięknym kościołem romańskim. Targ, piwnice dojrzewalnicze, źródła termalne.',
+    'p4.name': 'Brioude', 'p4.dist': '~30 min', 'p4.desc': 'Bazylika Saint-Julien — największy kościół romański Owernii, z wyjątkowymi kapitelami.',
+    'p5.name': 'La Chaise-Dieu', 'p5.dist': '~50 min', 'p5.desc': 'Majestatyczne opactwo benedyktyńskie i uznany na świecie festiwal muzyki klasycznej (sierpień).',
+    'act.h.biefs': '💧 Kanały Biefs w Issoire',
+    'biefs.p': 'Mało znane, lecz fascynujące: <strong>Biefs d\'Issoire</strong> tworzą historyczną sieć kanałów przecinającą miasto pod ziemią i na powierzchni.',
+    'biefs.btn': '📄 Pobierz broszurę (PDF)',
+    'act.h.loisirs': 'Aktywności na świeżym powietrzu i przyroda',
+    'l1.name': 'Park zwierząt Owernii', 'l1.dist': '~20 min · Ardes-sur-Couze', 'l1.desc': 'Rysie, wilki, niedźwiedzie, ptaki drapieżne i rodzima fauna w naturalnym otoczeniu. Idealne dla rodzin.',
+    'l2.name': 'Jaskinia w Perrier', 'l2.dist': '~15 min', 'l2.desc': 'Dawna wioska troglodycka w skale wulkanicznej. Fascynujące zwiedzanie z przewodnikiem, widok panoramiczny.',
+    'thankyou.h': '🙏 Krótka opinia lub ocena Waszego pobytu bardzo by mnie ucieszyła!',
+    'thankyou.p': 'Jeśli macie jakieś uwagi lub sugestie, zawsze jestem otwarta na informacje zwrotne. Udanego pobytu! 🌿',
+    'cnt.title': 'Przydatne kontakty', 'cnt.subtitle': 'W nagłym wypadku pomoc nigdy nie jest daleko',
+    'urg.samu': 'Pogotowie (SAMU)', 'urg.pompiers': 'Straż pożarna', 'urg.police': 'Policja', 'urg.eu': 'Nr alarmowy UE',
+    'sidonie.p': '+33 6 64 51 32 45 · Nie wahajcie się — jestem do Waszej dyspozycji!',
+    'footer': '<strong>Le Triozon · Mieszkanie w sercu Issoire</strong><br>3 boulevard Triozon Bayle · 63500 Issoire · 1. piętro<br>Sidonie · +33 6 64 51 32 45 · Poradnik dla gości · 2026',
   }
 };
 
@@ -1480,6 +1686,8 @@ function setLang(lang) {
   document.querySelector('#linge .sec-subtitle').innerHTML = t['linge.subtitle'];
   const lingeP = document.querySelector('#linge > p');
   if(lingeP) lingeP.innerHTML = t['linge.intro'];
+  const lingeLaundry = document.querySelector('#linge .info-box span:last-child');
+  if(lingeLaundry) lingeLaundry.innerHTML = t['linge.laundry'];
   const priceHeads = document.querySelectorAll('.price-head');
   if(priceHeads[0]) priceHeads[0].innerHTML = t['price.h1'];
   if(priceHeads[1]) priceHeads[1].innerHTML = t['price.h2'];
@@ -1498,12 +1706,9 @@ function setLang(lang) {
   document.querySelector('#equipements .sec-subtitle').innerHTML = t['equip.subtitle'];
   const equipP = document.querySelector('#equipements > p');
   if(equipP) equipP.innerHTML = t['equip.provided'];
-  const equipItems = document.querySelectorAll('.equip-item');
-  [1,2,3,4,5,6].forEach((n,i) => {
-    if(!equipItems[i]) return;
-    const emoji = equipItems[i].querySelector('.equip-emoji');
-    const text = emoji ? emoji.outerHTML + t['equip.i'+n] : t['equip.i'+n];
-    equipItems[i].innerHTML = text;
+  document.querySelectorAll('#equipements [data-tk]').forEach(el => {
+    const key = el.getAttribute('data-tk');
+    if(t[key]) el.innerHTML = t[key];
   });
   // Heating & trash subsections
   const subH3s = document.querySelectorAll('#equipements h3');

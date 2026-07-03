@@ -416,6 +416,17 @@ a:hover { text-decoration: underline; }
   color: var(--ink2);
 }
 .depart-step span { font-size: 1.1rem; }
+.depart-note {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--v2);
+  margin: 22px 0 10px;
+}
+.depart-note.alt { color: var(--gold); }
+.depart-step.optional {
+  background: var(--white);
+  border: 1px solid var(--rule);
+}
 
 /* ── URGENCES ────────────────────────────────────────────────────────────*/
 .urg-grid {
@@ -991,13 +1002,24 @@ footer strong { color: rgba(255,255,255,0.85); }
         <p class="sec-subtitle">Quelques petites choses avant de repartir</p>
       </div>
     </div>
-    <p style="font-size:.92rem;color:var(--ink2);margin-bottom:16px;">Un <strong>forfait ménage de 30 €</strong> est disponible à la réservation. Si vous faites le ménage vous-même, merci de laisser le logement parfaitement propre, prêt à être reloué. <strong>Dans tous les cas :</strong></p>
+    <div class="alert" style="margin-bottom:4px">
+      <span>🧺</span>
+      <span>Un <strong>forfait ménage de 30 €</strong> est disponible à la réservation, pour que l'appartement soit nickel à votre arrivée et reste impeccable pour les voyageurs suivants.</span>
+    </div>
+    <p class="depart-note">Dans tous les cas, merci de :</p>
     <div class="depart-steps">
       <div class="depart-step"><span>🍽️</span> Vaisselle propre et rangée</div>
       <div class="depart-step"><span>🗑️</span> Poubelles vidées</div>
       <div class="depart-step"><span>🛁</span> Linge en tas dans la salle de bain</div>
       <div class="depart-step"><span>🪟</span> Fenêtres et volets fermées, lumières éteintes</div>
       <div class="depart-step"><span>🔑</span> Clés et badge redéposés dans la boîte à clés</div>
+    </div>
+    <p class="depart-note alt">Si vous n'optez pas pour le forfait ménage, merci également de :</p>
+    <div class="depart-steps">
+      <div class="depart-step optional"><span>🧹</span> Passer l'aspirateur et la serpillière dans toutes les pièces</div>
+      <div class="depart-step optional"><span>🚿</span> Nettoyer la salle de bain (WC, douche, lavabo)</div>
+      <div class="depart-step optional"><span>🍳</span> Nettoyer la cuisine : plans de travail, plaque de cuisson, intérieur du frigo et du micro-ondes</div>
+      <div class="depart-step optional"><span>🛋️</span> Vérifier qu'aucune miette ni tache ne subsiste sur le canapé ou la literie</div>
     </div>
   </section>
 
@@ -1257,10 +1279,16 @@ const T = {
     'reg.r4': '🪟 <span><strong>Fenêtres fermées</strong> en cas d\'absence prolongée</span>',
     // depart
     'dep.title': 'Départ — avant 11h00', 'dep.subtitle': 'Quelques petites choses avant de repartir',
-    'dep.intro': 'Un <strong>forfait ménage de 30 €</strong> est disponible à la réservation. Si vous faites le ménage vous-même, merci de laisser le logement parfaitement propre, prêt à être reloué. <strong>Dans tous les cas :</strong>',
+    'dep.intro': 'Un <strong>forfait ménage de 30 €</strong> est disponible à la réservation, pour que l\'appartement soit nickel à votre arrivée et reste impeccable pour les voyageurs suivants.',
+    'dep.always_title': 'Dans tous les cas, merci de :',
     'dep.s1': '🍽️ Vaisselle propre et rangée', 'dep.s2': '🗑️ Poubelles vidées',
     'dep.s3': '🛁 Linge en tas dans la salle de bain', 'dep.s4': '🪟 Fenêtres et volets fermées, lumières éteintes',
     'dep.s5': '🔑 Clés et badge redéposés dans la boîte à clés',
+    'dep.clean_title': 'Si vous n\'optez pas pour le forfait ménage, merci également de :',
+    'dep.c1': '🧹 Passer l\'aspirateur et la serpillière dans toutes les pièces',
+    'dep.c2': '🚿 Nettoyer la salle de bain (WC, douche, lavabo)',
+    'dep.c3': '🍳 Nettoyer la cuisine : plans de travail, plaque de cuisson, intérieur du frigo et du micro-ondes',
+    'dep.c4': '🛋️ Vérifier qu\'aucune miette ni tache ne subsiste sur le canapé ou la literie',
     // activites
     'act.title': 'Découvrir Issoire &amp; la région', 'act.subtitle': 'Issoire et l\'Auvergne ont beaucoup à offrir !',
     'act.h.issoire': 'À ne pas rater à Issoire',
@@ -1364,10 +1392,16 @@ const T = {
     'reg.r3': '🔇 <span>Please respect <strong>neighbours\' quiet hours</strong>, especially in the evening</span>',
     'reg.r4': '🪟 <span><strong>Close windows</strong> when leaving for an extended period</span>',
     'dep.title': 'Check-out — before 11:00 AM', 'dep.subtitle': 'A few things to do before you leave',
-    'dep.intro': 'A <strong>€30 cleaning fee</strong> is available at booking. If you clean yourself, please leave the apartment spotless, ready for the next guest. <strong>In all cases:</strong>',
+    'dep.intro': 'A <strong>€30 cleaning fee</strong> is available at booking, so the apartment is spotless when you arrive and stays that way for the next guests.',
+    'dep.always_title': 'In all cases, please:',
     'dep.s1': '🍽️ Dishes washed and put away', 'dep.s2': '🗑️ Bins emptied',
     'dep.s3': '🛁 Linen piled in the bathroom', 'dep.s4': '🪟 Windows and shutters closed, lights off',
     'dep.s5': '🔑 Keys and fob returned to the key safe',
+    'dep.clean_title': 'If you\'re not taking the cleaning option, please also:',
+    'dep.c1': '🧹 Vacuum and mop all rooms',
+    'dep.c2': '🚿 Clean the bathroom (toilet, shower, sink)',
+    'dep.c3': '🍳 Clean the kitchen: countertops, hob, inside the fridge and microwave',
+    'dep.c4': '🛋️ Check no crumbs or stains remain on the sofa or bedding',
     'act.title': 'Discover Issoire &amp; the region', 'act.subtitle': 'Issoire and the Auvergne have so much to offer!',
     'act.h.issoire': 'Must-sees in Issoire',
     'act.l1': '🛒 <strong>The Saturday morning market</strong> — unmissable, open-air in the heart of town',
@@ -1468,10 +1502,16 @@ const T = {
     'reg.r3': '🔇 <span>Bitte die <strong>Ruhe der Nachbarn</strong> respektieren, insbesondere abends</span>',
     'reg.r4': '🪟 <span><strong>Fenster schließen</strong> bei längerer Abwesenheit</span>',
     'dep.title': 'Abreise — vor 11:00 Uhr', 'dep.subtitle': 'Ein paar Dinge vor Ihrer Abreise',
-    'dep.intro': 'Eine <strong>Endreinigungspauschale von 30 €</strong> kann bei der Buchung hinzugefügt werden. Wenn Sie selbst reinigen, hinterlassen Sie die Wohnung bitte tadellos sauber und bereit für den nächsten Gast. <strong>In jedem Fall:</strong>',
+    'dep.intro': 'Eine <strong>Endreinigungspauschale von 30 €</strong> kann bei der Buchung hinzugefügt werden, damit die Wohnung bei Ihrer Ankunft makellos ist und es auch für die nächsten Gäste bleibt.',
+    'dep.always_title': 'In jedem Fall bitten wir Sie:',
     'dep.s1': '🍽️ Geschirr abgewaschen und weggeräumt', 'dep.s2': '🗑️ Müll geleert',
     'dep.s3': '🛁 Wäsche im Haufen im Badezimmer', 'dep.s4': '🪟 Fenster und Läden geschlossen, Lichter ausgeschaltet',
     'dep.s5': '🔑 Schlüssel und Chip zurück in den Schlüsselsafe',
+    'dep.clean_title': 'Wenn Sie die Reinigungspauschale nicht in Anspruch nehmen, bitten wir Sie außerdem:',
+    'dep.c1': '🧹 In allen Räumen staubsaugen und wischen',
+    'dep.c2': '🚿 Das Badezimmer reinigen (WC, Dusche, Waschbecken)',
+    'dep.c3': '🍳 Die Küche reinigen: Arbeitsflächen, Kochplatten, Innenraum von Kühlschrank und Mikrowelle',
+    'dep.c4': '🛋️ Sicherstellen, dass keine Krümel oder Flecken auf Sofa oder Bettwäsche zurückbleiben',
     'act.title': 'Issoire &amp; die Region entdecken', 'act.subtitle': 'Issoire und die Auvergne haben so viel zu bieten!',
     'act.h.issoire': 'Highlights in Issoire',
     'act.l1': '🛒 <strong>Der Samstagmorgenmarkt</strong> — unverzichtbar, im Freien im Herzen der Stadt',
@@ -1571,10 +1611,16 @@ const T = {
     'reg.r3': '🔇 <span>Prosimy o poszanowanie <strong>spokoju sąsiadów</strong>, zwłaszcza wieczorem</span>',
     'reg.r4': '🪟 <span><strong>Zamykajcie okna</strong> podczas dłuższej nieobecności</span>',
     'dep.title': 'Wyjazd — przed 11:00', 'dep.subtitle': 'Kilka rzeczy przed wyjazdem',
-    'dep.intro': 'Opcjonalną <strong>opłatę za sprzątanie końcowe w wysokości 30 €</strong> można dodać przy rezerwacji. Jeśli sprzątacie sami, prosimy zostawić mieszkanie nienagannie czyste i gotowe dla kolejnego gościa. <strong>W każdym przypadku:</strong>',
+    'dep.intro': 'Opcjonalną <strong>opłatę za sprzątanie końcowe w wysokości 30 €</strong> można dodać przy rezerwacji, aby mieszkanie było nieskazitelne po Waszym przyjeździe i pozostało takie dla kolejnych gości.',
+    'dep.always_title': 'W każdym przypadku prosimy o:',
     'dep.s1': '🍽️ Naczynia umyte i odłożone', 'dep.s2': '🗑️ Kosze opróżnione',
     'dep.s3': '🛁 Pościel złożona w stos w łazience', 'dep.s4': '🪟 Okna i okiennice zamknięte, światła wyłączone',
     'dep.s5': '🔑 Klucze i chip odłożone do sejfu na klucze',
+    'dep.clean_title': 'Jeśli nie wybieracie opcji sprzątania, prosimy również o:',
+    'dep.c1': '🧹 Odkurzenie i umycie podłóg we wszystkich pomieszczeniach',
+    'dep.c2': '🚿 Wyczyszczenie łazienki (WC, prysznic, umywalka)',
+    'dep.c3': '🍳 Wyczyszczenie kuchni: blaty, płyta grzewcza, wnętrze lodówki i mikrofalówki',
+    'dep.c4': '🛋️ Sprawdzenie, czy na kanapie lub pościeli nie zostały okruchy ani plamy',
     'act.title': 'Odkryjcie Issoire i region', 'act.subtitle': 'Issoire i Owernia mają tak wiele do zaoferowania!',
     'act.h.issoire': 'Atrakcje w Issoire',
     'act.l1': '🛒 <strong>Sobotni poranny targ</strong> — obowiązkowy punkt, na świeżym powietrzu w sercu miasta',
@@ -1728,10 +1774,16 @@ function setLang(lang) {
   // Départ
   document.querySelector('#depart .sec-title').innerHTML = t['dep.title'];
   document.querySelector('#depart .sec-subtitle').innerHTML = t['dep.subtitle'];
-  const depP = document.querySelector('#depart > p');
-  if(depP) depP.innerHTML = t['dep.intro'];
-  const depSteps = document.querySelectorAll('.depart-step');
+  const depAlert = document.querySelector('#depart .alert span:last-child');
+  if(depAlert) depAlert.innerHTML = t['dep.intro'];
+  const depNotes = document.querySelectorAll('#depart .depart-note');
+  if(depNotes[0]) depNotes[0].innerHTML = t['dep.always_title'];
+  if(depNotes[1]) depNotes[1].innerHTML = t['dep.clean_title'];
+  const depStepGroups = document.querySelectorAll('#depart .depart-steps');
+  const depSteps = depStepGroups[0] ? depStepGroups[0].querySelectorAll('.depart-step') : [];
   [1,2,3,4,5].forEach((n,i) => { if(depSteps[i]) depSteps[i].innerHTML = t['dep.s'+n]; });
+  const depChecks = depStepGroups[1] ? depStepGroups[1].querySelectorAll('.depart-step') : [];
+  [1,2,3,4].forEach((n,i) => { if(depChecks[i]) depChecks[i].innerHTML = t['dep.c'+n]; });
 
   // Activités
   document.querySelector('#activites .sec-title').innerHTML = t['act.title'];
